@@ -89,22 +89,25 @@
               <span>잘 모르겠음</span>
             </label>
           </div>
-          <label class="field-label">
-            오늘 상담받고 싶은 내용
-            <textarea
-              name="requested_consultation"
-              class="textarea"
-              placeholder="예: 최근 손 떨림이 오후에 심해지는 것 같아서 여쭤보고 싶어요."
-            ></textarea>
-          </label>
-          <label class="field-label">
-            환자 또는 보호자가 전달하는 내용 (원문 그대로)
-            <textarea
-              name="subjective_summary_raw"
-              class="textarea"
-              placeholder="비식별·합성 문장으로 자유롭게 입력하세요. 이 원문이 LLM 구조화 요약의 입력이 됩니다."
-            ></textarea>
-          </label>
+          <!-- 서술형 입력은 '증상 상담'을 선택한 경우에만 표시 -->
+          <div id="symptom-detail" hidden>
+            <label class="field-label">
+              오늘 상담받고 싶은 내용
+              <textarea
+                name="requested_consultation"
+                class="textarea"
+                placeholder="예: 최근 손 떨림이 오후에 심해지는 것 같아서 여쭤보고 싶어요."
+              ></textarea>
+            </label>
+            <label class="field-label">
+              환자 또는 보호자가 전달하는 내용 (원문 그대로)
+              <textarea
+                name="subjective_summary_raw"
+                class="textarea"
+                placeholder="비식별·합성 문장으로 자유롭게 입력하세요. 이 원문이 LLM 구조화 요약의 입력이 됩니다."
+              ></textarea>
+            </label>
+          </div>
         </section>
 
         <!-- 조건부 섹션: '서류 발급' 선택 시에만 표시 -->
@@ -153,8 +156,8 @@
               <span>공공기관</span>
             </label>
             <label class="check-card">
-              <input type="checkbox" name="document_destination" value="타 의료기관" />
-              <span>타 의료기관</span>
+              <input type="checkbox" name="document_destination" value="타 의료기관/요양기관" />
+              <span>타 의료기관/요양기관</span>
             </label>
             <label class="check-card">
               <input type="checkbox" name="document_destination" value="개인 보관" />

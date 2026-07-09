@@ -7,6 +7,7 @@
 
 const form = document.getElementById("intake-form");
 const symptomSection = document.getElementById("symptom-section");
+const symptomDetail = document.getElementById("symptom-detail");
 const documentSection = document.getElementById("document-section");
 const previewCard = document.getElementById("preview-card");
 const previewOutput = document.getElementById("preview-output");
@@ -26,8 +27,13 @@ function getRadioValue(name) {
 function updateConditionalSections() {
   const purposes = getCheckedValues("visit_purpose");
 
+  // 증상 변화(선택형)는 약 처방만 받으러 와도 확인한다. 재진에서 "변화 없음" 확인 자체가 기록 가치가 있다.
   const needsSymptomSection = purposes.includes("증상 상담") || purposes.includes("약 처방");
   symptomSection.hidden = !needsSymptomSection;
+
+  // 서술형 입력(상담 내용, 원문)은 증상 상담을 선택한 경우에만 노출해 입력 부담을 줄인다.
+  const consultSelected = purposes.includes("증상 상담");
+  symptomDetail.hidden = !consultSelected;
 
   const needsDocumentSection = purposes.includes("서류 발급");
   documentSection.hidden = !needsDocumentSection;
@@ -52,11 +58,12 @@ form.addEventListener("submit", (event) => {
 
   const purposes = getCheckedValues("visit_purpose");
   const showsSymptom = !symptomSection.hidden;
+  const showsDetail = !symptomDetail.hidden;
   const showsDocument = !documentSection.hidden;
   const visitTypeFields = buildVisitTypeFields(getRadioValue("visit_type"));
 
   const rawInputParts = [];
-  if (showsSymptom) {
+  if (showsDetail) {
     const rawText = form.querySelector('textarea[name="subjective_summary_raw"]').value.trim();
     if (rawText) rawInputParts.push(rawText);
   }
@@ -69,7 +76,7 @@ form.addEventListener("submit", (event) => {
     document_destination: showsDocument ? getCheckedValues("document_destination") : [],
     patient_present: visitTypeFields.patient_present,
     guardian_only: visitTypeFields.guardian_only,
-    requested_consultation: showsSymptom
+    requested_consultation: showsDetail
       ? form.querySelector('textarea[name="requested_consultation"]').value.trim() || null
       : null,
     raw_input_text: rawInputParts.join(" ") || null,

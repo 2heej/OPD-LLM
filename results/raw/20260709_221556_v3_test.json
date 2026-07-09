@@ -1,0 +1,168 @@
+{
+  "created_at": "2026-07-09T22:15:56+09:00",
+  "model": "gpt-4.1-mini",
+  "prompt_version": "v3",
+  "split": "test",
+  "metrics": {
+    "case_count": 3,
+    "json_success_rate": 1.0,
+    "exact_match": 0.3333333333333333,
+    "field_accuracy": 0.8333333333333334,
+    "micro_precision": 0.9166666666666666,
+    "micro_recall": 0.8461538461538461,
+    "micro_f1": 0.8799999999999999,
+    "omission_rate": 0.15384615384615385,
+    "hallucination_rate": 0.08333333333333333,
+    "input_tokens": 3804,
+    "output_tokens": 483,
+    "symptom_change_accuracy": 1.0,
+    "patient_present_accuracy": 1.0,
+    "guardian_only_accuracy": 1.0
+  },
+  "records": [
+    {
+      "case_id": "case_008",
+      "disease_context": "파킨슨병",
+      "split": "test",
+      "input": "제가 환자예요. 다른 병원으로 옮기려고 진료기록이랑 검사 결과지 받으러 왔어요. 증상은 예전이랑 비슷해요.",
+      "gold": {
+        "visit_purpose": [
+          "서류 발급"
+        ],
+        "symptom_change": "비슷함",
+        "document_type": [
+          "기록/결과 사본"
+        ],
+        "document_destination": [
+          "타 의료기관/요양기관"
+        ],
+        "patient_present": true,
+        "guardian_only": false,
+        "subjective_summary": "환자 본인 내원. 전원을 위한 진료기록과 검사 결과지를 요청하며 증상은 이전과 비슷하다고 함.",
+        "requested_consultation": null,
+        "soap_summary": "S: 환자 본인 내원, 전원용 기록 사본 요청, 증상 변화 없음. O: 해당 없음(문진 단계). A: 진단/치료 방침 생성하지 않음. P: 기록 사본 발급 절차 확인."
+      },
+      "prediction": {
+        "visit_purpose": [
+          "서류 발급",
+          "검사결과 확인"
+        ],
+        "document_type": [
+          "기록/결과 사본"
+        ],
+        "document_destination": [
+          "타 의료기관/요양기관"
+        ],
+        "symptom_change": "비슷함",
+        "patient_present": true,
+        "guardian_only": false,
+        "subjective_summary": "환자가 직접 내원하였으며 다른 병원으로 옮기기 위해 진료기록과 검사 결과지를 요청함. 증상은 예전과 비슷하다고 보고함.",
+        "requested_consultation": null,
+        "soap_summary": "S: 환자 내원, 증상은 기존과 비슷함. O: 해당 없음. A: 진단/치료 방침 생성하지 않음. P: 없음."
+      },
+      "raw_output": "{\"visit_purpose\":[\"서류 발급\",\"검사결과 확인\"],\"symptom_change\":\"비슷함\",\"document_type\":[\"기록/결과 사본\"],\"document_destination\":[\"타 의료기관/요양기관\"],\"patient_present\":true,\"guardian_only\":false,\"subjective_summary\":\"환자가 직접 내원하였으며 다른 병원으로 옮기기 위해 진료기록과 검사 결과지를 요청함. 증상은 예전과 비슷하다고 보고함.\",\"requested_consultation\":null,\"soap_summary\":\"S: 환자 내원, 증상은 기존과 비슷함. O: 해당 없음. A: 진단/치료 방침 생성하지 않음. P: 없음.\"}",
+      "error": null,
+      "usage": {
+        "input_tokens": 1258,
+        "output_tokens": 155,
+        "total_tokens": 1413
+      }
+    },
+    {
+      "case_id": "case_009",
+      "disease_context": "뇌전증",
+      "split": "test",
+      "input": "발작이 요즘 잦습니다. 약을 조절해야 하나 싶어서요. 오늘은 보호자만 왔어요.",
+      "gold": {
+        "visit_purpose": [
+          "증상 상담",
+          "약 처방"
+        ],
+        "symptom_change": "나빠짐",
+        "document_type": [],
+        "document_destination": [],
+        "patient_present": false,
+        "guardian_only": true,
+        "subjective_summary": "보호자만 내원. 환자의 발작이 최근 잦아졌다고 보호자가 전달하며 약 조절이 필요한지 확인하고 싶어함.",
+        "requested_consultation": "발작이 잦아져 약 조절이 필요한지 상담하고 싶어함",
+        "soap_summary": "S: 보호자 단독 내원, 환자의 발작 빈도 증가를 보호자가 전달. O: 해당 없음(환자 미내원). A: 진단/치료 방침 생성하지 않음. P: 발작 빈도·양상과 약 조절 필요 여부 진료 중 확인 필요."
+      },
+      "prediction": {
+        "visit_purpose": [
+          "약 처방",
+          "증상 상담"
+        ],
+        "document_type": [],
+        "document_destination": [],
+        "symptom_change": "나빠짐",
+        "patient_present": false,
+        "guardian_only": true,
+        "subjective_summary": "보호자만 내원. 발작이 최근에 잦아져 약 조절 여부 상담 희망.",
+        "requested_consultation": "약 조절에 대해 상담하고 싶어함",
+        "soap_summary": "S: 보호자 단독 내원, 발작 빈도 증가 보고. O: 해당 없음(환자 미내원). A: 진단/치료 방침 생성하지 않음. P: 약 조절 필요성 확인."
+      },
+      "raw_output": "{\"visit_purpose\":[\"약 처방\",\"증상 상담\"],\"symptom_change\":\"나빠짐\",\"document_type\":[],\"document_destination\":[],\"patient_present\":false,\"guardian_only\":true,\"subjective_summary\":\"보호자만 내원. 발작이 최근에 잦아져 약 조절 여부 상담 희망.\",\"requested_consultation\":\"약 조절에 대해 상담하고 싶어함\",\"soap_summary\":\"S: 보호자 단독 내원, 발작 빈도 증가 보고. O: 해당 없음(환자 미내원). A: 진단/치료 방침 생성하지 않음. P: 약 조절 필요성 확인.\"}",
+      "error": null,
+      "usage": {
+        "input_tokens": 1244,
+        "output_tokens": 139,
+        "total_tokens": 1383
+      }
+    },
+    {
+      "case_id": "case_010",
+      "disease_context": "치매",
+      "split": "test",
+      "input": "지난번 인지 검사 결과 들으러 왔고요, 보험사에 낼 진단서랑 산정특례 연장도 해야 합니다. 개인적으로 쓸 서류에 의사 확인도 하나 받고 싶은데 어디 낼지는 아직 못 정했어요. 상태는 좋아진 건지 나빠진 건지 저희도 잘 모르겠어요. 아버지랑 같이 왔습니다.",
+      "gold": {
+        "visit_purpose": [
+          "검사결과 확인",
+          "서류 발급"
+        ],
+        "symptom_change": "잘 모르겠음",
+        "document_type": [
+          "진단서",
+          "기타/종류 모름",
+          "개인 양식"
+        ],
+        "document_destination": [
+          "보험",
+          "공공기관",
+          "제출처 모름"
+        ],
+        "patient_present": true,
+        "guardian_only": false,
+        "subjective_summary": "환자와 보호자 함께 내원. 인지 검사 결과 확인과 함께 보험 제출용 진단서, 산정특례 연장 서류, 개인 양식 확인을 요청함. 개인 양식의 제출처는 미정이며 증상 변화는 판단하기 어려워함.",
+        "requested_consultation": null,
+        "soap_summary": "S: 환자·보호자 함께 내원, 검사 결과 확인 및 진단서·산정특례 연장·개인 양식 요청, 증상 변화 판단 어려움. O: 해당 없음(문진 단계). A: 진단/치료 방침 생성하지 않음. P: 검사 결과 안내, 서류별 발급 절차 확인, 개인 양식 제출처 확인 필요."
+      },
+      "prediction": {
+        "visit_purpose": [
+          "서류 발급",
+          "검사결과 확인"
+        ],
+        "document_type": [
+          "진단서",
+          "기타/종류 모름"
+        ],
+        "document_destination": [
+          "보험",
+          "제출처 모름"
+        ],
+        "symptom_change": "잘 모르겠음",
+        "patient_present": true,
+        "guardian_only": false,
+        "subjective_summary": "환자와 보호자가 인지 검사 결과 상담 및 보험사 제출용 진단서와 산정특례 연장을 위해 내원했으며, 개인 서류용으로 의사 확인도 희망하나 제출처는 미정이다. 증상 변화는 본인과 보호자 모두 잘 모르겠다고 함.",
+        "requested_consultation": null,
+        "soap_summary": "S: 인지 검사 결과 확인 및 서류 관련 상담. O: 해당 없음. A: 진단/치료 방침 생성하지 않음. P: 개인 서류 제출처 확인 필요."
+      },
+      "raw_output": "{\"visit_purpose\":[\"서류 발급\",\"검사결과 확인\"],\"symptom_change\":\"잘 모르겠음\",\"document_type\":[\"진단서\",\"기타/종류 모름\"],\"document_destination\":[\"보험\",\"제출처 모름\"],\"patient_present\":true,\"guardian_only\":false,\"subjective_summary\":\"환자와 보호자가 인지 검사 결과 상담 및 보험사 제출용 진단서와 산정특례 연장을 위해 내원했으며, 개인 서류용으로 의사 확인도 희망하나 제출처는 미정이다. 증상 변화는 본인과 보호자 모두 잘 모르겠다고 함.\",\"requested_consultation\":null,\"soap_summary\":\"S: 인지 검사 결과 확인 및 서류 관련 상담. O: 해당 없음. A: 진단/치료 방침 생성하지 않음. P: 개인 서류 제출처 확인 필요.\"}",
+      "error": null,
+      "usage": {
+        "input_tokens": 1302,
+        "output_tokens": 189,
+        "total_tokens": 1491
+      }
+    }
+  ]
+}

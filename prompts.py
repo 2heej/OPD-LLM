@@ -18,7 +18,7 @@ FIELD_SPEC = """
 - visit_purpose: 약 처방, 증상 상담, 서류 발급, 검사결과 확인 중 해당하는 값을 배열로 작성
 - symptom_change: 좋아짐, 비슷함, 나빠짐, 새 증상 있음, 잘 모르겠음 중 하나. 언급 없으면 null
 - document_type: 진단서, 소견서, 통원사실증명서(진료확인서), 기록/결과 사본, 개인 양식, 기타/종류 모름 중 해당하는 값을 배열로 작성. 요청 없으면 빈 배열
-- document_destination: 보험, 직장/학교, 공공기관, 타 의료기관, 개인 보관, 제출처 모름 중 해당하는 값을 배열로 작성. 요청 없으면 빈 배열
+- document_destination: 보험, 직장/학교, 공공기관, 타 의료기관/요양기관, 개인 보관, 제출처 모름 중 해당하는 값을 배열로 작성. 요청 없으면 빈 배열
 - patient_present: 환자 본인이 오늘 진료에 present하면 true, present하지 않으면 false
 - guardian_only: 보호자만 내원하고 환자는 오지 않았으면 true, 아니면 false
 - subjective_summary: 환자 또는 보호자가 말한 내용을 진단·치료 방침 없이 1~2문장으로 구조화한 요약
@@ -67,15 +67,16 @@ patient_present와 guardian_only는 입력에 방문 형태가 명시된 경우�
 2. 보호자만 방문하고 환자가 오지 않은 경우 guardian_only를 true로, patient_present를 false로 표시하고 subjective_summary에 보호자 전달 내용임을 명시한다.
 3. 환자 또는 보호자가 오늘 진료 중 상담받고 싶다고 밝힌 내용이 있으면 requested_consultation에 누락 없이 남긴다. 없으면 null로 남기고 지어내지 않는다.
 
+symptom_change는 기존 질환의 대표 증상이 심해지거나 잦아진 경우 '나빠짐'으로, 질환 경과와 별개로 이전에 없던 증상이 처음 나타난 경우에만 '새 증상 있음'으로 구분한다.
 서류 이름과 제출처는 입력 표현을 허용값에 맞게 정규화하되 의미를 추가하지 않는다.
 soap_summary에는 진단명이나 치료 계획을 생성하지 않고, 확인이 필요한 항목만 P에 남긴다.
 반드시 JSON 객체만 출력한다.
 
 예시 입력:
-아버지는 거동이 불편해서 제가 대신 왔어요. 어디에 내는 서류인지 정확히는 몰라서 여쭤보고 싶고, 걸음이 더 느려지신 것 같다고 하셨어요.
+남편이 몸이 안 좋아서 제가 대신 왔어요. 회사에 낼 서류가 필요한데 진단서인지 확인서인지는 잘 모르겠어요. 요즘 말수가 부쩍 줄었는데 그것도 여쭤보고 싶어요.
 
 예시 출력:
-{{"visit_purpose":["서류 발급","증상 상담"],"symptom_change":"나빠짐","document_type":["기타/종류 모름"],"document_destination":["공공기관"],"patient_present":false,"guardian_only":true,"subjective_summary":"보호자만 내원. 환자의 보행 속도가 느려졌다고 보호자가 전달함. 서류가 필요하나 정확한 서류명은 확인 필요.","requested_consultation":"보행이 느려진 변화에 대해 상담하고 싶어함","soap_summary":"S: 보호자 단독 내원, 보행 저하를 보호자가 전달. O: 해당 없음(환자 미내원). A: 진단/치료 방침 생성하지 않음. P: 서류 종류 확인, 보행 변화 진행 여부 확인 필요."}}
+{{"visit_purpose":["서류 발급","증상 상담"],"symptom_change":"나빠짐","document_type":["기타/종류 모름"],"document_destination":["직장/학교"],"patient_present":false,"guardian_only":true,"subjective_summary":"보호자만 내원. 환자의 말수가 줄었다고 보호자가 전달함. 직장 제출용 서류가 필요하나 서류 종류는 확인 필요.","requested_consultation":"말수가 줄어든 변화에 대해 상담하고 싶어함","soap_summary":"S: 보호자 단독 내원, 말수 감소를 보호자가 전달. O: 해당 없음(환자 미내원). A: 진단/치료 방침 생성하지 않음. P: 서류 종류 확인, 증상 변화 진행 여부 확인 필요."}}
 """.strip(),
 }
 
@@ -91,7 +92,7 @@ ALLOWED_VALUES = {
         "개인 양식",
         "기타/종류 모름",
     ],
-    "document_destination": ["보험", "직장/학교", "공공기관", "타 의료기관", "개인 보관", "제출처 모름"],
+    "document_destination": ["보험", "직장/학교", "공공기관", "타 의료기관/요양기관", "개인 보관", "제출처 모름"],
 }
 
 MULTI_LABEL_FIELDS = ("visit_purpose", "document_type", "document_destination")
