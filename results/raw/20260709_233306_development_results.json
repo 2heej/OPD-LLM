@@ -1,0 +1,3590 @@
+{
+  "v0": {
+    "created_at": "2026-07-09T23:29:54+09:00",
+    "model": "gpt-4.1-mini",
+    "prompt_version": "v0",
+    "split": "development",
+    "metrics": {
+      "case_count": 20,
+      "json_success_rate": 1.0,
+      "exact_match": 0.05,
+      "field_accuracy": 0.38333333333333336,
+      "micro_precision": 0.8108108108108109,
+      "micro_recall": 0.6122448979591837,
+      "micro_f1": 0.6976744186046512,
+      "omission_rate": 0.3877551020408163,
+      "hallucination_rate": 0.1891891891891892,
+      "input_tokens": 6474,
+      "output_tokens": 1565,
+      "symptom_change_accuracy": 0.4,
+      "patient_present_accuracy": 0.05,
+      "guardian_only_accuracy": 0.05
+    },
+    "records": [
+      {
+        "case_id": "case_001",
+        "disease_context": "치매",
+        "split": "development",
+        "input": "어머니는 오늘 못 오시고 저만 왔어요. 요양원에 낼 서류가 필요한데 뭘 떼야 하는지는 잘 모르겠어요. 그리고 요즘 식사를 하시고도 밥을 안 먹었다고 하시는 일이 자꾸 있어서 그것도 여쭤보고 싶어요.",
+        "gold": {
+          "visit_purpose": [
+            "서류 발급",
+            "증상 상담"
+          ],
+          "symptom_change": "나빠짐",
+          "document_type": [
+            "기타/종류 모름"
+          ],
+          "document_destination": [
+            "타 의료기관/요양기관"
+          ],
+          "patient_present": false,
+          "guardian_only": true,
+          "subjective_summary": "보호자만 내원. 환자가 식사한 사실을 잊는 일이 잦다고 보호자가 전달함. 요양원 제출용 서류가 필요하나 서류 종류는 확인 필요.",
+          "requested_consultation": "식사한 사실을 잊어버리는 증상에 대해 상담하고 싶어함",
+          "soap_summary": "S: 보호자 단독 내원, 환자의 식사 사실 망각 반복을 보호자가 전달. O: 해당 없음(환자 미내원). A: 진단/치료 방침 생성하지 않음. P: 서류 종류 확인, 인지 변화 진행 여부 확인 필요."
+        },
+        "prediction": {
+          "visit_purpose": [
+            "서류 발급",
+            "증상 상담"
+          ],
+          "document_type": [],
+          "document_destination": [],
+          "symptom_change": null,
+          "patient_present": null,
+          "guardian_only": null,
+          "subjective_summary": null,
+          "requested_consultation": null,
+          "soap_summary": null
+        },
+        "raw_output": "{\n  \"visit_purpose\": [\"서류 발급\", \"증상 상담\"],\n  \"accompanying_person\": \"보호자\",\n  \"patient_presence\": \"불참\",\n  \"document_request\": {\n    \"needed\": true,\n    \"document_type\": \"기타/종류 모름\",\n    \"document_destination\": \"타 의료기관/요양기관\",\n    \"details\": \"요양원 제출용\"\n  },\n  \"symptom_consultation\": {\n    \"symptom_description\": \"식사 후에도 밥을 안 먹었다고 함\",\n    \"symptom_change\": \"미상\"\n  }\n}",
+        "error": null,
+        "usage": {
+          "input_tokens": 340,
+          "output_tokens": 135,
+          "total_tokens": 475
+        }
+      },
+      {
+        "case_id": "case_002",
+        "disease_context": "파킨슨병",
+        "split": "development",
+        "input": "약은 그대로 받을게요. 그런데 요즘 손 떨림이 오전에는 괜찮다가 오후만 되면 심해져요. 저녁때는 수저 들기가 힘들 때도 있고요. 혼자 왔습니다.",
+        "gold": {
+          "visit_purpose": [
+            "약 처방",
+            "증상 상담"
+          ],
+          "symptom_change": "나빠짐",
+          "document_type": [],
+          "document_destination": [],
+          "patient_present": true,
+          "guardian_only": false,
+          "subjective_summary": "환자 본인 내원. 손 떨림이 오후에 심해지고 저녁에는 수저 사용이 힘들 때가 있다고 함. 약 처방 유지를 원함.",
+          "requested_consultation": "오후에 심해지는 손 떨림에 대해 상담 요청",
+          "soap_summary": "S: 환자 본인 내원, 손 떨림 오후 악화와 저녁 수저 사용 어려움 호소. O: 해당 없음(문진 단계). A: 진단/치료 방침 생성하지 않음. P: 약 처방 확인, 증상 시간대별 변화 진료 중 확인 필요."
+        },
+        "prediction": {
+          "visit_purpose": [
+            "약 처방"
+          ],
+          "document_type": [],
+          "document_destination": [],
+          "symptom_change": "나빠짐",
+          "patient_present": null,
+          "guardian_only": null,
+          "subjective_summary": null,
+          "requested_consultation": null,
+          "soap_summary": null
+        },
+        "raw_output": "{\n  \"visit_purpose\": [\"약 처방\"],\n  \"current_medication\": \"약은 그대로 받음\",\n  \"symptom\": \"손 떨림\",\n  \"symptom_change\": \"나빠짐\",\n  \"symptom_detail\": {\n    \"time_of_day\": {\n      \"morning\": \"괜찮음\",\n      \"afternoon\": \"심해짐\",\n      \"evening\": \"수저 들기 힘듦\"\n    }\n  },\n  \"accompanied\": \"혼자 옴\"\n}",
+        "error": null,
+        "usage": {
+          "input_tokens": 321,
+          "output_tokens": 114,
+          "total_tokens": 435
+        }
+      },
+      {
+        "case_id": "case_003",
+        "disease_context": "뇌전증",
+        "split": "development",
+        "input": "지난달에 학교 낼 진단서는 받아 갔고요, 요즘 발작 횟수가 좀 는 것 같아서 왔어요. 엄마랑 같이 왔습니다.",
+        "gold": {
+          "visit_purpose": [
+            "증상 상담"
+          ],
+          "symptom_change": "나빠짐",
+          "document_type": [],
+          "document_destination": [],
+          "patient_present": true,
+          "guardian_only": false,
+          "subjective_summary": "환자와 보호자 함께 내원. 발작 횟수가 늘어난 것 같다고 함. 서류는 지난달 이미 발급받아 이번에는 요청하지 않음.",
+          "requested_consultation": "발작 횟수가 늘어난 것에 대해 상담하고 싶어함",
+          "soap_summary": "S: 환자·보호자 함께 내원, 발작 빈도 증가 우려 전달. O: 해당 없음(문진 단계). A: 진단/치료 방침 생성하지 않음. P: 발작 빈도·양상 변화 진료 중 확인 필요."
+        },
+        "prediction": {
+          "visit_purpose": [
+            "증상 상담",
+            "서류 발급"
+          ],
+          "document_type": [
+            "진단서"
+          ],
+          "document_destination": [
+            "직장/학교"
+          ],
+          "symptom_change": "['나빠짐']",
+          "patient_present": null,
+          "guardian_only": null,
+          "subjective_summary": null,
+          "requested_consultation": null,
+          "soap_summary": null
+        },
+        "raw_output": "{\n  \"visit_purpose\": [\"증상 상담\", \"서류 발급\"],\n  \"symptom_change\": [\"나빠짐\"],\n  \"document_type\": [\"진단서\"],\n  \"document_destination\": [\"직장/학교\"]\n}",
+        "error": null,
+        "usage": {
+          "input_tokens": 309,
+          "output_tokens": 52,
+          "total_tokens": 361
+        }
+      },
+      {
+        "case_id": "case_004",
+        "disease_context": "치매",
+        "split": "development",
+        "input": "아버지 모시고 같이 왔어요. 지난번 검사 결과 들으러 왔고, 보험에 낼 소견서도 하나 부탁드립니다.",
+        "gold": {
+          "visit_purpose": [
+            "검사결과 확인",
+            "서류 발급"
+          ],
+          "symptom_change": null,
+          "document_type": [
+            "소견서"
+          ],
+          "document_destination": [
+            "보험"
+          ],
+          "patient_present": true,
+          "guardian_only": false,
+          "subjective_summary": "환자와 보호자 함께 내원. 검사 결과 확인을 원하며 보험 제출용 소견서를 요청함.",
+          "requested_consultation": null,
+          "soap_summary": "S: 환자·보호자 함께 내원, 검사 결과 확인 및 소견서 요청. O: 해당 없음(문진 단계). A: 진단/치료 방침 생성하지 않음. P: 검사 결과 안내, 소견서 발급 절차 확인 필요."
+        },
+        "prediction": {
+          "visit_purpose": [
+            "검사결과 확인",
+            "서류 발급"
+          ],
+          "document_type": [
+            "소견서"
+          ],
+          "document_destination": [
+            "보험"
+          ],
+          "symptom_change": "미상",
+          "patient_present": null,
+          "guardian_only": null,
+          "subjective_summary": null,
+          "requested_consultation": null,
+          "soap_summary": null
+        },
+        "raw_output": "{\n  \"visit_purpose\": [\"검사결과 확인\", \"서류 발급\"],\n  \"symptom_change\": \"미상\",\n  \"document_type\": [\"소견서\"],\n  \"document_destination\": [\"보험\"]\n}",
+        "error": null,
+        "usage": {
+          "input_tokens": 304,
+          "output_tokens": 50,
+          "total_tokens": 354
+        }
+      },
+      {
+        "case_id": "case_005",
+        "disease_context": "파킨슨병",
+        "split": "development",
+        "input": "아버지는 거동이 불편하셔서 저만 왔어요. 장애 등급 신청을 하려는데 어떤 서류를 떼야 하는지 모르겠어요. 그리고 요즘 걸음이 많이 느려지셨어요. 발이 잘 안 떨어진다고 하시고, 집 안에서도 몇 번 넘어질 뻔했어요.",
+        "gold": {
+          "visit_purpose": [
+            "서류 발급",
+            "증상 상담"
+          ],
+          "symptom_change": "나빠짐",
+          "document_type": [
+            "기타/종류 모름"
+          ],
+          "document_destination": [
+            "공공기관"
+          ],
+          "patient_present": false,
+          "guardian_only": true,
+          "subjective_summary": "보호자만 내원. 환자의 걸음이 느려지고 발이 잘 떨어지지 않아 넘어질 뻔한 일이 있었다고 보호자가 전달함. 장애 등급 신청용 서류가 필요하나 서류 종류는 확인 필요.",
+          "requested_consultation": "보행이 느려진 변화에 대해 상담하고 싶어함",
+          "soap_summary": "S: 보호자 단독 내원, 환자의 보행 저하와 낙상 위험을 보호자가 전달. O: 해당 없음(환자 미내원). A: 진단/치료 방침 생성하지 않음. P: 서류 종류 확인, 보행 변화와 낙상 위험 확인 필요."
+        },
+        "prediction": {
+          "visit_purpose": [
+            "서류 발급",
+            "증상 상담"
+          ],
+          "document_type": [],
+          "document_destination": [],
+          "symptom_change": "['나빠짐']",
+          "patient_present": null,
+          "guardian_only": null,
+          "subjective_summary": null,
+          "requested_consultation": null,
+          "soap_summary": null
+        },
+        "raw_output": "{\n  \"accompany_status\": \"보호자 단독 방문\",\n  \"visit_purpose\": [\"서류 발급\", \"증상 상담\"],\n  \"symptom_change\": [\"나빠짐\"],\n  \"symptom_description\": \"걸음이 많이 느려짐, 발이 잘 안 떨어짐, 집 안에서 여러 차례 넘어질 뻔함\",\n  \"requested_document\": {\n    \"document_type\": \"미상\",\n    \"document_destination\": \"공공기관\",\n    \"document_detail\": \"장애 등급 신청에 필요한 서류 종류 문의\"\n  }\n}",
+        "error": null,
+        "usage": {
+          "input_tokens": 346,
+          "output_tokens": 125,
+          "total_tokens": 471
+        }
+      },
+      {
+        "case_id": "case_006",
+        "disease_context": "뇌전증",
+        "split": "development",
+        "input": "약만 타러 왔어요. 별다른 건 없었고요. 혼자 왔습니다.",
+        "gold": {
+          "visit_purpose": [
+            "약 처방"
+          ],
+          "symptom_change": "비슷함",
+          "document_type": [],
+          "document_destination": [],
+          "patient_present": true,
+          "guardian_only": false,
+          "subjective_summary": "환자 본인 내원. 증상 변화 없이 약 처방만 요청함.",
+          "requested_consultation": null,
+          "soap_summary": "S: 환자 본인 내원, 증상 변화 없음, 약 처방 요청. O: 해당 없음(문진 단계). A: 진단/치료 방침 생성하지 않음. P: 정기 처방 확인."
+        },
+        "prediction": {
+          "visit_purpose": [
+            "약 처방"
+          ],
+          "document_type": [],
+          "document_destination": [],
+          "symptom_change": "비슷함",
+          "patient_present": null,
+          "guardian_only": null,
+          "subjective_summary": null,
+          "requested_consultation": null,
+          "soap_summary": null
+        },
+        "raw_output": "{\n  \"visit_purpose\": \"약 처방\",\n  \"symptom_change\": \"비슷함\",\n  \"accompaniment\": \"혼자 옴\",\n  \"additional_notes\": \"별다른 건 없었고요.\"\n}",
+        "error": null,
+        "usage": {
+          "input_tokens": 293,
+          "output_tokens": 52,
+          "total_tokens": 345
+        }
+      },
+      {
+        "case_id": "case_007",
+        "disease_context": "치매",
+        "split": "development",
+        "input": "어머니 모시고 같이 왔어요. 요즘 밤에 자꾸 깨서 집 안을 돌아다니세요. 새벽에 현관문을 열려고 하신 적도 있고요. 이게 약 때문인지 다른 이유인지 상담받고 싶어요.",
+        "gold": {
+          "visit_purpose": [
+            "증상 상담"
+          ],
+          "symptom_change": "새 증상 있음",
+          "document_type": [],
+          "document_destination": [],
+          "patient_present": true,
+          "guardian_only": false,
+          "subjective_summary": "환자와 보호자 함께 내원. 야간에 깨서 배회하고 새벽에 현관문을 열려 한 일이 있었다고 전달하며 원인 상담을 원함.",
+          "requested_consultation": "야간 각성·배회가 약 때문인지 다른 원인인지 상담 요청",
+          "soap_summary": "S: 환자·보호자 함께 내원, 야간 각성·배회 새로 발생, 새벽 외출 시도 있었음. O: 해당 없음(문진 단계). A: 진단/치료 방침 생성하지 않음. P: 야간 증상과 복약 관련성 진료 중 확인 필요."
+        },
+        "prediction": {
+          "visit_purpose": [
+            "증상 상담"
+          ],
+          "document_type": [],
+          "document_destination": [],
+          "symptom_change": "잘 모르겠음",
+          "patient_present": null,
+          "guardian_only": null,
+          "subjective_summary": null,
+          "requested_consultation": null,
+          "soap_summary": null
+        },
+        "raw_output": "{\n  \"accompaniment\": \"어머니 모시고 같이 옴\",\n  \"visit_purpose\": \"증상 상담\",\n  \"symptoms\": {\n    \"night_waking\": \"자꾸 깸\",\n    \"night_wandering\": \"집 안을 돌아다님\",\n    \"attempt_to_open_door\": \"새벽에 현관문을 열려고 한 적 있음\"\n  },\n  \"symptom_change\": \"잘 모르겠음\",\n  \"concern\": \"약 때문인지 다른 이유인지\"\n}",
+        "error": null,
+        "usage": {
+          "input_tokens": 326,
+          "output_tokens": 111,
+          "total_tokens": 437
+        }
+      },
+      {
+        "case_id": "case_011",
+        "disease_context": "파킨슨병",
+        "split": "development",
+        "input": "아이고 오늘 주차장이 왜 이렇게 복잡해요. 아버지 약 타러 왔는데요, 참 그리고 저번에 새로 바꾼 약 있잖아요, 그거 먹고부터 자꾸 어지럽다고 하셔가지고. 아 아버지도 같이 왔어요, 지금 화장실 가셨고요. 어지러운 게 약 때문인가 그것 좀 여쭤볼게요.",
+        "gold": {
+          "visit_purpose": [
+            "약 처방",
+            "증상 상담"
+          ],
+          "symptom_change": "새 증상 있음",
+          "document_type": [],
+          "document_destination": [],
+          "patient_present": true,
+          "guardian_only": false,
+          "subjective_summary": "환자와 보호자 함께 내원. 약 변경 후 어지럼이 새로 생겼다고 보호자가 전달함. 약 처방을 원함.",
+          "requested_consultation": "약 변경 후 생긴 어지럼이 약 때문인지 상담 요청",
+          "soap_summary": "S: 환자·보호자 함께 내원, 약 변경 후 어지럼 발생 전달. O: 해당 없음(문진 단계). A: 진단/치료 방침 생성하지 않음. P: 어지럼과 약 변경의 관련성 진료 중 확인 필요, 처방 확인."
+        },
+        "prediction": {
+          "visit_purpose": [
+            "약 처방"
+          ],
+          "document_type": [],
+          "document_destination": [],
+          "symptom_change": "새 증상 있음",
+          "patient_present": null,
+          "guardian_only": null,
+          "subjective_summary": null,
+          "requested_consultation": null,
+          "soap_summary": null
+        },
+        "raw_output": "{\n  \"visit_purpose\": [\"약 처방\"],\n  \"symptoms\": [\"어지러움\"],\n  \"symptom_change\": \"새 증상 있음\",\n  \"medication_change\": \"새로 바꾼 약 복용 후 증상 발생\",\n  \"patient_status\": \"환자는 현재 화장실에 있음\"\n}",
+        "error": null,
+        "usage": {
+          "input_tokens": 362,
+          "output_tokens": 73,
+          "total_tokens": 435
+        }
+      },
+      {
+        "case_id": "case_012",
+        "disease_context": "뇌전증",
+        "split": "development",
+        "input": "약이요. 그대로예요.",
+        "gold": {
+          "visit_purpose": [
+            "약 처방"
+          ],
+          "symptom_change": "비슷함",
+          "document_type": [],
+          "document_destination": [],
+          "patient_present": null,
+          "guardian_only": null,
+          "subjective_summary": "약 처방만 요청함. 증상 변화 없다고 함. 방문 형태 언급 없음(미상).",
+          "requested_consultation": null,
+          "soap_summary": "S: 약 처방 요청, 증상 변화 없음, 방문 형태 미상. O: 해당 없음(문진 단계). A: 진단/치료 방침 생성하지 않음. P: 방문 형태 확인, 정기 처방 확인."
+        },
+        "prediction": {
+          "visit_purpose": [
+            "약 처방"
+          ],
+          "document_type": [],
+          "document_destination": [],
+          "symptom_change": "비슷함",
+          "patient_present": null,
+          "guardian_only": null,
+          "subjective_summary": null,
+          "requested_consultation": null,
+          "soap_summary": null
+        },
+        "raw_output": "{\n  \"visit_purpose\": \"약 처방\",\n  \"symptom_change\": \"비슷함\",\n  \"document_request\": {\n    \"document_type\": null,\n    \"document_destination\": null\n  }\n}",
+        "error": null,
+        "usage": {
+          "input_tokens": 278,
+          "output_tokens": 47,
+          "total_tokens": 325
+        }
+      },
+      {
+        "case_id": "case_013",
+        "disease_context": "치매",
+        "split": "development",
+        "input": "어무이 모시고 왔심더. 요새 자꾸 화를 내시고 예전엔 안 그랬거든예. 밤에 잠도 잘 몬 주무시고. 그거 때문에 상담 좀 받아볼라꼬예.",
+        "gold": {
+          "visit_purpose": [
+            "증상 상담"
+          ],
+          "symptom_change": "새 증상 있음",
+          "document_type": [],
+          "document_destination": [],
+          "patient_present": true,
+          "guardian_only": false,
+          "subjective_summary": "환자와 보호자 함께 내원. 이전에 없던 화냄과 수면 문제가 생겼다고 보호자가 전달함.",
+          "requested_consultation": "화를 자주 내는 것과 잠을 잘 못 자는 문제에 대해 상담하고 싶어함",
+          "soap_summary": "S: 환자·보호자 함께 내원, 화냄과 수면 문제 새로 발생 전달. O: 해당 없음(문진 단계). A: 진단/치료 방침 생성하지 않음. P: 행동 변화·수면 문제 진료 중 확인 필요."
+        },
+        "prediction": {
+          "visit_purpose": [
+            "증상 상담"
+          ],
+          "document_type": [],
+          "document_destination": [],
+          "symptom_change": "새 증상 있음",
+          "patient_present": null,
+          "guardian_only": null,
+          "subjective_summary": null,
+          "requested_consultation": null,
+          "soap_summary": null
+        },
+        "raw_output": "{\n  \"visit_purpose\": \"증상 상담\",\n  \"emotional_change\": \"화 냄 (예전엔 안 그랬음)\",\n  \"sleep_problem\": \"밤에 잠 잘 못 잠\",\n  \"symptom_change\": \"새 증상 있음\"\n}",
+        "error": null,
+        "usage": {
+          "input_tokens": 325,
+          "output_tokens": 59,
+          "total_tokens": 384
+        }
+      },
+      {
+        "case_id": "case_014",
+        "disease_context": "파킨슨병",
+        "split": "development",
+        "input": "소견서 하나 떼려고요. 아 잠깐, 소견서가 아니고 진단서라 했나... 보험회사에서 달라는 거요. 몸은 뭐 비슷해요. 혼자 왔어요.",
+        "gold": {
+          "visit_purpose": [
+            "서류 발급"
+          ],
+          "symptom_change": "비슷함",
+          "document_type": [
+            "기타/종류 모름"
+          ],
+          "document_destination": [
+            "보험"
+          ],
+          "patient_present": true,
+          "guardian_only": false,
+          "subjective_summary": "환자 본인 내원. 보험회사 제출용 서류가 필요하나 진단서인지 소견서인지 확실하지 않음. 증상은 이전과 비슷하다고 함.",
+          "requested_consultation": null,
+          "soap_summary": "S: 환자 본인 내원, 보험 제출용 서류 요청(종류 불확실), 증상 변화 없음. O: 해당 없음(문진 단계). A: 진단/치료 방침 생성하지 않음. P: 보험사 요구 서류 종류 확인 필요."
+        },
+        "prediction": {
+          "visit_purpose": [
+            "서류 발급"
+          ],
+          "document_type": [
+            "진단서"
+          ],
+          "document_destination": [
+            "보험"
+          ],
+          "symptom_change": "['비슷함']",
+          "patient_present": null,
+          "guardian_only": null,
+          "subjective_summary": null,
+          "requested_consultation": null,
+          "soap_summary": null
+        },
+        "raw_output": "{\n  \"visit_purpose\": [\"서류 발급\"],\n  \"symptom_change\": [\"비슷함\"],\n  \"document_type\": [\"진단서\"],\n  \"document_destination\": [\"보험\"],\n  \"accompanied\": \"혼자\"\n}",
+        "error": null,
+        "usage": {
+          "input_tokens": 319,
+          "output_tokens": 54,
+          "total_tokens": 373
+        }
+      },
+      {
+        "case_id": "case_015",
+        "disease_context": "뇌전증",
+        "split": "development",
+        "input": "약 바꾸고 나서 발작이 확 줄었어요. 두 달 동안 한 번도 없었고요. 약은 그대로 받아 가면 되고, 혼자 왔습니다.",
+        "gold": {
+          "visit_purpose": [
+            "약 처방"
+          ],
+          "symptom_change": "좋아짐",
+          "document_type": [],
+          "document_destination": [],
+          "patient_present": true,
+          "guardian_only": false,
+          "subjective_summary": "환자 본인 내원. 약 변경 후 두 달간 발작이 없었다고 함. 동일 약 처방을 원함.",
+          "requested_consultation": null,
+          "soap_summary": "S: 환자 본인 내원, 약 변경 후 발작 없음(두 달), 동일 처방 요청. O: 해당 없음(문진 단계). A: 진단/치료 방침 생성하지 않음. P: 정기 처방 확인."
+        },
+        "prediction": {
+          "visit_purpose": [
+            "약 처방"
+          ],
+          "document_type": [],
+          "document_destination": [],
+          "symptom_change": "['좋아짐']",
+          "patient_present": null,
+          "guardian_only": null,
+          "subjective_summary": null,
+          "requested_consultation": null,
+          "soap_summary": null
+        },
+        "raw_output": "{\n  \"visit_purpose\": [\"약 처방\"],\n  \"symptom_change\": [\"좋아짐\"],\n  \"seizure_frequency\": \"한 달에 0회 (2개월 동안 발작 없음)\",\n  \"medication_plan\": \"현재 약 그대로 유지\",\n  \"accompanied\": false,\n  \"additional_notes\": \"\"\n}",
+        "error": null,
+        "usage": {
+          "input_tokens": 309,
+          "output_tokens": 73,
+          "total_tokens": 382
+        }
+      },
+      {
+        "case_id": "case_016",
+        "disease_context": "치매",
+        "split": "development",
+        "input": "남편이 요즘 통 기억을 못 해요. 어제는 손주 이름도 헷갈리고. 우리 딸은 미국 사는데 걔가 자꾸 전화로 아빠 어떠냐고 물어봐서요. 오늘은 남편이랑 같이 왔고요, 진료확인서도 한 장 떼주세요. 제가 보관해두게요.",
+        "gold": {
+          "visit_purpose": [
+            "증상 상담",
+            "서류 발급"
+          ],
+          "symptom_change": "나빠짐",
+          "document_type": [
+            "통원사실증명서(진료확인서)"
+          ],
+          "document_destination": [
+            "개인 보관"
+          ],
+          "patient_present": true,
+          "guardian_only": false,
+          "subjective_summary": "환자와 보호자 함께 내원. 기억력 저하가 심해졌다고 보호자가 전달함. 개인 보관용 진료확인서를 요청함.",
+          "requested_consultation": "기억력이 더 나빠진 것에 대해 상담하고 싶어함",
+          "soap_summary": "S: 환자·보호자 함께 내원, 기억력 저하 심화 전달, 진료확인서 요청. O: 해당 없음(문진 단계). A: 진단/치료 방침 생성하지 않음. P: 인지 변화 진행 여부 확인, 진료확인서 발급."
+        },
+        "prediction": {
+          "visit_purpose": [
+            "증상 상담",
+            "서류 발급"
+          ],
+          "document_type": [],
+          "document_destination": [],
+          "symptom_change": "미상",
+          "patient_present": null,
+          "guardian_only": null,
+          "subjective_summary": null,
+          "requested_consultation": null,
+          "soap_summary": null
+        },
+        "raw_output": "{\n  \"visit_purpose\": [\"증상 상담\", \"서류 발급\"],\n  \"symptom_description\": \"남편이 요즘 기억을 못 하고, 어제는 손주 이름도 헷갈림\",\n  \"symptom_change\": \"미상\",\n  \"accompanied\": true,\n  \"requested_document\": {\n    \"document_type\": [\"통원사실증명서(진료확인서)\"],\n    \"document_destination\": [\"개인 보관\"]\n  }\n}",
+        "error": null,
+        "usage": {
+          "input_tokens": 352,
+          "output_tokens": 107,
+          "total_tokens": 459
+        }
+      },
+      {
+        "case_id": "case_017",
+        "disease_context": "파킨슨병",
+        "split": "development",
+        "input": "아버지가 못 오셔서 제가 왔는데요, 전화로 여쭤보니까 별다른 건 없다고는 하시는데 제가 직접 본 게 아니라 잘 모르겠어요. 약이나 타다 드리려고요.",
+        "gold": {
+          "visit_purpose": [
+            "약 처방"
+          ],
+          "symptom_change": "비슷함",
+          "document_type": [],
+          "document_destination": [],
+          "patient_present": false,
+          "guardian_only": true,
+          "subjective_summary": "보호자만 내원. 환자는 전화로 별다른 변화가 없다고 함(전언). 보호자가 직접 확인하지는 못함. 약 처방을 원함.",
+          "requested_consultation": null,
+          "soap_summary": "S: 보호자 단독 내원, 증상 변화 없음(환자 전언, 보호자 직접 확인 못함). O: 해당 없음(환자 미내원). A: 진단/치료 방침 생성하지 않음. P: 증상 변화 진료 중 재확인, 처방 확인."
+        },
+        "prediction": {
+          "visit_purpose": [
+            "약 처방"
+          ],
+          "document_type": [
+            "미상"
+          ],
+          "document_destination": [
+            "미상"
+          ],
+          "symptom_change": "잘 모르겠음",
+          "patient_present": null,
+          "guardian_only": null,
+          "subjective_summary": null,
+          "requested_consultation": null,
+          "soap_summary": null
+        },
+        "raw_output": "{\n  \"visit_purpose\": \"약 처방\",\n  \"symptom_change\": \"잘 모르겠음\",\n  \"document_type\": \"미상\",\n  \"document_destination\": \"미상\"\n}",
+        "error": null,
+        "usage": {
+          "input_tokens": 320,
+          "output_tokens": 44,
+          "total_tokens": 364
+        }
+      },
+      {
+        "case_id": "case_018",
+        "disease_context": "뇌전증",
+        "split": "development",
+        "input": "저기 애가 이번에 수학여행을 가는데 학교에서 약 먹는 거 때문에 서류를 하나 해오라 하더라고요. 뭐라더라, 진단서인지 소견서인지... 아무튼 학교 제출용이요. 애는 학교 갔고 저만 왔어요. 발작은 요즘 없었어요.",
+        "gold": {
+          "visit_purpose": [
+            "서류 발급"
+          ],
+          "symptom_change": "비슷함",
+          "document_type": [
+            "기타/종류 모름"
+          ],
+          "document_destination": [
+            "직장/학교"
+          ],
+          "patient_present": false,
+          "guardian_only": true,
+          "subjective_summary": "보호자만 내원. 수학여행 관련 학교 제출용 서류가 필요하나 서류 종류는 확실하지 않음. 최근 발작은 없었다고 함.",
+          "requested_consultation": null,
+          "soap_summary": "S: 보호자 단독 내원, 학교 제출용 서류 요청(종류 불확실), 발작 없음. O: 해당 없음(환자 미내원). A: 진단/치료 방침 생성하지 않음. P: 학교 요구 서류 종류 확인 필요."
+        },
+        "prediction": {
+          "visit_purpose": [
+            "서류 발급"
+          ],
+          "document_type": [
+            "진단서/소견서(두 가지 모두 미상)"
+          ],
+          "document_destination": [
+            "직장/학교"
+          ],
+          "symptom_change": "비슷함",
+          "patient_present": null,
+          "guardian_only": null,
+          "subjective_summary": null,
+          "requested_consultation": null,
+          "soap_summary": null
+        },
+        "raw_output": "{\n  \"visit_purpose\": \"서류 발급\",\n  \"symptom_change\": \"비슷함\",\n  \"document_type\": \"진단서/소견서(두 가지 모두 미상)\",\n  \"document_destination\": \"직장/학교\",\n  \"patient_accompanied\": false,\n  \"recent_seizure\": false\n}",
+        "error": null,
+        "usage": {
+          "input_tokens": 345,
+          "output_tokens": 75,
+          "total_tokens": 420
+        }
+      },
+      {
+        "case_id": "case_019",
+        "disease_context": "치매",
+        "split": "development",
+        "input": "오늘 좀 할 게 많아요. 지난주에 한 MRI 결과도 들어야 하고, 어머니 약도 타야 하고, 주간보호센터에 낼 소견서도 있고요. 어머니는 요즘 좀 가라앉으셨는지 말수가 줄었어요. 같이 왔습니다.",
+        "gold": {
+          "visit_purpose": [
+            "검사결과 확인",
+            "약 처방",
+            "서류 발급",
+            "증상 상담"
+          ],
+          "symptom_change": "새 증상 있음",
+          "document_type": [
+            "소견서"
+          ],
+          "document_destination": [
+            "타 의료기관/요양기관"
+          ],
+          "patient_present": true,
+          "guardian_only": false,
+          "subjective_summary": "환자와 보호자 함께 내원. 검사 결과 확인, 약 처방, 주간보호센터 제출용 소견서를 요청함. 말수가 줄어드는 변화가 새로 나타났다고 보호자가 전달함.",
+          "requested_consultation": "말수가 줄어든 변화에 대해 상담하고 싶어함",
+          "soap_summary": "S: 환자·보호자 함께 내원, 말수 감소 새로 관찰, 결과 확인·처방·소견서 요청. O: 해당 없음(문진 단계). A: 진단/치료 방침 생성하지 않음. P: 검사 결과 안내, 소견서 발급, 기분·의욕 변화 진료 중 확인 필요(약 부작용 가능성 포함)."
+        },
+        "prediction": {
+          "visit_purpose": [
+            "약 처방",
+            "서류 발급",
+            "검사결과 확인"
+          ],
+          "document_type": [],
+          "document_destination": [],
+          "symptom_change": "미상",
+          "patient_present": null,
+          "guardian_only": null,
+          "subjective_summary": null,
+          "requested_consultation": null,
+          "soap_summary": null
+        },
+        "raw_output": "{\n  \"visit_purpose\": [\"약 처방\", \"서류 발급\", \"검사결과 확인\"],\n  \"symptom_change\": \"미상\",\n  \"document\": {\n    \"type\": \"소견서\",\n    \"destination\": \"주간보호센터\"\n  }\n}",
+        "error": null,
+        "usage": {
+          "input_tokens": 336,
+          "output_tokens": 64,
+          "total_tokens": 400
+        }
+      },
+      {
+        "case_id": "case_020",
+        "disease_context": "뇌전증",
+        "split": "development",
+        "input": "지난번에 떼 간 진단서가 회사에서 양식이 안 맞는다고 다시 해오래요. 아니 무슨 서류를 두 번씩 떼게 하는지 모르겠네. 회사 제출용으로 다시 부탁드립니다. 발작은 없었고요, 혼자 왔어요.",
+        "gold": {
+          "visit_purpose": [
+            "서류 발급"
+          ],
+          "symptom_change": "비슷함",
+          "document_type": [
+            "진단서"
+          ],
+          "document_destination": [
+            "직장/학교"
+          ],
+          "patient_present": true,
+          "guardian_only": false,
+          "subjective_summary": "환자 본인 내원. 회사 제출용 진단서 재발급을 요청함(양식 문제로 재요청). 발작은 없었다고 함.",
+          "requested_consultation": null,
+          "soap_summary": "S: 환자 본인 내원, 진단서 재발급 요청(회사 양식 문제), 발작 없음. O: 해당 없음(문진 단계). A: 진단/치료 방침 생성하지 않음. P: 회사 요구 양식 확인 후 진단서 재발급."
+        },
+        "prediction": {
+          "visit_purpose": [
+            "서류 발급"
+          ],
+          "document_type": [],
+          "document_destination": [],
+          "symptom_change": "비슷함",
+          "patient_present": null,
+          "guardian_only": null,
+          "subjective_summary": null,
+          "requested_consultation": null,
+          "soap_summary": null
+        },
+        "raw_output": "{\n  \"visit_purpose\": \"서류 발급\",\n  \"symptom_change\": \"비슷함\",\n  \"document\": {\n    \"type\": \"진단서\",\n    \"destination\": \"직장/학교\"\n  },\n  \"additional_info\": {\n    \"seizure\": \"없었음\",\n    \"accompanied\": \"혼자 옴\"\n  }\n}",
+        "error": null,
+        "usage": {
+          "input_tokens": 335,
+          "output_tokens": 83,
+          "total_tokens": 418
+        }
+      },
+      {
+        "case_id": "case_021",
+        "disease_context": "뇌전증",
+        "split": "development",
+        "input": "그... 약이 좀 남았는데요, 이번에 여행을 가게 돼서 약을 좀 길게, 그러니까 두 달 치? 길게 받을 수 있나 해서요. 발작은 없었어요. 혼자 왔어요.",
+        "gold": {
+          "visit_purpose": [
+            "약 처방"
+          ],
+          "symptom_change": "비슷함",
+          "document_type": [],
+          "document_destination": [],
+          "patient_present": true,
+          "guardian_only": false,
+          "subjective_summary": "환자 본인 내원. 여행으로 두 달 치 장기 처방이 가능한지 문의함. 발작은 없었다고 함.",
+          "requested_consultation": "여행 기간에 맞춘 장기 처방이 가능한지 문의함",
+          "soap_summary": "S: 환자 본인 내원, 여행으로 장기 처방 요청, 발작 없음. O: 해당 없음(문진 단계). A: 진단/치료 방침 생성하지 않음. P: 처방 일수 조정 가능 여부 진료 중 확인."
+        },
+        "prediction": {
+          "visit_purpose": [
+            "약 처방"
+          ],
+          "document_type": [],
+          "document_destination": [],
+          "symptom_change": "미상",
+          "patient_present": null,
+          "guardian_only": null,
+          "subjective_summary": null,
+          "requested_consultation": null,
+          "soap_summary": null
+        },
+        "raw_output": "{\n  \"visit_purpose\": [\"약 처방\"],\n  \"prescription_request\": {\n    \"duration\": \"두 달\",\n    \"reason\": \"여행\"\n  },\n  \"seizure_status\": \"발작은 없었음\",\n  \"accompaniment\": \"혼자 옴\",\n  \"symptom_change\": \"미상\",\n  \"document_request\": \"해당 없음\"\n}",
+        "error": null,
+        "usage": {
+          "input_tokens": 323,
+          "output_tokens": 86,
+          "total_tokens": 409
+        }
+      },
+      {
+        "case_id": "case_022",
+        "disease_context": "치매",
+        "split": "development",
+        "input": "어머니를 요양병원으로 모시려고 하는데 거기서 진료기록을 떼오라고 해서요. 어머니는 거동이 안 돼서 제가 왔어요. 상태는 비슷하세요.",
+        "gold": {
+          "visit_purpose": [
+            "서류 발급"
+          ],
+          "symptom_change": "비슷함",
+          "document_type": [
+            "기록/결과 사본"
+          ],
+          "document_destination": [
+            "타 의료기관/요양기관"
+          ],
+          "patient_present": false,
+          "guardian_only": true,
+          "subjective_summary": "보호자만 내원. 요양병원 전원을 위한 진료기록 사본을 요청함. 환자 상태는 비슷하다고 함.",
+          "requested_consultation": null,
+          "soap_summary": "S: 보호자 단독 내원, 요양병원 제출용 기록 사본 요청, 상태 비슷함. O: 해당 없음(환자 미내원). A: 진단/치료 방침 생성하지 않음. P: 기록 사본 발급 절차 확인."
+        },
+        "prediction": {
+          "visit_purpose": [
+            "서류 발급"
+          ],
+          "document_type": [],
+          "document_destination": [],
+          "symptom_change": "비슷함",
+          "patient_present": null,
+          "guardian_only": null,
+          "subjective_summary": null,
+          "requested_consultation": null,
+          "soap_summary": null
+        },
+        "raw_output": "{\n  \"visit_purpose\": \"서류 발급\",\n  \"patient_ambulatory_status\": \"거동이 안 됨\",\n  \"accompanying_person\": \"보호자\",\n  \"symptom_change\": \"비슷함\",\n  \"requested_document\": {\n    \"document_type\": \"기록/결과 사본\",\n    \"document_destination\": \"타 의료기관/요양기관\"\n  }\n}",
+        "error": null,
+        "usage": {
+          "input_tokens": 319,
+          "output_tokens": 90,
+          "total_tokens": 409
+        }
+      },
+      {
+        "case_id": "case_023",
+        "disease_context": "파킨슨병",
+        "split": "development",
+        "input": "다음 주에 다른 병원 예약이 있어서 검사 결과지가 필요해요. 결과는 지난번에 이미 들었고요, 종이만 받아 가면 됩니다. 혼자 왔어요.",
+        "gold": {
+          "visit_purpose": [
+            "서류 발급"
+          ],
+          "symptom_change": null,
+          "document_type": [
+            "기록/결과 사본"
+          ],
+          "document_destination": [
+            "타 의료기관/요양기관"
+          ],
+          "patient_present": true,
+          "guardian_only": false,
+          "subjective_summary": "환자 본인 내원. 타 병원 제출용 검사 결과지 사본을 요청함. 결과 설명은 이미 들어 추가 확인을 원하지 않음.",
+          "requested_consultation": null,
+          "soap_summary": "S: 환자 본인 내원, 결과지 사본만 요청(결과 상담 불필요). O: 해당 없음(문진 단계). A: 진단/치료 방침 생성하지 않음. P: 결과지 사본 발급."
+        },
+        "prediction": {
+          "visit_purpose": [
+            "서류 발급"
+          ],
+          "document_type": [],
+          "document_destination": [],
+          "symptom_change": "미상",
+          "patient_present": null,
+          "guardian_only": null,
+          "subjective_summary": null,
+          "requested_consultation": null,
+          "soap_summary": null
+        },
+        "raw_output": "{\n  \"visit_purpose\": \"서류 발급\",\n  \"symptom_change\": \"미상\",\n  \"document_request\": {\n    \"document_type\": \"기록/결과 사본\",\n    \"document_destination\": \"타 의료기관/요양기관\"\n  },\n  \"accompanied\": \"혼자\"\n}",
+        "error": null,
+        "usage": {
+          "input_tokens": 312,
+          "output_tokens": 71,
+          "total_tokens": 383
+        }
+      }
+    ]
+  },
+  "v1": {
+    "created_at": "2026-07-09T23:30:57+09:00",
+    "model": "gpt-4.1-mini",
+    "prompt_version": "v1",
+    "split": "development",
+    "metrics": {
+      "case_count": 20,
+      "json_success_rate": 1.0,
+      "exact_match": 0.6,
+      "field_accuracy": 0.9,
+      "micro_precision": 0.9166666666666666,
+      "micro_recall": 0.8979591836734694,
+      "micro_f1": 0.9072164948453607,
+      "omission_rate": 0.10204081632653061,
+      "hallucination_rate": 0.08333333333333333,
+      "input_tokens": 13214,
+      "output_tokens": 3160,
+      "symptom_change_accuracy": 0.8,
+      "patient_present_accuracy": 0.95,
+      "guardian_only_accuracy": 0.95
+    },
+    "records": [
+      {
+        "case_id": "case_001",
+        "disease_context": "치매",
+        "split": "development",
+        "input": "어머니는 오늘 못 오시고 저만 왔어요. 요양원에 낼 서류가 필요한데 뭘 떼야 하는지는 잘 모르겠어요. 그리고 요즘 식사를 하시고도 밥을 안 먹었다고 하시는 일이 자꾸 있어서 그것도 여쭤보고 싶어요.",
+        "gold": {
+          "visit_purpose": [
+            "서류 발급",
+            "증상 상담"
+          ],
+          "symptom_change": "나빠짐",
+          "document_type": [
+            "기타/종류 모름"
+          ],
+          "document_destination": [
+            "타 의료기관/요양기관"
+          ],
+          "patient_present": false,
+          "guardian_only": true,
+          "subjective_summary": "보호자만 내원. 환자가 식사한 사실을 잊는 일이 잦다고 보호자가 전달함. 요양원 제출용 서류가 필요하나 서류 종류는 확인 필요.",
+          "requested_consultation": "식사한 사실을 잊어버리는 증상에 대해 상담하고 싶어함",
+          "soap_summary": "S: 보호자 단독 내원, 환자의 식사 사실 망각 반복을 보호자가 전달. O: 해당 없음(환자 미내원). A: 진단/치료 방침 생성하지 않음. P: 서류 종류 확인, 인지 변화 진행 여부 확인 필요."
+        },
+        "prediction": {
+          "visit_purpose": [
+            "증상 상담",
+            "서류 발급"
+          ],
+          "document_type": [],
+          "document_destination": [
+            "타 의료기관/요양기관",
+            "제출처 모름"
+          ],
+          "symptom_change": null,
+          "patient_present": false,
+          "guardian_only": true,
+          "subjective_summary": "환자의 보호자가 내원하였으며, 요양원 제출용 서류 종류를 모르고 요청하고 있다. 환자가 식사 후에도 밥을 먹지 않았다고 말하는 일이 자주 발생한다.",
+          "requested_consultation": "식사 후 밥을 안 먹는 행동에 대한 상담",
+          "soap_summary": "S: 보호자가 서류 종류를 모름, 식사 후 밥을 안 먹는 일이 자주 있음. O: 없음. A: 진단 없음. P: 서류 종류 확인 필요."
+        },
+        "raw_output": "{\n  \"visit_purpose\": [\"증상 상담\", \"서류 발급\"],\n  \"symptom_change\": null,\n  \"document_type\": [],\n  \"document_destination\": [\"타 의료기관/요양기관\", \"제출처 모름\"],\n  \"patient_present\": false,\n  \"guardian_only\": true,\n  \"subjective_summary\": \"환자의 보호자가 내원하였으며, 요양원 제출용 서류 종류를 모르고 요청하고 있다. 환자가 식사 후에도 밥을 먹지 않았다고 말하는 일이 자주 발생한다.\",\n  \"requested_consultation\": \"식사 후 밥을 안 먹는 행동에 대한 상담\",\n  \"soap_summary\": \"S: 보호자가 서류 종류를 모름, 식사 후 밥을 안 먹는 일이 자주 있음. O: 없음. A: 진단 없음. P: 서류 종류 확인 필요.\"\n}",
+        "error": null,
+        "usage": {
+          "input_tokens": 677,
+          "output_tokens": 193,
+          "total_tokens": 870
+        }
+      },
+      {
+        "case_id": "case_002",
+        "disease_context": "파킨슨병",
+        "split": "development",
+        "input": "약은 그대로 받을게요. 그런데 요즘 손 떨림이 오전에는 괜찮다가 오후만 되면 심해져요. 저녁때는 수저 들기가 힘들 때도 있고요. 혼자 왔습니다.",
+        "gold": {
+          "visit_purpose": [
+            "약 처방",
+            "증상 상담"
+          ],
+          "symptom_change": "나빠짐",
+          "document_type": [],
+          "document_destination": [],
+          "patient_present": true,
+          "guardian_only": false,
+          "subjective_summary": "환자 본인 내원. 손 떨림이 오후에 심해지고 저녁에는 수저 사용이 힘들 때가 있다고 함. 약 처방 유지를 원함.",
+          "requested_consultation": "오후에 심해지는 손 떨림에 대해 상담 요청",
+          "soap_summary": "S: 환자 본인 내원, 손 떨림 오후 악화와 저녁 수저 사용 어려움 호소. O: 해당 없음(문진 단계). A: 진단/치료 방침 생성하지 않음. P: 약 처방 확인, 증상 시간대별 변화 진료 중 확인 필요."
+        },
+        "prediction": {
+          "visit_purpose": [
+            "약 처방",
+            "증상 상담"
+          ],
+          "document_type": [],
+          "document_destination": [],
+          "symptom_change": "나빠짐",
+          "patient_present": true,
+          "guardian_only": false,
+          "subjective_summary": "환자는 약은 기존대로 복용하나 손 떨림 증상이 오후에 심해지고 저녁에는 수저 들기가 힘들 정도라고 보고함.",
+          "requested_consultation": null,
+          "soap_summary": "S: 손 떨림이 오전보다 오후에 심하며 저녁에는 일상 동작에 지장 있음 / O: 없음 / A: 진단 생성하지 않음 / P: 증상 변화 및 약물 효과 확인 필요"
+        },
+        "raw_output": "{\n  \"visit_purpose\": [\"약 처방\", \"증상 상담\"],\n  \"symptom_change\": \"나빠짐\",\n  \"document_type\": [],\n  \"document_destination\": [],\n  \"patient_present\": true,\n  \"guardian_only\": false,\n  \"subjective_summary\": \"환자는 약은 기존대로 복용하나 손 떨림 증상이 오후에 심해지고 저녁에는 수저 들기가 힘들 정도라고 보고함.\",\n  \"requested_consultation\": null,\n  \"soap_summary\": \"S: 손 떨림이 오전보다 오후에 심하며 저녁에는 일상 동작에 지장 있음 / O: 없음 / A: 진단 생성하지 않음 / P: 증상 변화 및 약물 효과 확인 필요\"\n}",
+        "error": null,
+        "usage": {
+          "input_tokens": 658,
+          "output_tokens": 163,
+          "total_tokens": 821
+        }
+      },
+      {
+        "case_id": "case_003",
+        "disease_context": "뇌전증",
+        "split": "development",
+        "input": "지난달에 학교 낼 진단서는 받아 갔고요, 요즘 발작 횟수가 좀 는 것 같아서 왔어요. 엄마랑 같이 왔습니다.",
+        "gold": {
+          "visit_purpose": [
+            "증상 상담"
+          ],
+          "symptom_change": "나빠짐",
+          "document_type": [],
+          "document_destination": [],
+          "patient_present": true,
+          "guardian_only": false,
+          "subjective_summary": "환자와 보호자 함께 내원. 발작 횟수가 늘어난 것 같다고 함. 서류는 지난달 이미 발급받아 이번에는 요청하지 않음.",
+          "requested_consultation": "발작 횟수가 늘어난 것에 대해 상담하고 싶어함",
+          "soap_summary": "S: 환자·보호자 함께 내원, 발작 빈도 증가 우려 전달. O: 해당 없음(문진 단계). A: 진단/치료 방침 생성하지 않음. P: 발작 빈도·양상 변화 진료 중 확인 필요."
+        },
+        "prediction": {
+          "visit_purpose": [
+            "증상 상담"
+          ],
+          "document_type": [],
+          "document_destination": [],
+          "symptom_change": "나빠짐",
+          "patient_present": true,
+          "guardian_only": false,
+          "subjective_summary": "지난달에 학교 제출용 진단서를 받았으며 최근 발작 횟수가 증가하여 엄마와 함께 내원함.",
+          "requested_consultation": "발작 횟수 증가에 대한 상담",
+          "soap_summary": "S: 최근 발작 횟수 증가 reported / O: 해당 없음 / A: 진단 생성하지 않음 / P: 발작 변화 확인 필요"
+        },
+        "raw_output": "{\n  \"visit_purpose\": [\"증상 상담\"],\n  \"symptom_change\": \"나빠짐\",\n  \"document_type\": [],\n  \"document_destination\": [],\n  \"patient_present\": true,\n  \"guardian_only\": false,\n  \"subjective_summary\": \"지난달에 학교 제출용 진단서를 받았으며 최근 발작 횟수가 증가하여 엄마와 함께 내원함.\",\n  \"requested_consultation\": \"발작 횟수 증가에 대한 상담\",\n  \"soap_summary\": \"S: 최근 발작 횟수 증가 reported / O: 해당 없음 / A: 진단 생성하지 않음 / P: 발작 변화 확인 필요\"\n}",
+        "error": null,
+        "usage": {
+          "input_tokens": 646,
+          "output_tokens": 143,
+          "total_tokens": 789
+        }
+      },
+      {
+        "case_id": "case_004",
+        "disease_context": "치매",
+        "split": "development",
+        "input": "아버지 모시고 같이 왔어요. 지난번 검사 결과 들으러 왔고, 보험에 낼 소견서도 하나 부탁드립니다.",
+        "gold": {
+          "visit_purpose": [
+            "검사결과 확인",
+            "서류 발급"
+          ],
+          "symptom_change": null,
+          "document_type": [
+            "소견서"
+          ],
+          "document_destination": [
+            "보험"
+          ],
+          "patient_present": true,
+          "guardian_only": false,
+          "subjective_summary": "환자와 보호자 함께 내원. 검사 결과 확인을 원하며 보험 제출용 소견서를 요청함.",
+          "requested_consultation": null,
+          "soap_summary": "S: 환자·보호자 함께 내원, 검사 결과 확인 및 소견서 요청. O: 해당 없음(문진 단계). A: 진단/치료 방침 생성하지 않음. P: 검사 결과 안내, 소견서 발급 절차 확인 필요."
+        },
+        "prediction": {
+          "visit_purpose": [
+            "서류 발급",
+            "검사결과 확인"
+          ],
+          "document_type": [
+            "소견서"
+          ],
+          "document_destination": [
+            "보험"
+          ],
+          "symptom_change": null,
+          "patient_present": true,
+          "guardian_only": false,
+          "subjective_summary": "환자가 아버지를 모시고 내원하였으며, 지난번 검사 결과를 확인하고 보험 제출용 소견서 발급을 요청함.",
+          "requested_consultation": null,
+          "soap_summary": "S: 검사 결과 확인 및 보험 제출용 소견서 요청 / O: 해당 없음 / A: 진단 불포함 / P: 없음"
+        },
+        "raw_output": "{\n  \"visit_purpose\": [\"서류 발급\", \"검사결과 확인\"],\n  \"symptom_change\": null,\n  \"document_type\": [\"소견서\"],\n  \"document_destination\": [\"보험\"],\n  \"patient_present\": true,\n  \"guardian_only\": false,\n  \"subjective_summary\": \"환자가 아버지를 모시고 내원하였으며, 지난번 검사 결과를 확인하고 보험 제출용 소견서 발급을 요청함.\",\n  \"requested_consultation\": null,\n  \"soap_summary\": \"S: 검사 결과 확인 및 보험 제출용 소견서 요청 / O: 해당 없음 / A: 진단 불포함 / P: 없음\"\n}",
+        "error": null,
+        "usage": {
+          "input_tokens": 641,
+          "output_tokens": 148,
+          "total_tokens": 789
+        }
+      },
+      {
+        "case_id": "case_005",
+        "disease_context": "파킨슨병",
+        "split": "development",
+        "input": "아버지는 거동이 불편하셔서 저만 왔어요. 장애 등급 신청을 하려는데 어떤 서류를 떼야 하는지 모르겠어요. 그리고 요즘 걸음이 많이 느려지셨어요. 발이 잘 안 떨어진다고 하시고, 집 안에서도 몇 번 넘어질 뻔했어요.",
+        "gold": {
+          "visit_purpose": [
+            "서류 발급",
+            "증상 상담"
+          ],
+          "symptom_change": "나빠짐",
+          "document_type": [
+            "기타/종류 모름"
+          ],
+          "document_destination": [
+            "공공기관"
+          ],
+          "patient_present": false,
+          "guardian_only": true,
+          "subjective_summary": "보호자만 내원. 환자의 걸음이 느려지고 발이 잘 떨어지지 않아 넘어질 뻔한 일이 있었다고 보호자가 전달함. 장애 등급 신청용 서류가 필요하나 서류 종류는 확인 필요.",
+          "requested_consultation": "보행이 느려진 변화에 대해 상담하고 싶어함",
+          "soap_summary": "S: 보호자 단독 내원, 환자의 보행 저하와 낙상 위험을 보호자가 전달. O: 해당 없음(환자 미내원). A: 진단/치료 방침 생성하지 않음. P: 서류 종류 확인, 보행 변화와 낙상 위험 확인 필요."
+        },
+        "prediction": {
+          "visit_purpose": [
+            "증상 상담",
+            "서류 발급"
+          ],
+          "document_type": [],
+          "document_destination": [
+            "공공기관"
+          ],
+          "symptom_change": "나빠짐",
+          "patient_present": false,
+          "guardian_only": true,
+          "subjective_summary": "환자의 걸음이 많이 느려지고 발이 잘 안 떨어지며, 집 안에서 넘어질 뻔한 상황이 있음. 보호자만 내원하였고 장애 등급 신청을 위한 필요한 서류에 대해 문의함.",
+          "requested_consultation": "장애 등급 신청에 필요한 서류 안내",
+          "soap_summary": "S: 보행 느려지고 넘어질 뻔함 / O: 해당 없음 / A: 진단 생성하지 않음 / P: 장애 등급 신청 관련 서류 종류 확인 필요"
+        },
+        "raw_output": "```json\n{\n  \"visit_purpose\": [\"증상 상담\", \"서류 발급\"],\n  \"symptom_change\": \"나빠짐\",\n  \"document_type\": [],\n  \"document_destination\": [\"공공기관\"],\n  \"patient_present\": false,\n  \"guardian_only\": true,\n  \"subjective_summary\": \"환자의 걸음이 많이 느려지고 발이 잘 안 떨어지며, 집 안에서 넘어질 뻔한 상황이 있음. 보호자만 내원하였고 장애 등급 신청을 위한 필요한 서류에 대해 문의함.\",\n  \"requested_consultation\": \"장애 등급 신청에 필요한 서류 안내\",\n  \"soap_summary\": \"S: 보행 느려지고 넘어질 뻔함 / O: 해당 없음 / A: 진단 생성하지 않음 / P: 장애 등급 신청 관련 서류 종류 확인 필요\"\n}\n```",
+        "error": null,
+        "usage": {
+          "input_tokens": 683,
+          "output_tokens": 190,
+          "total_tokens": 873
+        }
+      },
+      {
+        "case_id": "case_006",
+        "disease_context": "뇌전증",
+        "split": "development",
+        "input": "약만 타러 왔어요. 별다른 건 없었고요. 혼자 왔습니다.",
+        "gold": {
+          "visit_purpose": [
+            "약 처방"
+          ],
+          "symptom_change": "비슷함",
+          "document_type": [],
+          "document_destination": [],
+          "patient_present": true,
+          "guardian_only": false,
+          "subjective_summary": "환자 본인 내원. 증상 변화 없이 약 처방만 요청함.",
+          "requested_consultation": null,
+          "soap_summary": "S: 환자 본인 내원, 증상 변화 없음, 약 처방 요청. O: 해당 없음(문진 단계). A: 진단/치료 방침 생성하지 않음. P: 정기 처방 확인."
+        },
+        "prediction": {
+          "visit_purpose": [
+            "약 처방"
+          ],
+          "document_type": [],
+          "document_destination": [],
+          "symptom_change": "비슷함",
+          "patient_present": true,
+          "guardian_only": false,
+          "subjective_summary": "환자가 약만 타러 방문했으며 별다른 증상 변화는 없고 혼자 내원함.",
+          "requested_consultation": null,
+          "soap_summary": "S: 약만 처방 받으러 왔고 별다른 증상 변화 없음 / O: 해당 없음 / A: 진단 생성하지 않음 / P: 확인 필요 없음"
+        },
+        "raw_output": "{\n  \"visit_purpose\": [\"약 처방\"],\n  \"symptom_change\": \"비슷함\",\n  \"document_type\": [],\n  \"document_destination\": [],\n  \"patient_present\": true,\n  \"guardian_only\": false,\n  \"subjective_summary\": \"환자가 약만 타러 방문했으며 별다른 증상 변화는 없고 혼자 내원함.\",\n  \"requested_consultation\": null,\n  \"soap_summary\": \"S: 약만 처방 받으러 왔고 별다른 증상 변화 없음 / O: 해당 없음 / A: 진단 생성하지 않음 / P: 확인 필요 없음\"\n}",
+        "error": null,
+        "usage": {
+          "input_tokens": 630,
+          "output_tokens": 137,
+          "total_tokens": 767
+        }
+      },
+      {
+        "case_id": "case_007",
+        "disease_context": "치매",
+        "split": "development",
+        "input": "어머니 모시고 같이 왔어요. 요즘 밤에 자꾸 깨서 집 안을 돌아다니세요. 새벽에 현관문을 열려고 하신 적도 있고요. 이게 약 때문인지 다른 이유인지 상담받고 싶어요.",
+        "gold": {
+          "visit_purpose": [
+            "증상 상담"
+          ],
+          "symptom_change": "새 증상 있음",
+          "document_type": [],
+          "document_destination": [],
+          "patient_present": true,
+          "guardian_only": false,
+          "subjective_summary": "환자와 보호자 함께 내원. 야간에 깨서 배회하고 새벽에 현관문을 열려 한 일이 있었다고 전달하며 원인 상담을 원함.",
+          "requested_consultation": "야간 각성·배회가 약 때문인지 다른 원인인지 상담 요청",
+          "soap_summary": "S: 환자·보호자 함께 내원, 야간 각성·배회 새로 발생, 새벽 외출 시도 있었음. O: 해당 없음(문진 단계). A: 진단/치료 방침 생성하지 않음. P: 야간 증상과 복약 관련성 진료 중 확인 필요."
+        },
+        "prediction": {
+          "visit_purpose": [
+            "증상 상담"
+          ],
+          "document_type": [],
+          "document_destination": [],
+          "symptom_change": "새 증상 있음",
+          "patient_present": true,
+          "guardian_only": false,
+          "subjective_summary": "환자가 밤에 자주 깨서 집 안을 돌아다니며, 새벽에 현관문을 열려한 적이 있다. 약 때문인지 다른 이유인지 관련 상담을 원함.",
+          "requested_consultation": "밤에 자주 깨는 증상과 현관문을 열려는 행동이 약 때문인지 다른 이유인지 상담 받고 싶음",
+          "soap_summary": "S: 밤에 자주 깨고 집 안을 돌아다님, 새벽에 현관문을 열려 함 / O: 해당 없음 / A: 진단 없음 / P: 증상 원인 파악 및 상담 필요"
+        },
+        "raw_output": "{\n  \"visit_purpose\": [\"증상 상담\"],\n  \"symptom_change\": \"새 증상 있음\",\n  \"document_type\": [],\n  \"document_destination\": [],\n  \"patient_present\": true,\n  \"guardian_only\": false,\n  \"subjective_summary\": \"환자가 밤에 자주 깨서 집 안을 돌아다니며, 새벽에 현관문을 열려한 적이 있다. 약 때문인지 다른 이유인지 관련 상담을 원함.\",\n  \"requested_consultation\": \"밤에 자주 깨는 증상과 현관문을 열려는 행동이 약 때문인지 다른 이유인지 상담 받고 싶음\",\n  \"soap_summary\": \"S: 밤에 자주 깨고 집 안을 돌아다님, 새벽에 현관문을 열려 함 / O: 해당 없음 / A: 진단 없음 / P: 증상 원인 파악 및 상담 필요\"\n}",
+        "error": null,
+        "usage": {
+          "input_tokens": 663,
+          "output_tokens": 193,
+          "total_tokens": 856
+        }
+      },
+      {
+        "case_id": "case_011",
+        "disease_context": "파킨슨병",
+        "split": "development",
+        "input": "아이고 오늘 주차장이 왜 이렇게 복잡해요. 아버지 약 타러 왔는데요, 참 그리고 저번에 새로 바꾼 약 있잖아요, 그거 먹고부터 자꾸 어지럽다고 하셔가지고. 아 아버지도 같이 왔어요, 지금 화장실 가셨고요. 어지러운 게 약 때문인가 그것 좀 여쭤볼게요.",
+        "gold": {
+          "visit_purpose": [
+            "약 처방",
+            "증상 상담"
+          ],
+          "symptom_change": "새 증상 있음",
+          "document_type": [],
+          "document_destination": [],
+          "patient_present": true,
+          "guardian_only": false,
+          "subjective_summary": "환자와 보호자 함께 내원. 약 변경 후 어지럼이 새로 생겼다고 보호자가 전달함. 약 처방을 원함.",
+          "requested_consultation": "약 변경 후 생긴 어지럼이 약 때문인지 상담 요청",
+          "soap_summary": "S: 환자·보호자 함께 내원, 약 변경 후 어지럼 발생 전달. O: 해당 없음(문진 단계). A: 진단/치료 방침 생성하지 않음. P: 어지럼과 약 변경의 관련성 진료 중 확인 필요, 처방 확인."
+        },
+        "prediction": {
+          "visit_purpose": [
+            "약 처방",
+            "증상 상담"
+          ],
+          "document_type": [],
+          "document_destination": [],
+          "symptom_change": "새 증상 있음",
+          "patient_present": true,
+          "guardian_only": false,
+          "subjective_summary": "환자는 새로 바꾼 약을 복용한 후 어지럼증이 발생하여 증상 및 약 영향에 대해 문의하고자 방문함.",
+          "requested_consultation": "약 복용 후 발생하는 어지럼증 원인 문의",
+          "soap_summary": "S: 새로 바꾼 약 복용 후 어지럼증 발생 / O: 해당 없음 / A: 진단 생성하지 않음 / P: 어지럼증 원인 확인 필요"
+        },
+        "raw_output": "{\n  \"visit_purpose\": [\"약 처방\", \"증상 상담\"],\n  \"symptom_change\": \"새 증상 있음\",\n  \"document_type\": [],\n  \"document_destination\": [],\n  \"patient_present\": true,\n  \"guardian_only\": false,\n  \"subjective_summary\": \"환자는 새로 바꾼 약을 복용한 후 어지럼증이 발생하여 증상 및 약 영향에 대해 문의하고자 방문함.\",\n  \"requested_consultation\": \"약 복용 후 발생하는 어지럼증 원인 문의\",\n  \"soap_summary\": \"S: 새로 바꾼 약 복용 후 어지럼증 발생 / O: 해당 없음 / A: 진단 생성하지 않음 / P: 어지럼증 원인 확인 필요\"\n}",
+        "error": null,
+        "usage": {
+          "input_tokens": 699,
+          "output_tokens": 169,
+          "total_tokens": 868
+        }
+      },
+      {
+        "case_id": "case_012",
+        "disease_context": "뇌전증",
+        "split": "development",
+        "input": "약이요. 그대로예요.",
+        "gold": {
+          "visit_purpose": [
+            "약 처방"
+          ],
+          "symptom_change": "비슷함",
+          "document_type": [],
+          "document_destination": [],
+          "patient_present": null,
+          "guardian_only": null,
+          "subjective_summary": "약 처방만 요청함. 증상 변화 없다고 함. 방문 형태 언급 없음(미상).",
+          "requested_consultation": null,
+          "soap_summary": "S: 약 처방 요청, 증상 변화 없음, 방문 형태 미상. O: 해당 없음(문진 단계). A: 진단/치료 방침 생성하지 않음. P: 방문 형태 확인, 정기 처방 확인."
+        },
+        "prediction": {
+          "visit_purpose": [
+            "약 처방"
+          ],
+          "document_type": [],
+          "document_destination": [],
+          "symptom_change": "비슷함",
+          "patient_present": true,
+          "guardian_only": false,
+          "subjective_summary": "환자가 약 처방을 원하며 증상에 변화는 없다고 함.",
+          "requested_consultation": null,
+          "soap_summary": "S: 약 처방 원함 / O: 해당 없음 / A: 진단 생성하지 않음 / P: 확인 필요 없음"
+        },
+        "raw_output": "{\n  \"visit_purpose\": [\"약 처방\"],\n  \"symptom_change\": \"비슷함\",\n  \"document_type\": [],\n  \"document_destination\": [],\n  \"patient_present\": true,\n  \"guardian_only\": false,\n  \"subjective_summary\": \"환자가 약 처방을 원하며 증상에 변화는 없다고 함.\",\n  \"requested_consultation\": null,\n  \"soap_summary\": \"S: 약 처방 원함 / O: 해당 없음 / A: 진단 생성하지 않음 / P: 확인 필요 없음\"\n}",
+        "error": null,
+        "usage": {
+          "input_tokens": 615,
+          "output_tokens": 118,
+          "total_tokens": 733
+        }
+      },
+      {
+        "case_id": "case_013",
+        "disease_context": "치매",
+        "split": "development",
+        "input": "어무이 모시고 왔심더. 요새 자꾸 화를 내시고 예전엔 안 그랬거든예. 밤에 잠도 잘 몬 주무시고. 그거 때문에 상담 좀 받아볼라꼬예.",
+        "gold": {
+          "visit_purpose": [
+            "증상 상담"
+          ],
+          "symptom_change": "새 증상 있음",
+          "document_type": [],
+          "document_destination": [],
+          "patient_present": true,
+          "guardian_only": false,
+          "subjective_summary": "환자와 보호자 함께 내원. 이전에 없던 화냄과 수면 문제가 생겼다고 보호자가 전달함.",
+          "requested_consultation": "화를 자주 내는 것과 잠을 잘 못 자는 문제에 대해 상담하고 싶어함",
+          "soap_summary": "S: 환자·보호자 함께 내원, 화냄과 수면 문제 새로 발생 전달. O: 해당 없음(문진 단계). A: 진단/치료 방침 생성하지 않음. P: 행동 변화·수면 문제 진료 중 확인 필요."
+        },
+        "prediction": {
+          "visit_purpose": [
+            "증상 상담"
+          ],
+          "document_type": [],
+          "document_destination": [],
+          "symptom_change": "새 증상 있음",
+          "patient_present": true,
+          "guardian_only": false,
+          "subjective_summary": "환자가 최근 자주 화를 내고 밤에 잠을 잘 못 자서 상담을 원함.",
+          "requested_consultation": "화내는 증상과 불면에 대한 상담",
+          "soap_summary": "S: 최근 화를 자주 내고 불면 호소 / O: 해당 없음 / A: 진단 없음 / P: 상담 필요"
+        },
+        "raw_output": "{\n  \"visit_purpose\": [\"증상 상담\"],\n  \"symptom_change\": \"새 증상 있음\",\n  \"document_type\": [],\n  \"document_destination\": [],\n  \"patient_present\": true,\n  \"guardian_only\": false,\n  \"subjective_summary\": \"환자가 최근 자주 화를 내고 밤에 잠을 잘 못 자서 상담을 원함.\",\n  \"requested_consultation\": \"화내는 증상과 불면에 대한 상담\",\n  \"soap_summary\": \"S: 최근 화를 자주 내고 불면 호소 / O: 해당 없음 / A: 진단 없음 / P: 상담 필요\"\n}",
+        "error": null,
+        "usage": {
+          "input_tokens": 662,
+          "output_tokens": 137,
+          "total_tokens": 799
+        }
+      },
+      {
+        "case_id": "case_014",
+        "disease_context": "파킨슨병",
+        "split": "development",
+        "input": "소견서 하나 떼려고요. 아 잠깐, 소견서가 아니고 진단서라 했나... 보험회사에서 달라는 거요. 몸은 뭐 비슷해요. 혼자 왔어요.",
+        "gold": {
+          "visit_purpose": [
+            "서류 발급"
+          ],
+          "symptom_change": "비슷함",
+          "document_type": [
+            "기타/종류 모름"
+          ],
+          "document_destination": [
+            "보험"
+          ],
+          "patient_present": true,
+          "guardian_only": false,
+          "subjective_summary": "환자 본인 내원. 보험회사 제출용 서류가 필요하나 진단서인지 소견서인지 확실하지 않음. 증상은 이전과 비슷하다고 함.",
+          "requested_consultation": null,
+          "soap_summary": "S: 환자 본인 내원, 보험 제출용 서류 요청(종류 불확실), 증상 변화 없음. O: 해당 없음(문진 단계). A: 진단/치료 방침 생성하지 않음. P: 보험사 요구 서류 종류 확인 필요."
+        },
+        "prediction": {
+          "visit_purpose": [
+            "서류 발급"
+          ],
+          "document_type": [
+            "진단서"
+          ],
+          "document_destination": [
+            "보험"
+          ],
+          "symptom_change": "비슷함",
+          "patient_present": true,
+          "guardian_only": false,
+          "subjective_summary": "진단서 발급 요청함. 몸 상태는 이전과 비슷하다고 함. 환자 혼자 방문함.",
+          "requested_consultation": null,
+          "soap_summary": "S: 진단서 발급 요청, 상태 비슷함 / O: 없음 / A: 없음 / P: 없음"
+        },
+        "raw_output": "{\n  \"visit_purpose\": [\"서류 발급\"],\n  \"symptom_change\": \"비슷함\",\n  \"document_type\": [\"진단서\"],\n  \"document_destination\": [\"보험\"],\n  \"patient_present\": true,\n  \"guardian_only\": false,\n  \"subjective_summary\": \"진단서 발급 요청함. 몸 상태는 이전과 비슷하다고 함. 환자 혼자 방문함.\",\n  \"requested_consultation\": null,\n  \"soap_summary\": \"S: 진단서 발급 요청, 상태 비슷함 / O: 없음 / A: 없음 / P: 없음\"\n}",
+        "error": null,
+        "usage": {
+          "input_tokens": 656,
+          "output_tokens": 132,
+          "total_tokens": 788
+        }
+      },
+      {
+        "case_id": "case_015",
+        "disease_context": "뇌전증",
+        "split": "development",
+        "input": "약 바꾸고 나서 발작이 확 줄었어요. 두 달 동안 한 번도 없었고요. 약은 그대로 받아 가면 되고, 혼자 왔습니다.",
+        "gold": {
+          "visit_purpose": [
+            "약 처방"
+          ],
+          "symptom_change": "좋아짐",
+          "document_type": [],
+          "document_destination": [],
+          "patient_present": true,
+          "guardian_only": false,
+          "subjective_summary": "환자 본인 내원. 약 변경 후 두 달간 발작이 없었다고 함. 동일 약 처방을 원함.",
+          "requested_consultation": null,
+          "soap_summary": "S: 환자 본인 내원, 약 변경 후 발작 없음(두 달), 동일 처방 요청. O: 해당 없음(문진 단계). A: 진단/치료 방침 생성하지 않음. P: 정기 처방 확인."
+        },
+        "prediction": {
+          "visit_purpose": [
+            "약 처방"
+          ],
+          "document_type": [],
+          "document_destination": [],
+          "symptom_change": "좋아짐",
+          "patient_present": true,
+          "guardian_only": false,
+          "subjective_summary": "약 변경 후 발작이 크게 줄어 두 달 동안 한 번도 발작이 없었음. 약은 그대로 받아가길 원함.",
+          "requested_consultation": null,
+          "soap_summary": "S: 약 변경 후 발작 감소, 2개월간 없음 / O: 없음 / A: 진단 생성하지 않음 / P: 확인 필요 없음"
+        },
+        "raw_output": "{\n  \"visit_purpose\": [\"약 처방\"],\n  \"symptom_change\": \"좋아짐\",\n  \"document_type\": [],\n  \"document_destination\": [],\n  \"patient_present\": true,\n  \"guardian_only\": false,\n  \"subjective_summary\": \"약 변경 후 발작이 크게 줄어 두 달 동안 한 번도 발작이 없었음. 약은 그대로 받아가길 원함.\",\n  \"requested_consultation\": null,\n  \"soap_summary\": \"S: 약 변경 후 발작 감소, 2개월간 없음 / O: 없음 / A: 진단 생성하지 않음 / P: 확인 필요 없음\"\n}",
+        "error": null,
+        "usage": {
+          "input_tokens": 646,
+          "output_tokens": 138,
+          "total_tokens": 784
+        }
+      },
+      {
+        "case_id": "case_016",
+        "disease_context": "치매",
+        "split": "development",
+        "input": "남편이 요즘 통 기억을 못 해요. 어제는 손주 이름도 헷갈리고. 우리 딸은 미국 사는데 걔가 자꾸 전화로 아빠 어떠냐고 물어봐서요. 오늘은 남편이랑 같이 왔고요, 진료확인서도 한 장 떼주세요. 제가 보관해두게요.",
+        "gold": {
+          "visit_purpose": [
+            "증상 상담",
+            "서류 발급"
+          ],
+          "symptom_change": "나빠짐",
+          "document_type": [
+            "통원사실증명서(진료확인서)"
+          ],
+          "document_destination": [
+            "개인 보관"
+          ],
+          "patient_present": true,
+          "guardian_only": false,
+          "subjective_summary": "환자와 보호자 함께 내원. 기억력 저하가 심해졌다고 보호자가 전달함. 개인 보관용 진료확인서를 요청함.",
+          "requested_consultation": "기억력이 더 나빠진 것에 대해 상담하고 싶어함",
+          "soap_summary": "S: 환자·보호자 함께 내원, 기억력 저하 심화 전달, 진료확인서 요청. O: 해당 없음(문진 단계). A: 진단/치료 방침 생성하지 않음. P: 인지 변화 진행 여부 확인, 진료확인서 발급."
+        },
+        "prediction": {
+          "visit_purpose": [
+            "증상 상담",
+            "서류 발급"
+          ],
+          "document_type": [
+            "통원사실증명서(진료확인서)"
+          ],
+          "document_destination": [
+            "개인 보관"
+          ],
+          "symptom_change": "새 증상 있음",
+          "patient_present": true,
+          "guardian_only": false,
+          "subjective_summary": "남편이 최근 기억을 잘 못하고 손주 이름도 헷갈리며, 가족들이 걱정하고 있다. 보호자는 진료확인서를 한 장 발급받아 보관하고자 한다.",
+          "requested_consultation": null,
+          "soap_summary": "S: 기억력 저하 및 혼동 증상 발생/O: 해당 없음/A: 진단 없음/P: 추가 증상 변화 확인 필요"
+        },
+        "raw_output": "{\n  \"visit_purpose\": [\"증상 상담\", \"서류 발급\"],\n  \"symptom_change\": \"새 증상 있음\",\n  \"document_type\": [\"통원사실증명서(진료확인서)\"],\n  \"document_destination\": [\"개인 보관\"],\n  \"patient_present\": true,\n  \"guardian_only\": false,\n  \"subjective_summary\": \"남편이 최근 기억을 잘 못하고 손주 이름도 헷갈리며, 가족들이 걱정하고 있다. 보호자는 진료확인서를 한 장 발급받아 보관하고자 한다.\",\n  \"requested_consultation\": null,\n  \"soap_summary\": \"S: 기억력 저하 및 혼동 증상 발생/O: 해당 없음/A: 진단 없음/P: 추가 증상 변화 확인 필요\"\n}",
+        "error": null,
+        "usage": {
+          "input_tokens": 689,
+          "output_tokens": 176,
+          "total_tokens": 865
+        }
+      },
+      {
+        "case_id": "case_017",
+        "disease_context": "파킨슨병",
+        "split": "development",
+        "input": "아버지가 못 오셔서 제가 왔는데요, 전화로 여쭤보니까 별다른 건 없다고는 하시는데 제가 직접 본 게 아니라 잘 모르겠어요. 약이나 타다 드리려고요.",
+        "gold": {
+          "visit_purpose": [
+            "약 처방"
+          ],
+          "symptom_change": "비슷함",
+          "document_type": [],
+          "document_destination": [],
+          "patient_present": false,
+          "guardian_only": true,
+          "subjective_summary": "보호자만 내원. 환자는 전화로 별다른 변화가 없다고 함(전언). 보호자가 직접 확인하지는 못함. 약 처방을 원함.",
+          "requested_consultation": null,
+          "soap_summary": "S: 보호자 단독 내원, 증상 변화 없음(환자 전언, 보호자 직접 확인 못함). O: 해당 없음(환자 미내원). A: 진단/치료 방침 생성하지 않음. P: 증상 변화 진료 중 재확인, 처방 확인."
+        },
+        "prediction": {
+          "visit_purpose": [
+            "약 처방"
+          ],
+          "document_type": [],
+          "document_destination": [],
+          "symptom_change": "잘 모르겠음",
+          "patient_present": false,
+          "guardian_only": true,
+          "subjective_summary": "환자 부재로 보호자가 내원하였으며, 환자는 별다른 증상 없다고 전화로만 전달하였고 보호자는 직접 확인하지 못함. 약 처방을 원함.",
+          "requested_consultation": null,
+          "soap_summary": "S: 환자 부재, 보호자가 약 처방 의뢰함 / O: 없음 / A: 진단 없음 / P: 환자 직접 내원 여부 확인 필요"
+        },
+        "raw_output": "{\n  \"visit_purpose\": [\"약 처방\"],\n  \"symptom_change\": \"잘 모르겠음\",\n  \"document_type\": [],\n  \"document_destination\": [],\n  \"patient_present\": false,\n  \"guardian_only\": true,\n  \"subjective_summary\": \"환자 부재로 보호자가 내원하였으며, 환자는 별다른 증상 없다고 전화로만 전달하였고 보호자는 직접 확인하지 못함. 약 처방을 원함.\",\n  \"requested_consultation\": null,\n  \"soap_summary\": \"S: 환자 부재, 보호자가 약 처방 의뢰함 / O: 없음 / A: 진단 없음 / P: 환자 직접 내원 여부 확인 필요\"\n}",
+        "error": null,
+        "usage": {
+          "input_tokens": 657,
+          "output_tokens": 155,
+          "total_tokens": 812
+        }
+      },
+      {
+        "case_id": "case_018",
+        "disease_context": "뇌전증",
+        "split": "development",
+        "input": "저기 애가 이번에 수학여행을 가는데 학교에서 약 먹는 거 때문에 서류를 하나 해오라 하더라고요. 뭐라더라, 진단서인지 소견서인지... 아무튼 학교 제출용이요. 애는 학교 갔고 저만 왔어요. 발작은 요즘 없었어요.",
+        "gold": {
+          "visit_purpose": [
+            "서류 발급"
+          ],
+          "symptom_change": "비슷함",
+          "document_type": [
+            "기타/종류 모름"
+          ],
+          "document_destination": [
+            "직장/학교"
+          ],
+          "patient_present": false,
+          "guardian_only": true,
+          "subjective_summary": "보호자만 내원. 수학여행 관련 학교 제출용 서류가 필요하나 서류 종류는 확실하지 않음. 최근 발작은 없었다고 함.",
+          "requested_consultation": null,
+          "soap_summary": "S: 보호자 단독 내원, 학교 제출용 서류 요청(종류 불확실), 발작 없음. O: 해당 없음(환자 미내원). A: 진단/치료 방침 생성하지 않음. P: 학교 요구 서류 종류 확인 필요."
+        },
+        "prediction": {
+          "visit_purpose": [
+            "서류 발급"
+          ],
+          "document_type": [
+            "진단서",
+            "소견서"
+          ],
+          "document_destination": [
+            "직장/학교"
+          ],
+          "symptom_change": "비슷함",
+          "patient_present": false,
+          "guardian_only": true,
+          "subjective_summary": "환자 보호자가 수학여행 관련 학교 제출용 서류(진단서 또는 소견서)를 요청하였으며, 환자는 학교에 있고 보호자만 내원함. 최근 발작 증상은 없다고 보고함.",
+          "requested_consultation": null,
+          "soap_summary": "S: 보호자 서류 발급 요청/O: 해당 없음/A: 진단 또는 치료 미작성/P: 서류 종류 확정 필요"
+        },
+        "raw_output": "{\n  \"visit_purpose\": [\"서류 발급\"],\n  \"symptom_change\": \"비슷함\",\n  \"document_type\": [\"진단서\", \"소견서\"],\n  \"document_destination\": [\"직장/학교\"],\n  \"patient_present\": false,\n  \"guardian_only\": true,\n  \"subjective_summary\": \"환자 보호자가 수학여행 관련 학교 제출용 서류(진단서 또는 소견서)를 요청하였으며, 환자는 학교에 있고 보호자만 내원함. 최근 발작 증상은 없다고 보고함.\",\n  \"requested_consultation\": null,\n  \"soap_summary\": \"S: 보호자 서류 발급 요청/O: 해당 없음/A: 진단 또는 치료 미작성/P: 서류 종류 확정 필요\"\n}",
+        "error": null,
+        "usage": {
+          "input_tokens": 682,
+          "output_tokens": 169,
+          "total_tokens": 851
+        }
+      },
+      {
+        "case_id": "case_019",
+        "disease_context": "치매",
+        "split": "development",
+        "input": "오늘 좀 할 게 많아요. 지난주에 한 MRI 결과도 들어야 하고, 어머니 약도 타야 하고, 주간보호센터에 낼 소견서도 있고요. 어머니는 요즘 좀 가라앉으셨는지 말수가 줄었어요. 같이 왔습니다.",
+        "gold": {
+          "visit_purpose": [
+            "검사결과 확인",
+            "약 처방",
+            "서류 발급",
+            "증상 상담"
+          ],
+          "symptom_change": "새 증상 있음",
+          "document_type": [
+            "소견서"
+          ],
+          "document_destination": [
+            "타 의료기관/요양기관"
+          ],
+          "patient_present": true,
+          "guardian_only": false,
+          "subjective_summary": "환자와 보호자 함께 내원. 검사 결과 확인, 약 처방, 주간보호센터 제출용 소견서를 요청함. 말수가 줄어드는 변화가 새로 나타났다고 보호자가 전달함.",
+          "requested_consultation": "말수가 줄어든 변화에 대해 상담하고 싶어함",
+          "soap_summary": "S: 환자·보호자 함께 내원, 말수 감소 새로 관찰, 결과 확인·처방·소견서 요청. O: 해당 없음(문진 단계). A: 진단/치료 방침 생성하지 않음. P: 검사 결과 안내, 소견서 발급, 기분·의욕 변화 진료 중 확인 필요(약 부작용 가능성 포함)."
+        },
+        "prediction": {
+          "visit_purpose": [
+            "약 처방",
+            "서류 발급",
+            "검사결과 확인"
+          ],
+          "document_type": [
+            "소견서"
+          ],
+          "document_destination": [
+            "타 의료기관/요양기관"
+          ],
+          "symptom_change": "나빠짐",
+          "patient_present": true,
+          "guardian_only": false,
+          "subjective_summary": "환자와 보호자가 동행했으며, 환자는 최근 말수가 줄어 증상이 가라앉은 것으로 보인다. 지난주에 시행한 MRI 결과 확인과 약 처방, 주간보호센터 제출용 소견서 발급을 원함.",
+          "requested_consultation": null,
+          "soap_summary": "S: 환자 말수가 줄었음; O: 해당 없음; A: 진단 생성하지 않음; P: MRI 결과 확인 필요"
+        },
+        "raw_output": "{\n  \"visit_purpose\": [\"약 처방\", \"서류 발급\", \"검사결과 확인\"],\n  \"symptom_change\": \"나빠짐\",\n  \"document_type\": [\"소견서\"],\n  \"document_destination\": [\"타 의료기관/요양기관\"],\n  \"patient_present\": true,\n  \"guardian_only\": false,\n  \"subjective_summary\": \"환자와 보호자가 동행했으며, 환자는 최근 말수가 줄어 증상이 가라앉은 것으로 보인다. 지난주에 시행한 MRI 결과 확인과 약 처방, 주간보호센터 제출용 소견서 발급을 원함.\",\n  \"requested_consultation\": null,\n  \"soap_summary\": \"S: 환자 말수가 줄었음; O: 해당 없음; A: 진단 생성하지 않음; P: MRI 결과 확인 필요\"\n}",
+        "error": null,
+        "usage": {
+          "input_tokens": 673,
+          "output_tokens": 186,
+          "total_tokens": 859
+        }
+      },
+      {
+        "case_id": "case_020",
+        "disease_context": "뇌전증",
+        "split": "development",
+        "input": "지난번에 떼 간 진단서가 회사에서 양식이 안 맞는다고 다시 해오래요. 아니 무슨 서류를 두 번씩 떼게 하는지 모르겠네. 회사 제출용으로 다시 부탁드립니다. 발작은 없었고요, 혼자 왔어요.",
+        "gold": {
+          "visit_purpose": [
+            "서류 발급"
+          ],
+          "symptom_change": "비슷함",
+          "document_type": [
+            "진단서"
+          ],
+          "document_destination": [
+            "직장/학교"
+          ],
+          "patient_present": true,
+          "guardian_only": false,
+          "subjective_summary": "환자 본인 내원. 회사 제출용 진단서 재발급을 요청함(양식 문제로 재요청). 발작은 없었다고 함.",
+          "requested_consultation": null,
+          "soap_summary": "S: 환자 본인 내원, 진단서 재발급 요청(회사 양식 문제), 발작 없음. O: 해당 없음(문진 단계). A: 진단/치료 방침 생성하지 않음. P: 회사 요구 양식 확인 후 진단서 재발급."
+        },
+        "prediction": {
+          "visit_purpose": [
+            "서류 발급"
+          ],
+          "document_type": [
+            "진단서"
+          ],
+          "document_destination": [
+            "직장/학교"
+          ],
+          "symptom_change": "비슷함",
+          "patient_present": true,
+          "guardian_only": false,
+          "subjective_summary": "환자는 발작 없이 상태가 유지되고 있으며, 회사 제출용 진단서를 이전에 발급받았으나 회사 양식과 맞지 않아 다시 발급을 요청함.",
+          "requested_consultation": null,
+          "soap_summary": "S: 발작 없음, 진단서 재발급 요청 / O: 해당 없음 / A: 진단서 재발급 필요 / P: 서류 양식 확인 필요"
+        },
+        "raw_output": "{\n  \"visit_purpose\": [\"서류 발급\"],\n  \"symptom_change\": \"비슷함\",\n  \"document_type\": [\"진단서\"],\n  \"document_destination\": [\"직장/학교\"],\n  \"patient_present\": true,\n  \"guardian_only\": false,\n  \"subjective_summary\": \"환자는 발작 없이 상태가 유지되고 있으며, 회사 제출용 진단서를 이전에 발급받았으나 회사 양식과 맞지 않아 다시 발급을 요청함.\",\n  \"requested_consultation\": null,\n  \"soap_summary\": \"S: 발작 없음, 진단서 재발급 요청 / O: 해당 없음 / A: 진단서 재발급 필요 / P: 서류 양식 확인 필요\"\n}",
+        "error": null,
+        "usage": {
+          "input_tokens": 672,
+          "output_tokens": 160,
+          "total_tokens": 832
+        }
+      },
+      {
+        "case_id": "case_021",
+        "disease_context": "뇌전증",
+        "split": "development",
+        "input": "그... 약이 좀 남았는데요, 이번에 여행을 가게 돼서 약을 좀 길게, 그러니까 두 달 치? 길게 받을 수 있나 해서요. 발작은 없었어요. 혼자 왔어요.",
+        "gold": {
+          "visit_purpose": [
+            "약 처방"
+          ],
+          "symptom_change": "비슷함",
+          "document_type": [],
+          "document_destination": [],
+          "patient_present": true,
+          "guardian_only": false,
+          "subjective_summary": "환자 본인 내원. 여행으로 두 달 치 장기 처방이 가능한지 문의함. 발작은 없었다고 함.",
+          "requested_consultation": "여행 기간에 맞춘 장기 처방이 가능한지 문의함",
+          "soap_summary": "S: 환자 본인 내원, 여행으로 장기 처방 요청, 발작 없음. O: 해당 없음(문진 단계). A: 진단/치료 방침 생성하지 않음. P: 처방 일수 조정 가능 여부 진료 중 확인."
+        },
+        "prediction": {
+          "visit_purpose": [
+            "약 처방"
+          ],
+          "document_type": [],
+          "document_destination": [],
+          "symptom_change": "비슷함",
+          "patient_present": true,
+          "guardian_only": false,
+          "subjective_summary": "환자는 여행 계획으로 약을 두 달 치로 길게 처방받기를 원하며, 최근 발작은 없었음.",
+          "requested_consultation": null,
+          "soap_summary": "S: 환자가 약을 두 달 치로 길게 처방받기를 원함, 발작 없음 / O: 없음 / A: 진단 없음 / P: 약 처방 관련 확인 필요"
+        },
+        "raw_output": "{\n  \"visit_purpose\": [\"약 처방\"],\n  \"symptom_change\": \"비슷함\",\n  \"document_type\": [],\n  \"document_destination\": [],\n  \"patient_present\": true,\n  \"guardian_only\": false,\n  \"subjective_summary\": \"환자는 여행 계획으로 약을 두 달 치로 길게 처방받기를 원하며, 최근 발작은 없었음.\",\n  \"requested_consultation\": null,\n  \"soap_summary\": \"S: 환자가 약을 두 달 치로 길게 처방받기를 원함, 발작 없음 / O: 없음 / A: 진단 없음 / P: 약 처방 관련 확인 필요\"\n}",
+        "error": null,
+        "usage": {
+          "input_tokens": 660,
+          "output_tokens": 143,
+          "total_tokens": 803
+        }
+      },
+      {
+        "case_id": "case_022",
+        "disease_context": "치매",
+        "split": "development",
+        "input": "어머니를 요양병원으로 모시려고 하는데 거기서 진료기록을 떼오라고 해서요. 어머니는 거동이 안 돼서 제가 왔어요. 상태는 비슷하세요.",
+        "gold": {
+          "visit_purpose": [
+            "서류 발급"
+          ],
+          "symptom_change": "비슷함",
+          "document_type": [
+            "기록/결과 사본"
+          ],
+          "document_destination": [
+            "타 의료기관/요양기관"
+          ],
+          "patient_present": false,
+          "guardian_only": true,
+          "subjective_summary": "보호자만 내원. 요양병원 전원을 위한 진료기록 사본을 요청함. 환자 상태는 비슷하다고 함.",
+          "requested_consultation": null,
+          "soap_summary": "S: 보호자 단독 내원, 요양병원 제출용 기록 사본 요청, 상태 비슷함. O: 해당 없음(환자 미내원). A: 진단/치료 방침 생성하지 않음. P: 기록 사본 발급 절차 확인."
+        },
+        "prediction": {
+          "visit_purpose": [
+            "서류 발급"
+          ],
+          "document_type": [
+            "기록/결과 사본"
+          ],
+          "document_destination": [
+            "타 의료기관/요양기관"
+          ],
+          "symptom_change": "비슷함",
+          "patient_present": false,
+          "guardian_only": true,
+          "subjective_summary": "어머니의 거동이 불편하여 보호자가 대신 방문하였으며, 상태는 이전과 비슷하다고 함.",
+          "requested_consultation": null,
+          "soap_summary": "S: 환자가 거동 불편하여 보호자 내원, 상태 비슷함 / O: 해당 없음 / A: 진단 없음 / P: 진료기록 발급 확인 필요"
+        },
+        "raw_output": "{\n  \"visit_purpose\": [\"서류 발급\"],\n  \"symptom_change\": \"비슷함\",\n  \"document_type\": [\"기록/결과 사본\"],\n  \"document_destination\": [\"타 의료기관/요양기관\"],\n  \"patient_present\": false,\n  \"guardian_only\": true,\n  \"subjective_summary\": \"어머니의 거동이 불편하여 보호자가 대신 방문하였으며, 상태는 이전과 비슷하다고 함.\",\n  \"requested_consultation\": null,\n  \"soap_summary\": \"S: 환자가 거동 불편하여 보호자 내원, 상태 비슷함 / O: 해당 없음 / A: 진단 없음 / P: 진료기록 발급 확인 필요\"\n}",
+        "error": null,
+        "usage": {
+          "input_tokens": 656,
+          "output_tokens": 158,
+          "total_tokens": 814
+        }
+      },
+      {
+        "case_id": "case_023",
+        "disease_context": "파킨슨병",
+        "split": "development",
+        "input": "다음 주에 다른 병원 예약이 있어서 검사 결과지가 필요해요. 결과는 지난번에 이미 들었고요, 종이만 받아 가면 됩니다. 혼자 왔어요.",
+        "gold": {
+          "visit_purpose": [
+            "서류 발급"
+          ],
+          "symptom_change": null,
+          "document_type": [
+            "기록/결과 사본"
+          ],
+          "document_destination": [
+            "타 의료기관/요양기관"
+          ],
+          "patient_present": true,
+          "guardian_only": false,
+          "subjective_summary": "환자 본인 내원. 타 병원 제출용 검사 결과지 사본을 요청함. 결과 설명은 이미 들어 추가 확인을 원하지 않음.",
+          "requested_consultation": null,
+          "soap_summary": "S: 환자 본인 내원, 결과지 사본만 요청(결과 상담 불필요). O: 해당 없음(문진 단계). A: 진단/치료 방침 생성하지 않음. P: 결과지 사본 발급."
+        },
+        "prediction": {
+          "visit_purpose": [
+            "서류 발급"
+          ],
+          "document_type": [
+            "기록/결과 사본"
+          ],
+          "document_destination": [
+            "타 의료기관/요양기관"
+          ],
+          "symptom_change": null,
+          "patient_present": true,
+          "guardian_only": false,
+          "subjective_summary": "환자가 혼자 방문하였으며, 다음 주 다른 병원 예약을 위해 지난번 검사 결과지를 종이로 받고자 함.",
+          "requested_consultation": null,
+          "soap_summary": "S: 환자가 다른 병원 예약으로 검사 결과지 출력 요청함 / O: 해당 없음 / A: 진단 생성하지 않음 / P: 확인 필요 없음"
+        },
+        "raw_output": "{\n  \"visit_purpose\": [\"서류 발급\"],\n  \"symptom_change\": null,\n  \"document_type\": [\"기록/결과 사본\"],\n  \"document_destination\": [\"타 의료기관/요양기관\"],\n  \"patient_present\": true,\n  \"guardian_only\": false,\n  \"subjective_summary\": \"환자가 혼자 방문하였으며, 다음 주 다른 병원 예약을 위해 지난번 검사 결과지를 종이로 받고자 함.\",\n  \"requested_consultation\": null,\n  \"soap_summary\": \"S: 환자가 다른 병원 예약으로 검사 결과지 출력 요청함 / O: 해당 없음 / A: 진단 생성하지 않음 / P: 확인 필요 없음\"\n}",
+        "error": null,
+        "usage": {
+          "input_tokens": 649,
+          "output_tokens": 152,
+          "total_tokens": 801
+        }
+      }
+    ]
+  },
+  "v2": {
+    "created_at": "2026-07-09T23:32:03+09:00",
+    "model": "gpt-4.1-mini",
+    "prompt_version": "v2",
+    "split": "development",
+    "metrics": {
+      "case_count": 20,
+      "json_success_rate": 1.0,
+      "exact_match": 0.35,
+      "field_accuracy": 0.8,
+      "micro_precision": 0.7924528301886793,
+      "micro_recall": 0.8571428571428571,
+      "micro_f1": 0.8235294117647058,
+      "omission_rate": 0.14285714285714285,
+      "hallucination_rate": 0.20754716981132076,
+      "input_tokens": 15814,
+      "output_tokens": 3329,
+      "symptom_change_accuracy": 0.7,
+      "patient_present_accuracy": 0.85,
+      "guardian_only_accuracy": 0.85
+    },
+    "records": [
+      {
+        "case_id": "case_001",
+        "disease_context": "치매",
+        "split": "development",
+        "input": "어머니는 오늘 못 오시고 저만 왔어요. 요양원에 낼 서류가 필요한데 뭘 떼야 하는지는 잘 모르겠어요. 그리고 요즘 식사를 하시고도 밥을 안 먹었다고 하시는 일이 자꾸 있어서 그것도 여쭤보고 싶어요.",
+        "gold": {
+          "visit_purpose": [
+            "서류 발급",
+            "증상 상담"
+          ],
+          "symptom_change": "나빠짐",
+          "document_type": [
+            "기타/종류 모름"
+          ],
+          "document_destination": [
+            "타 의료기관/요양기관"
+          ],
+          "patient_present": false,
+          "guardian_only": true,
+          "subjective_summary": "보호자만 내원. 환자가 식사한 사실을 잊는 일이 잦다고 보호자가 전달함. 요양원 제출용 서류가 필요하나 서류 종류는 확인 필요.",
+          "requested_consultation": "식사한 사실을 잊어버리는 증상에 대해 상담하고 싶어함",
+          "soap_summary": "S: 보호자 단독 내원, 환자의 식사 사실 망각 반복을 보호자가 전달. O: 해당 없음(환자 미내원). A: 진단/치료 방침 생성하지 않음. P: 서류 종류 확인, 인지 변화 진행 여부 확인 필요."
+        },
+        "prediction": {
+          "visit_purpose": [
+            "서류 발급",
+            "증상 상담"
+          ],
+          "document_type": [],
+          "document_destination": [
+            "타 의료기관/요양기관",
+            "제출처 모름"
+          ],
+          "symptom_change": null,
+          "patient_present": false,
+          "guardian_only": true,
+          "subjective_summary": "환자의 보호자가 오늘 진료 내원하였으며, 요양원에 제출할 서류 종류는 정확히 모름. 환자는 최근 식사 후에도 밥을 안 먹었다고 하는 행동이 반복되어 여쭤보고 싶어함.",
+          "requested_consultation": "환자의 식사 관련 행동 문제 상담",
+          "soap_summary": "S: 보호자가 요양원 제출 서류 문의 및 환자의 식사 문제 언급. O: 해당 없음. A: 진단하지 않음. P: 제출 서류 종류 확인 필요."
+        },
+        "raw_output": "{\n  \"visit_purpose\": [\"서류 발급\", \"증상 상담\"],\n  \"symptom_change\": null,\n  \"document_type\": [],\n  \"document_destination\": [\"타 의료기관/요양기관\", \"제출처 모름\"],\n  \"patient_present\": false,\n  \"guardian_only\": true,\n  \"subjective_summary\": \"환자의 보호자가 오늘 진료 내원하였으며, 요양원에 제출할 서류 종류는 정확히 모름. 환자는 최근 식사 후에도 밥을 안 먹었다고 하는 행동이 반복되어 여쭤보고 싶어함.\",\n  \"requested_consultation\": \"환자의 식사 관련 행동 문제 상담\",\n  \"soap_summary\": \"S: 보호자가 요양원 제출 서류 문의 및 환자의 식사 문제 언급. O: 해당 없음. A: 진단하지 않음. P: 제출 서류 종류 확인 필요.\"\n}",
+        "error": null,
+        "usage": {
+          "input_tokens": 807,
+          "output_tokens": 197,
+          "total_tokens": 1004
+        }
+      },
+      {
+        "case_id": "case_002",
+        "disease_context": "파킨슨병",
+        "split": "development",
+        "input": "약은 그대로 받을게요. 그런데 요즘 손 떨림이 오전에는 괜찮다가 오후만 되면 심해져요. 저녁때는 수저 들기가 힘들 때도 있고요. 혼자 왔습니다.",
+        "gold": {
+          "visit_purpose": [
+            "약 처방",
+            "증상 상담"
+          ],
+          "symptom_change": "나빠짐",
+          "document_type": [],
+          "document_destination": [],
+          "patient_present": true,
+          "guardian_only": false,
+          "subjective_summary": "환자 본인 내원. 손 떨림이 오후에 심해지고 저녁에는 수저 사용이 힘들 때가 있다고 함. 약 처방 유지를 원함.",
+          "requested_consultation": "오후에 심해지는 손 떨림에 대해 상담 요청",
+          "soap_summary": "S: 환자 본인 내원, 손 떨림 오후 악화와 저녁 수저 사용 어려움 호소. O: 해당 없음(문진 단계). A: 진단/치료 방침 생성하지 않음. P: 약 처방 확인, 증상 시간대별 변화 진료 중 확인 필요."
+        },
+        "prediction": {
+          "visit_purpose": [
+            "약 처방",
+            "증상 상담"
+          ],
+          "document_type": [],
+          "document_destination": [],
+          "symptom_change": "새 증상 있음",
+          "patient_present": true,
+          "guardian_only": false,
+          "subjective_summary": "환자가 약은 그대로 처방받기를 원하며, 최근 손 떨림 증상이 오전에는 괜찮다가 오후부터 심해지고 저녁에는 수저 들기가 힘들 정도라고 보고함. 혼자 내원함.",
+          "requested_consultation": null,
+          "soap_summary": "S: 손 떨림이 오후부터 심해지고 저녁에는 일상생활이 어려울 정도임/O: 해당 없음/A: 진단하지 않음/P: 증상 변화 및 추가 상담 필요"
+        },
+        "raw_output": "{\n  \"visit_purpose\": [\"약 처방\", \"증상 상담\"],\n  \"symptom_change\": \"새 증상 있음\",\n  \"document_type\": [],\n  \"document_destination\": [],\n  \"patient_present\": true,\n  \"guardian_only\": false,\n  \"subjective_summary\": \"환자가 약은 그대로 처방받기를 원하며, 최근 손 떨림 증상이 오전에는 괜찮다가 오후부터 심해지고 저녁에는 수저 들기가 힘들 정도라고 보고함. 혼자 내원함.\",\n  \"requested_consultation\": null,\n  \"soap_summary\": \"S: 손 떨림이 오후부터 심해지고 저녁에는 일상생활이 어려울 정도임/O: 해당 없음/A: 진단하지 않음/P: 증상 변화 및 추가 상담 필요\"\n}",
+        "error": null,
+        "usage": {
+          "input_tokens": 788,
+          "output_tokens": 173,
+          "total_tokens": 961
+        }
+      },
+      {
+        "case_id": "case_003",
+        "disease_context": "뇌전증",
+        "split": "development",
+        "input": "지난달에 학교 낼 진단서는 받아 갔고요, 요즘 발작 횟수가 좀 는 것 같아서 왔어요. 엄마랑 같이 왔습니다.",
+        "gold": {
+          "visit_purpose": [
+            "증상 상담"
+          ],
+          "symptom_change": "나빠짐",
+          "document_type": [],
+          "document_destination": [],
+          "patient_present": true,
+          "guardian_only": false,
+          "subjective_summary": "환자와 보호자 함께 내원. 발작 횟수가 늘어난 것 같다고 함. 서류는 지난달 이미 발급받아 이번에는 요청하지 않음.",
+          "requested_consultation": "발작 횟수가 늘어난 것에 대해 상담하고 싶어함",
+          "soap_summary": "S: 환자·보호자 함께 내원, 발작 빈도 증가 우려 전달. O: 해당 없음(문진 단계). A: 진단/치료 방침 생성하지 않음. P: 발작 빈도·양상 변화 진료 중 확인 필요."
+        },
+        "prediction": {
+          "visit_purpose": [
+            "서류 발급",
+            "증상 상담"
+          ],
+          "document_type": [
+            "진단서"
+          ],
+          "document_destination": [
+            "직장/학교"
+          ],
+          "symptom_change": "나빠짐",
+          "patient_present": null,
+          "guardian_only": true,
+          "subjective_summary": "지난달에 학교 제출용 진단서를 받았고, 최근 발작 횟수가 증가하여 보호자(엄마)와 함께 내원함.",
+          "requested_consultation": null,
+          "soap_summary": "S: 최근 발작 횟수 증가, 보호자 동반 내원 / O: 해당 없음 / A: 진단 생성하지 않음 / P: 환자 내원 여부 확인 필요"
+        },
+        "raw_output": "{\n  \"visit_purpose\": [\"서류 발급\", \"증상 상담\"],\n  \"symptom_change\": \"나빠짐\",\n  \"document_type\": [\"진단서\"],\n  \"document_destination\": [\"직장/학교\"],\n  \"patient_present\": null,\n  \"guardian_only\": true,\n  \"subjective_summary\": \"지난달에 학교 제출용 진단서를 받았고, 최근 발작 횟수가 증가하여 보호자(엄마)와 함께 내원함.\",\n  \"requested_consultation\": null,\n  \"soap_summary\": \"S: 최근 발작 횟수 증가, 보호자 동반 내원 / O: 해당 없음 / A: 진단 생성하지 않음 / P: 환자 내원 여부 확인 필요\"\n}",
+        "error": null,
+        "usage": {
+          "input_tokens": 776,
+          "output_tokens": 162,
+          "total_tokens": 938
+        }
+      },
+      {
+        "case_id": "case_004",
+        "disease_context": "치매",
+        "split": "development",
+        "input": "아버지 모시고 같이 왔어요. 지난번 검사 결과 들으러 왔고, 보험에 낼 소견서도 하나 부탁드립니다.",
+        "gold": {
+          "visit_purpose": [
+            "검사결과 확인",
+            "서류 발급"
+          ],
+          "symptom_change": null,
+          "document_type": [
+            "소견서"
+          ],
+          "document_destination": [
+            "보험"
+          ],
+          "patient_present": true,
+          "guardian_only": false,
+          "subjective_summary": "환자와 보호자 함께 내원. 검사 결과 확인을 원하며 보험 제출용 소견서를 요청함.",
+          "requested_consultation": null,
+          "soap_summary": "S: 환자·보호자 함께 내원, 검사 결과 확인 및 소견서 요청. O: 해당 없음(문진 단계). A: 진단/치료 방침 생성하지 않음. P: 검사 결과 안내, 소견서 발급 절차 확인 필요."
+        },
+        "prediction": {
+          "visit_purpose": [
+            "서류 발급",
+            "검사결과 확인"
+          ],
+          "document_type": [
+            "소견서"
+          ],
+          "document_destination": [
+            "보험"
+          ],
+          "symptom_change": null,
+          "patient_present": null,
+          "guardian_only": null,
+          "subjective_summary": "아버지와 함께 내원하였고, 지난번 검사 결과를 확인하고 보험 제출용 소견서 발급을 요청함.",
+          "requested_consultation": null,
+          "soap_summary": "S: 아버지와 동행, 지난 검사 결과 확인 및 보험용 소견서 요청 / O: 없음 / A: 진단 생성하지 않음 / P: 환자 방문 여부 확인 필요"
+        },
+        "raw_output": "{\n  \"visit_purpose\": [\"서류 발급\", \"검사결과 확인\"],\n  \"symptom_change\": null,\n  \"document_type\": [\"소견서\"],\n  \"document_destination\": [\"보험\"],\n  \"patient_present\": \"미상\",\n  \"guardian_only\": \"미상\",\n  \"subjective_summary\": \"아버지와 함께 내원하였고, 지난번 검사 결과를 확인하고 보험 제출용 소견서 발급을 요청함.\",\n  \"requested_consultation\": null,\n  \"soap_summary\": \"S: 아버지와 동행, 지난 검사 결과 확인 및 보험용 소견서 요청 / O: 없음 / A: 진단 생성하지 않음 / P: 환자 방문 여부 확인 필요\"\n}",
+        "error": null,
+        "usage": {
+          "input_tokens": 771,
+          "output_tokens": 161,
+          "total_tokens": 932
+        }
+      },
+      {
+        "case_id": "case_005",
+        "disease_context": "파킨슨병",
+        "split": "development",
+        "input": "아버지는 거동이 불편하셔서 저만 왔어요. 장애 등급 신청을 하려는데 어떤 서류를 떼야 하는지 모르겠어요. 그리고 요즘 걸음이 많이 느려지셨어요. 발이 잘 안 떨어진다고 하시고, 집 안에서도 몇 번 넘어질 뻔했어요.",
+        "gold": {
+          "visit_purpose": [
+            "서류 발급",
+            "증상 상담"
+          ],
+          "symptom_change": "나빠짐",
+          "document_type": [
+            "기타/종류 모름"
+          ],
+          "document_destination": [
+            "공공기관"
+          ],
+          "patient_present": false,
+          "guardian_only": true,
+          "subjective_summary": "보호자만 내원. 환자의 걸음이 느려지고 발이 잘 떨어지지 않아 넘어질 뻔한 일이 있었다고 보호자가 전달함. 장애 등급 신청용 서류가 필요하나 서류 종류는 확인 필요.",
+          "requested_consultation": "보행이 느려진 변화에 대해 상담하고 싶어함",
+          "soap_summary": "S: 보호자 단독 내원, 환자의 보행 저하와 낙상 위험을 보호자가 전달. O: 해당 없음(환자 미내원). A: 진단/치료 방침 생성하지 않음. P: 서류 종류 확인, 보행 변화와 낙상 위험 확인 필요."
+        },
+        "prediction": {
+          "visit_purpose": [
+            "서류 발급",
+            "증상 상담"
+          ],
+          "document_type": [],
+          "document_destination": [
+            "제출처 모름"
+          ],
+          "symptom_change": "나빠짐",
+          "patient_present": false,
+          "guardian_only": true,
+          "subjective_summary": "환자는 거동이 불편하여 보호자만 내원하였고, 걸음이 느려지고 발이 잘 떨어지지 않아 집에서도 몇 번 넘어질 뻔했다고 함. 장애 등급 신청을 위해 필요한 서류를 잘 모름.",
+          "requested_consultation": null,
+          "soap_summary": "S: 환자 거동 불편, 보행 느려짐 및 넘어질 뻔함 / O: 해당 없음 / A: 진단 없음 / P: 요청 서류 종류 확인 필요"
+        },
+        "raw_output": "```json\n{\n  \"visit_purpose\": [\"서류 발급\", \"증상 상담\"],\n  \"symptom_change\": \"나빠짐\",\n  \"document_type\": [],\n  \"document_destination\": [\"제출처 모름\"],\n  \"patient_present\": false,\n  \"guardian_only\": true,\n  \"subjective_summary\": \"환자는 거동이 불편하여 보호자만 내원하였고, 걸음이 느려지고 발이 잘 떨어지지 않아 집에서도 몇 번 넘어질 뻔했다고 함. 장애 등급 신청을 위해 필요한 서류를 잘 모름.\",\n  \"requested_consultation\": null,\n  \"soap_summary\": \"S: 환자 거동 불편, 보행 느려짐 및 넘어질 뻔함 / O: 해당 없음 / A: 진단 없음 / P: 요청 서류 종류 확인 필요\"\n}\n```",
+        "error": null,
+        "usage": {
+          "input_tokens": 813,
+          "output_tokens": 187,
+          "total_tokens": 1000
+        }
+      },
+      {
+        "case_id": "case_006",
+        "disease_context": "뇌전증",
+        "split": "development",
+        "input": "약만 타러 왔어요. 별다른 건 없었고요. 혼자 왔습니다.",
+        "gold": {
+          "visit_purpose": [
+            "약 처방"
+          ],
+          "symptom_change": "비슷함",
+          "document_type": [],
+          "document_destination": [],
+          "patient_present": true,
+          "guardian_only": false,
+          "subjective_summary": "환자 본인 내원. 증상 변화 없이 약 처방만 요청함.",
+          "requested_consultation": null,
+          "soap_summary": "S: 환자 본인 내원, 증상 변화 없음, 약 처방 요청. O: 해당 없음(문진 단계). A: 진단/치료 방침 생성하지 않음. P: 정기 처방 확인."
+        },
+        "prediction": {
+          "visit_purpose": [
+            "약 처방"
+          ],
+          "document_type": [],
+          "document_destination": [],
+          "symptom_change": "['비슷함']",
+          "patient_present": true,
+          "guardian_only": false,
+          "subjective_summary": "약만 타러 왔고 별다른 증상 변화는 없으며 환자가 혼자 내원함.",
+          "requested_consultation": null,
+          "soap_summary": "S: 약만 타러 왔고 증상에 변화 없음 / O: 없음 / A: 진단 없음 / P: 없음"
+        },
+        "raw_output": "{\n  \"visit_purpose\": [\"약 처방\"],\n  \"symptom_change\": [\"비슷함\"],\n  \"document_type\": [],\n  \"document_destination\": [],\n  \"patient_present\": true,\n  \"guardian_only\": false,\n  \"subjective_summary\": \"약만 타러 왔고 별다른 증상 변화는 없으며 환자가 혼자 내원함.\",\n  \"requested_consultation\": null,\n  \"soap_summary\": \"S: 약만 타러 왔고 증상에 변화 없음 / O: 없음 / A: 진단 없음 / P: 없음\"\n}",
+        "error": null,
+        "usage": {
+          "input_tokens": 760,
+          "output_tokens": 126,
+          "total_tokens": 886
+        }
+      },
+      {
+        "case_id": "case_007",
+        "disease_context": "치매",
+        "split": "development",
+        "input": "어머니 모시고 같이 왔어요. 요즘 밤에 자꾸 깨서 집 안을 돌아다니세요. 새벽에 현관문을 열려고 하신 적도 있고요. 이게 약 때문인지 다른 이유인지 상담받고 싶어요.",
+        "gold": {
+          "visit_purpose": [
+            "증상 상담"
+          ],
+          "symptom_change": "새 증상 있음",
+          "document_type": [],
+          "document_destination": [],
+          "patient_present": true,
+          "guardian_only": false,
+          "subjective_summary": "환자와 보호자 함께 내원. 야간에 깨서 배회하고 새벽에 현관문을 열려 한 일이 있었다고 전달하며 원인 상담을 원함.",
+          "requested_consultation": "야간 각성·배회가 약 때문인지 다른 원인인지 상담 요청",
+          "soap_summary": "S: 환자·보호자 함께 내원, 야간 각성·배회 새로 발생, 새벽 외출 시도 있었음. O: 해당 없음(문진 단계). A: 진단/치료 방침 생성하지 않음. P: 야간 증상과 복약 관련성 진료 중 확인 필요."
+        },
+        "prediction": {
+          "visit_purpose": [
+            "증상 상담"
+          ],
+          "document_type": [],
+          "document_destination": [],
+          "symptom_change": "새 증상 있음",
+          "patient_present": true,
+          "guardian_only": false,
+          "subjective_summary": "어머니와 함께 내원했으며, 환자가 밤에 자주 깨서 집 안을 돌아다니고 새벽에 현관문을 열려고 한 행동이 있다고 함. 약 때문인지 다른 이유인지 상담 원함.",
+          "requested_consultation": "밤에 자꾸 깨서 집 안을 돌아다니거나 현관문을 열려고 하는 증상과 관련하여 약 때문인지 다른 이유인지 상담받고 싶음",
+          "soap_summary": "S: 밤에 자주 깨고 집 안을 돌아다님, 새벽에 현관문을 열려고 시도함 / O: 해당 없음 / A: 진단 생성하지 않음 / P: 증상 원인 상담 필요"
+        },
+        "raw_output": "{\n  \"visit_purpose\": [\n    \"증상 상담\"\n  ],\n  \"symptom_change\": \"새 증상 있음\",\n  \"document_type\": [],\n  \"document_destination\": [],\n  \"patient_present\": true,\n  \"guardian_only\": false,\n  \"subjective_summary\": \"어머니와 함께 내원했으며, 환자가 밤에 자주 깨서 집 안을 돌아다니고 새벽에 현관문을 열려고 한 행동이 있다고 함. 약 때문인지 다른 이유인지 상담 원함.\",\n  \"requested_consultation\": \"밤에 자꾸 깨서 집 안을 돌아다니거나 현관문을 열려고 하는 증상과 관련하여 약 때문인지 다른 이유인지 상담받고 싶음\",\n  \"soap_summary\": \"S: 밤에 자주 깨고 집 안을 돌아다님, 새벽에 현관문을 열려고 시도함 / O: 해당 없음 / A: 진단 생성하지 않음 / P: 증상 원인 상담 필요\"\n}",
+        "error": null,
+        "usage": {
+          "input_tokens": 793,
+          "output_tokens": 214,
+          "total_tokens": 1007
+        }
+      },
+      {
+        "case_id": "case_011",
+        "disease_context": "파킨슨병",
+        "split": "development",
+        "input": "아이고 오늘 주차장이 왜 이렇게 복잡해요. 아버지 약 타러 왔는데요, 참 그리고 저번에 새로 바꾼 약 있잖아요, 그거 먹고부터 자꾸 어지럽다고 하셔가지고. 아 아버지도 같이 왔어요, 지금 화장실 가셨고요. 어지러운 게 약 때문인가 그것 좀 여쭤볼게요.",
+        "gold": {
+          "visit_purpose": [
+            "약 처방",
+            "증상 상담"
+          ],
+          "symptom_change": "새 증상 있음",
+          "document_type": [],
+          "document_destination": [],
+          "patient_present": true,
+          "guardian_only": false,
+          "subjective_summary": "환자와 보호자 함께 내원. 약 변경 후 어지럼이 새로 생겼다고 보호자가 전달함. 약 처방을 원함.",
+          "requested_consultation": "약 변경 후 생긴 어지럼이 약 때문인지 상담 요청",
+          "soap_summary": "S: 환자·보호자 함께 내원, 약 변경 후 어지럼 발생 전달. O: 해당 없음(문진 단계). A: 진단/치료 방침 생성하지 않음. P: 어지럼과 약 변경의 관련성 진료 중 확인 필요, 처방 확인."
+        },
+        "prediction": {
+          "visit_purpose": [
+            "약 처방",
+            "증상 상담"
+          ],
+          "document_type": [],
+          "document_destination": [],
+          "symptom_change": "새 증상 있음",
+          "patient_present": true,
+          "guardian_only": false,
+          "subjective_summary": "아버지가 새로 바꾼 약을 복용한 후 어지럼증이 자주 발생하여 약 때문인지 문의하고자 방문하였으며, 환자 본인도 함께 동행하여 현재 화장실에 있습니다.",
+          "requested_consultation": "약을 복용 후 어지럼증 발생에 대한 상담",
+          "soap_summary": "S: 약 복용 후 어지럼증 발생함 / O: 해당 없음 / A: 진단 생성하지 않음 / P: 약 관련 어지럼증 상담 필요"
+        },
+        "raw_output": "{\n  \"visit_purpose\": [\"약 처방\", \"증상 상담\"],\n  \"symptom_change\": \"새 증상 있음\",\n  \"document_type\": [],\n  \"document_destination\": [],\n  \"patient_present\": true,\n  \"guardian_only\": false,\n  \"subjective_summary\": \"아버지가 새로 바꾼 약을 복용한 후 어지럼증이 자주 발생하여 약 때문인지 문의하고자 방문하였으며, 환자 본인도 함께 동행하여 현재 화장실에 있습니다.\",\n  \"requested_consultation\": \"약을 복용 후 어지럼증 발생에 대한 상담\",\n  \"soap_summary\": \"S: 약 복용 후 어지럼증 발생함 / O: 해당 없음 / A: 진단 생성하지 않음 / P: 약 관련 어지럼증 상담 필요\"\n}",
+        "error": null,
+        "usage": {
+          "input_tokens": 829,
+          "output_tokens": 181,
+          "total_tokens": 1010
+        }
+      },
+      {
+        "case_id": "case_012",
+        "disease_context": "뇌전증",
+        "split": "development",
+        "input": "약이요. 그대로예요.",
+        "gold": {
+          "visit_purpose": [
+            "약 처방"
+          ],
+          "symptom_change": "비슷함",
+          "document_type": [],
+          "document_destination": [],
+          "patient_present": null,
+          "guardian_only": null,
+          "subjective_summary": "약 처방만 요청함. 증상 변화 없다고 함. 방문 형태 언급 없음(미상).",
+          "requested_consultation": null,
+          "soap_summary": "S: 약 처방 요청, 증상 변화 없음, 방문 형태 미상. O: 해당 없음(문진 단계). A: 진단/치료 방침 생성하지 않음. P: 방문 형태 확인, 정기 처방 확인."
+        },
+        "prediction": {
+          "visit_purpose": [
+            "약 처방"
+          ],
+          "document_type": [],
+          "document_destination": [],
+          "symptom_change": "비슷함",
+          "patient_present": null,
+          "guardian_only": null,
+          "subjective_summary": "환자가 약 처방을 원하며 증상은 그대로임.",
+          "requested_consultation": null,
+          "soap_summary": "S: 약 처방 원함, 증상 변화 없음 / O: 없음 / A: 진단 없음 / P: 방문 형태 미상"
+        },
+        "raw_output": "{\n  \"visit_purpose\": [\"약 처방\"],\n  \"symptom_change\": \"비슷함\",\n  \"document_type\": [],\n  \"document_destination\": [],\n  \"patient_present\": \"미상\",\n  \"guardian_only\": \"미상\",\n  \"subjective_summary\": \"환자가 약 처방을 원하며 증상은 그대로임.\",\n  \"requested_consultation\": null,\n  \"soap_summary\": \"S: 약 처방 원함, 증상 변화 없음 / O: 없음 / A: 진단 없음 / P: 방문 형태 미상\"\n}",
+        "error": null,
+        "usage": {
+          "input_tokens": 745,
+          "output_tokens": 121,
+          "total_tokens": 866
+        }
+      },
+      {
+        "case_id": "case_013",
+        "disease_context": "치매",
+        "split": "development",
+        "input": "어무이 모시고 왔심더. 요새 자꾸 화를 내시고 예전엔 안 그랬거든예. 밤에 잠도 잘 몬 주무시고. 그거 때문에 상담 좀 받아볼라꼬예.",
+        "gold": {
+          "visit_purpose": [
+            "증상 상담"
+          ],
+          "symptom_change": "새 증상 있음",
+          "document_type": [],
+          "document_destination": [],
+          "patient_present": true,
+          "guardian_only": false,
+          "subjective_summary": "환자와 보호자 함께 내원. 이전에 없던 화냄과 수면 문제가 생겼다고 보호자가 전달함.",
+          "requested_consultation": "화를 자주 내는 것과 잠을 잘 못 자는 문제에 대해 상담하고 싶어함",
+          "soap_summary": "S: 환자·보호자 함께 내원, 화냄과 수면 문제 새로 발생 전달. O: 해당 없음(문진 단계). A: 진단/치료 방침 생성하지 않음. P: 행동 변화·수면 문제 진료 중 확인 필요."
+        },
+        "prediction": {
+          "visit_purpose": [
+            "증상 상담"
+          ],
+          "document_type": [],
+          "document_destination": [],
+          "symptom_change": "새 증상 있음",
+          "patient_present": false,
+          "guardian_only": true,
+          "subjective_summary": "보호자가 어머니를 모시고 왔으며, 최근 어머니가 자주 화를 내고 밤에 잠을 잘 못 주무신다고 함.",
+          "requested_consultation": "화내는 증상과 수면 문제에 관한 상담 요청",
+          "soap_summary": "S: 최근 화를 내고 밤에 잠을 잘 못 주무심 / O: 해당 없음 / A: 진단 생성하지 않음 / P: 환자 직접 내원 여부 확인 필요"
+        },
+        "raw_output": "{\n  \"visit_purpose\": [\"증상 상담\"],\n  \"symptom_change\": \"새 증상 있음\",\n  \"document_type\": [],\n  \"document_destination\": [],\n  \"patient_present\": false,\n  \"guardian_only\": true,\n  \"subjective_summary\": \"보호자가 어머니를 모시고 왔으며, 최근 어머니가 자주 화를 내고 밤에 잠을 잘 못 주무신다고 함.\",\n  \"requested_consultation\": \"화내는 증상과 수면 문제에 관한 상담 요청\",\n  \"soap_summary\": \"S: 최근 화를 내고 밤에 잠을 잘 못 주무심 / O: 해당 없음 / A: 진단 생성하지 않음 / P: 환자 직접 내원 여부 확인 필요\"\n}",
+        "error": null,
+        "usage": {
+          "input_tokens": 792,
+          "output_tokens": 164,
+          "total_tokens": 956
+        }
+      },
+      {
+        "case_id": "case_014",
+        "disease_context": "파킨슨병",
+        "split": "development",
+        "input": "소견서 하나 떼려고요. 아 잠깐, 소견서가 아니고 진단서라 했나... 보험회사에서 달라는 거요. 몸은 뭐 비슷해요. 혼자 왔어요.",
+        "gold": {
+          "visit_purpose": [
+            "서류 발급"
+          ],
+          "symptom_change": "비슷함",
+          "document_type": [
+            "기타/종류 모름"
+          ],
+          "document_destination": [
+            "보험"
+          ],
+          "patient_present": true,
+          "guardian_only": false,
+          "subjective_summary": "환자 본인 내원. 보험회사 제출용 서류가 필요하나 진단서인지 소견서인지 확실하지 않음. 증상은 이전과 비슷하다고 함.",
+          "requested_consultation": null,
+          "soap_summary": "S: 환자 본인 내원, 보험 제출용 서류 요청(종류 불확실), 증상 변화 없음. O: 해당 없음(문진 단계). A: 진단/치료 방침 생성하지 않음. P: 보험사 요구 서류 종류 확인 필요."
+        },
+        "prediction": {
+          "visit_purpose": [
+            "서류 발급"
+          ],
+          "document_type": [
+            "진단서"
+          ],
+          "document_destination": [
+            "보험"
+          ],
+          "symptom_change": "비슷함",
+          "patient_present": true,
+          "guardian_only": false,
+          "subjective_summary": "환자가 보험회사에 제출할 진단서 발급을 원하며, 증상은 이전과 비슷하다고 함. 환자 본인이 혼자 내원함.",
+          "requested_consultation": null,
+          "soap_summary": "S: 진단서 발급 요청, 증상은 비슷함 / O: 없음 / A: 진단 없음 / P: 확인 필요함"
+        },
+        "raw_output": "{\n  \"visit_purpose\": [\"서류 발급\"],\n  \"symptom_change\": \"비슷함\",\n  \"document_type\": [\"진단서\"],\n  \"document_destination\": [\"보험\"],\n  \"patient_present\": true,\n  \"guardian_only\": false,\n  \"subjective_summary\": \"환자가 보험회사에 제출할 진단서 발급을 원하며, 증상은 이전과 비슷하다고 함. 환자 본인이 혼자 내원함.\",\n  \"requested_consultation\": null,\n  \"soap_summary\": \"S: 진단서 발급 요청, 증상은 비슷함 / O: 없음 / A: 진단 없음 / P: 확인 필요함\"\n}",
+        "error": null,
+        "usage": {
+          "input_tokens": 786,
+          "output_tokens": 149,
+          "total_tokens": 935
+        }
+      },
+      {
+        "case_id": "case_015",
+        "disease_context": "뇌전증",
+        "split": "development",
+        "input": "약 바꾸고 나서 발작이 확 줄었어요. 두 달 동안 한 번도 없었고요. 약은 그대로 받아 가면 되고, 혼자 왔습니다.",
+        "gold": {
+          "visit_purpose": [
+            "약 처방"
+          ],
+          "symptom_change": "좋아짐",
+          "document_type": [],
+          "document_destination": [],
+          "patient_present": true,
+          "guardian_only": false,
+          "subjective_summary": "환자 본인 내원. 약 변경 후 두 달간 발작이 없었다고 함. 동일 약 처방을 원함.",
+          "requested_consultation": null,
+          "soap_summary": "S: 환자 본인 내원, 약 변경 후 발작 없음(두 달), 동일 처방 요청. O: 해당 없음(문진 단계). A: 진단/치료 방침 생성하지 않음. P: 정기 처방 확인."
+        },
+        "prediction": {
+          "visit_purpose": [
+            "약 처방"
+          ],
+          "document_type": [],
+          "document_destination": [],
+          "symptom_change": "좋아짐",
+          "patient_present": true,
+          "guardian_only": false,
+          "subjective_summary": "약 변경 후 발작이 확 줄었고 두 달 동안 발작이 없었음. 약은 그대로 받아가면 된다고 함. 환자 혼자 내원함.",
+          "requested_consultation": null,
+          "soap_summary": "S: 약 변경 후 발작 횟수 크게 감소, 2개월간 발작 없음 / O: 해당 없음 / A: 진단 생성하지 않음 / P: 확인 필요 약 처방 및 환자 내원 상태"
+        },
+        "raw_output": "{\n  \"visit_purpose\": [\"약 처방\"],\n  \"symptom_change\": \"좋아짐\",\n  \"document_type\": [],\n  \"document_destination\": [],\n  \"patient_present\": true,\n  \"guardian_only\": false,\n  \"subjective_summary\": \"약 변경 후 발작이 확 줄었고 두 달 동안 발작이 없었음. 약은 그대로 받아가면 된다고 함. 환자 혼자 내원함.\",\n  \"requested_consultation\": null,\n  \"soap_summary\": \"S: 약 변경 후 발작 횟수 크게 감소, 2개월간 발작 없음 / O: 해당 없음 / A: 진단 생성하지 않음 / P: 확인 필요 약 처방 및 환자 내원 상태\"\n}",
+        "error": null,
+        "usage": {
+          "input_tokens": 776,
+          "output_tokens": 160,
+          "total_tokens": 936
+        }
+      },
+      {
+        "case_id": "case_016",
+        "disease_context": "치매",
+        "split": "development",
+        "input": "남편이 요즘 통 기억을 못 해요. 어제는 손주 이름도 헷갈리고. 우리 딸은 미국 사는데 걔가 자꾸 전화로 아빠 어떠냐고 물어봐서요. 오늘은 남편이랑 같이 왔고요, 진료확인서도 한 장 떼주세요. 제가 보관해두게요.",
+        "gold": {
+          "visit_purpose": [
+            "증상 상담",
+            "서류 발급"
+          ],
+          "symptom_change": "나빠짐",
+          "document_type": [
+            "통원사실증명서(진료확인서)"
+          ],
+          "document_destination": [
+            "개인 보관"
+          ],
+          "patient_present": true,
+          "guardian_only": false,
+          "subjective_summary": "환자와 보호자 함께 내원. 기억력 저하가 심해졌다고 보호자가 전달함. 개인 보관용 진료확인서를 요청함.",
+          "requested_consultation": "기억력이 더 나빠진 것에 대해 상담하고 싶어함",
+          "soap_summary": "S: 환자·보호자 함께 내원, 기억력 저하 심화 전달, 진료확인서 요청. O: 해당 없음(문진 단계). A: 진단/치료 방침 생성하지 않음. P: 인지 변화 진행 여부 확인, 진료확인서 발급."
+        },
+        "prediction": {
+          "visit_purpose": [
+            "증상 상담",
+            "서류 발급"
+          ],
+          "document_type": [
+            "통원사실증명서(진료확인서)"
+          ],
+          "document_destination": [
+            "개인 보관"
+          ],
+          "symptom_change": "새 증상 있음",
+          "patient_present": true,
+          "guardian_only": false,
+          "subjective_summary": "환자는 최근 기억력 저하와 손주 이름 혼동 증상이 있으며, 보호자는 환자 상태에 대해 딸과 전화로 상담 중임. 환자와 보호자 모두 내원하였고 진료확인서를 요청함.",
+          "requested_consultation": null,
+          "soap_summary": "S: 최근 기억력 저하 및 혼동 증상, 보호자는 딸과 전화 상담 중 O: 해당 없음 A: 진단 생성하지 않음 P: 추가 증상 변화 확인 필요"
+        },
+        "raw_output": "{\n  \"visit_purpose\": [\"증상 상담\", \"서류 발급\"],\n  \"symptom_change\": \"새 증상 있음\",\n  \"document_type\": [\"통원사실증명서(진료확인서)\"],\n  \"document_destination\": [\"개인 보관\"],\n  \"patient_present\": true,\n  \"guardian_only\": false,\n  \"subjective_summary\": \"환자는 최근 기억력 저하와 손주 이름 혼동 증상이 있으며, 보호자는 환자 상태에 대해 딸과 전화로 상담 중임. 환자와 보호자 모두 내원하였고 진료확인서를 요청함.\",\n  \"requested_consultation\": null,\n  \"soap_summary\": \"S: 최근 기억력 저하 및 혼동 증상, 보호자는 딸과 전화 상담 중 O: 해당 없음 A: 진단 생성하지 않음 P: 추가 증상 변화 확인 필요\"\n}",
+        "error": null,
+        "usage": {
+          "input_tokens": 819,
+          "output_tokens": 194,
+          "total_tokens": 1013
+        }
+      },
+      {
+        "case_id": "case_017",
+        "disease_context": "파킨슨병",
+        "split": "development",
+        "input": "아버지가 못 오셔서 제가 왔는데요, 전화로 여쭤보니까 별다른 건 없다고는 하시는데 제가 직접 본 게 아니라 잘 모르겠어요. 약이나 타다 드리려고요.",
+        "gold": {
+          "visit_purpose": [
+            "약 처방"
+          ],
+          "symptom_change": "비슷함",
+          "document_type": [],
+          "document_destination": [],
+          "patient_present": false,
+          "guardian_only": true,
+          "subjective_summary": "보호자만 내원. 환자는 전화로 별다른 변화가 없다고 함(전언). 보호자가 직접 확인하지는 못함. 약 처방을 원함.",
+          "requested_consultation": null,
+          "soap_summary": "S: 보호자 단독 내원, 증상 변화 없음(환자 전언, 보호자 직접 확인 못함). O: 해당 없음(환자 미내원). A: 진단/치료 방침 생성하지 않음. P: 증상 변화 진료 중 재확인, 처방 확인."
+        },
+        "prediction": {
+          "visit_purpose": [
+            "약 처방"
+          ],
+          "document_type": [],
+          "document_destination": [],
+          "symptom_change": "잘 모르겠음",
+          "patient_present": false,
+          "guardian_only": true,
+          "subjective_summary": "환자의 아버지가 방문하지 않고 보호자가 대신 방문함. 전화로 증상을 문의했으나 직접 본 것은 아니라 잘 모른다고 함. 약 처방을 목적으로 방문.",
+          "requested_consultation": null,
+          "soap_summary": "S: 보호자가 환자 대신 방문하였으나 증상에 대해서 잘 모름. O: 해당 없음. A: 진단 없음. P: 환자 상태 추가 확인 필요."
+        },
+        "raw_output": "```json\n{\n  \"visit_purpose\": [\"약 처방\"],\n  \"symptom_change\": \"잘 모르겠음\",\n  \"document_type\": [],\n  \"document_destination\": [],\n  \"patient_present\": false,\n  \"guardian_only\": true,\n  \"subjective_summary\": \"환자의 아버지가 방문하지 않고 보호자가 대신 방문함. 전화로 증상을 문의했으나 직접 본 것은 아니라 잘 모른다고 함. 약 처방을 목적으로 방문.\",\n  \"requested_consultation\": null,\n  \"soap_summary\": \"S: 보호자가 환자 대신 방문하였으나 증상에 대해서 잘 모름. O: 해당 없음. A: 진단 없음. P: 환자 상태 추가 확인 필요.\"\n}\n```",
+        "error": null,
+        "usage": {
+          "input_tokens": 787,
+          "output_tokens": 158,
+          "total_tokens": 945
+        }
+      },
+      {
+        "case_id": "case_018",
+        "disease_context": "뇌전증",
+        "split": "development",
+        "input": "저기 애가 이번에 수학여행을 가는데 학교에서 약 먹는 거 때문에 서류를 하나 해오라 하더라고요. 뭐라더라, 진단서인지 소견서인지... 아무튼 학교 제출용이요. 애는 학교 갔고 저만 왔어요. 발작은 요즘 없었어요.",
+        "gold": {
+          "visit_purpose": [
+            "서류 발급"
+          ],
+          "symptom_change": "비슷함",
+          "document_type": [
+            "기타/종류 모름"
+          ],
+          "document_destination": [
+            "직장/학교"
+          ],
+          "patient_present": false,
+          "guardian_only": true,
+          "subjective_summary": "보호자만 내원. 수학여행 관련 학교 제출용 서류가 필요하나 서류 종류는 확실하지 않음. 최근 발작은 없었다고 함.",
+          "requested_consultation": null,
+          "soap_summary": "S: 보호자 단독 내원, 학교 제출용 서류 요청(종류 불확실), 발작 없음. O: 해당 없음(환자 미내원). A: 진단/치료 방침 생성하지 않음. P: 학교 요구 서류 종류 확인 필요."
+        },
+        "prediction": {
+          "visit_purpose": [
+            "서류 발급"
+          ],
+          "document_type": [
+            "진단서",
+            "소견서"
+          ],
+          "document_destination": [
+            "직장/학교"
+          ],
+          "symptom_change": "비슷함",
+          "patient_present": false,
+          "guardian_only": true,
+          "subjective_summary": "환자 보호자가 학교에서 약 복용 관련 서류(진단서 또는 소견서)를 요청받았으며, 환자는 학교에 가고 보호자만 내원하였고 최근 발작은 없었다고 함.",
+          "requested_consultation": null,
+          "soap_summary": "S: 약 복용 관련 서류 요청, 발작 최근 없음. O: 해당 없음. A: 진단 생성하지 않음. P: 확인 필요 없음."
+        },
+        "raw_output": "{\n  \"visit_purpose\": [\n    \"서류 발급\"\n  ],\n  \"symptom_change\": \"비슷함\",\n  \"document_type\": [\n    \"진단서\",\n    \"소견서\"\n  ],\n  \"document_destination\": [\n    \"직장/학교\"\n  ],\n  \"patient_present\": false,\n  \"guardian_only\": true,\n  \"subjective_summary\": \"환자 보호자가 학교에서 약 복용 관련 서류(진단서 또는 소견서)를 요청받았으며, 환자는 학교에 가고 보호자만 내원하였고 최근 발작은 없었다고 함.\",\n  \"requested_consultation\": null,\n  \"soap_summary\": \"S: 약 복용 관련 서류 요청, 발작 최근 없음. O: 해당 없음. A: 진단 생성하지 않음. P: 확인 필요 없음.\"\n}",
+        "error": null,
+        "usage": {
+          "input_tokens": 812,
+          "output_tokens": 185,
+          "total_tokens": 997
+        }
+      },
+      {
+        "case_id": "case_019",
+        "disease_context": "치매",
+        "split": "development",
+        "input": "오늘 좀 할 게 많아요. 지난주에 한 MRI 결과도 들어야 하고, 어머니 약도 타야 하고, 주간보호센터에 낼 소견서도 있고요. 어머니는 요즘 좀 가라앉으셨는지 말수가 줄었어요. 같이 왔습니다.",
+        "gold": {
+          "visit_purpose": [
+            "검사결과 확인",
+            "약 처방",
+            "서류 발급",
+            "증상 상담"
+          ],
+          "symptom_change": "새 증상 있음",
+          "document_type": [
+            "소견서"
+          ],
+          "document_destination": [
+            "타 의료기관/요양기관"
+          ],
+          "patient_present": true,
+          "guardian_only": false,
+          "subjective_summary": "환자와 보호자 함께 내원. 검사 결과 확인, 약 처방, 주간보호센터 제출용 소견서를 요청함. 말수가 줄어드는 변화가 새로 나타났다고 보호자가 전달함.",
+          "requested_consultation": "말수가 줄어든 변화에 대해 상담하고 싶어함",
+          "soap_summary": "S: 환자·보호자 함께 내원, 말수 감소 새로 관찰, 결과 확인·처방·소견서 요청. O: 해당 없음(문진 단계). A: 진단/치료 방침 생성하지 않음. P: 검사 결과 안내, 소견서 발급, 기분·의욕 변화 진료 중 확인 필요(약 부작용 가능성 포함)."
+        },
+        "prediction": {
+          "visit_purpose": [
+            "약 처방",
+            "서류 발급",
+            "검사결과 확인"
+          ],
+          "document_type": [
+            "소견서"
+          ],
+          "document_destination": [
+            "공공기관",
+            "제출처 모름"
+          ],
+          "symptom_change": "나빠짐",
+          "patient_present": true,
+          "guardian_only": false,
+          "subjective_summary": "어머니가 말수가 줄었으며 상태가 다소 나빠진 듯하다. MRI 결과 확인과 약 처방, 주간보호센터 제출용 소견서가 필요하다.",
+          "requested_consultation": null,
+          "soap_summary": "S: 말수 감소; O: 해당 없음; A: 진단 생성하지 않음; P: 없음"
+        },
+        "raw_output": "{\n  \"visit_purpose\": [\"약 처방\", \"서류 발급\", \"검사결과 확인\"],\n  \"symptom_change\": \"나빠짐\",\n  \"document_type\": [\"소견서\"],\n  \"document_destination\": [\"공공기관\", \"제출처 모름\"],\n  \"patient_present\": true,\n  \"guardian_only\": false,\n  \"subjective_summary\": \"어머니가 말수가 줄었으며 상태가 다소 나빠진 듯하다. MRI 결과 확인과 약 처방, 주간보호센터 제출용 소견서가 필요하다.\",\n  \"requested_consultation\": null,\n  \"soap_summary\": \"S: 말수 감소; O: 해당 없음; A: 진단 생성하지 않음; P: 없음\"\n}",
+        "error": null,
+        "usage": {
+          "input_tokens": 803,
+          "output_tokens": 165,
+          "total_tokens": 968
+        }
+      },
+      {
+        "case_id": "case_020",
+        "disease_context": "뇌전증",
+        "split": "development",
+        "input": "지난번에 떼 간 진단서가 회사에서 양식이 안 맞는다고 다시 해오래요. 아니 무슨 서류를 두 번씩 떼게 하는지 모르겠네. 회사 제출용으로 다시 부탁드립니다. 발작은 없었고요, 혼자 왔어요.",
+        "gold": {
+          "visit_purpose": [
+            "서류 발급"
+          ],
+          "symptom_change": "비슷함",
+          "document_type": [
+            "진단서"
+          ],
+          "document_destination": [
+            "직장/학교"
+          ],
+          "patient_present": true,
+          "guardian_only": false,
+          "subjective_summary": "환자 본인 내원. 회사 제출용 진단서 재발급을 요청함(양식 문제로 재요청). 발작은 없었다고 함.",
+          "requested_consultation": null,
+          "soap_summary": "S: 환자 본인 내원, 진단서 재발급 요청(회사 양식 문제), 발작 없음. O: 해당 없음(문진 단계). A: 진단/치료 방침 생성하지 않음. P: 회사 요구 양식 확인 후 진단서 재발급."
+        },
+        "prediction": {
+          "visit_purpose": [
+            "서류 발급"
+          ],
+          "document_type": [
+            "진단서"
+          ],
+          "document_destination": [
+            "직장/학교"
+          ],
+          "symptom_change": "비슷함",
+          "patient_present": true,
+          "guardian_only": false,
+          "subjective_summary": "환자가 이전에 발급받은 진단서가 회사 양식과 맞지 않아 회사 제출용으로 다시 진단서 발급을 요청하였으며, 최근 발작은 없었고 혼자 내원하였음.",
+          "requested_consultation": null,
+          "soap_summary": "S: 진단서 재발급 요청, 발작 없음 / O: 해당 없음 / A: 진단 없음 / P: 확인 필요 없음"
+        },
+        "raw_output": "{\n  \"visit_purpose\": [\"서류 발급\"],\n  \"symptom_change\": \"비슷함\",\n  \"document_type\": [\"진단서\"],\n  \"document_destination\": [\"직장/학교\"],\n  \"patient_present\": true,\n  \"guardian_only\": false,\n  \"subjective_summary\": \"환자가 이전에 발급받은 진단서가 회사 양식과 맞지 않아 회사 제출용으로 다시 진단서 발급을 요청하였으며, 최근 발작은 없었고 혼자 내원하였음.\",\n  \"requested_consultation\": null,\n  \"soap_summary\": \"S: 진단서 재발급 요청, 발작 없음 / O: 해당 없음 / A: 진단 없음 / P: 확인 필요 없음\"\n}",
+        "error": null,
+        "usage": {
+          "input_tokens": 802,
+          "output_tokens": 164,
+          "total_tokens": 966
+        }
+      },
+      {
+        "case_id": "case_021",
+        "disease_context": "뇌전증",
+        "split": "development",
+        "input": "그... 약이 좀 남았는데요, 이번에 여행을 가게 돼서 약을 좀 길게, 그러니까 두 달 치? 길게 받을 수 있나 해서요. 발작은 없었어요. 혼자 왔어요.",
+        "gold": {
+          "visit_purpose": [
+            "약 처방"
+          ],
+          "symptom_change": "비슷함",
+          "document_type": [],
+          "document_destination": [],
+          "patient_present": true,
+          "guardian_only": false,
+          "subjective_summary": "환자 본인 내원. 여행으로 두 달 치 장기 처방이 가능한지 문의함. 발작은 없었다고 함.",
+          "requested_consultation": "여행 기간에 맞춘 장기 처방이 가능한지 문의함",
+          "soap_summary": "S: 환자 본인 내원, 여행으로 장기 처방 요청, 발작 없음. O: 해당 없음(문진 단계). A: 진단/치료 방침 생성하지 않음. P: 처방 일수 조정 가능 여부 진료 중 확인."
+        },
+        "prediction": {
+          "visit_purpose": [
+            "약 처방"
+          ],
+          "document_type": [],
+          "document_destination": [],
+          "symptom_change": "비슷함",
+          "patient_present": true,
+          "guardian_only": false,
+          "subjective_summary": "환자가 약이 남았으나 여행을 가서 두 달 치 약을 길게 받고 싶어함. 발작은 없었고 혼자 내원함.",
+          "requested_consultation": null,
+          "soap_summary": "S: 약이 남았으나 여행으로 약을 더 받고 싶음; O: 해당 없음; A: 진단 생성하지 않음; P: 약 처방 기간 확인 필요"
+        },
+        "raw_output": "{\n  \"visit_purpose\": [\"약 처방\"],\n  \"symptom_change\": \"비슷함\",\n  \"document_type\": [],\n  \"document_destination\": [],\n  \"patient_present\": true,\n  \"guardian_only\": false,\n  \"subjective_summary\": \"환자가 약이 남았으나 여행을 가서 두 달 치 약을 길게 받고 싶어함. 발작은 없었고 혼자 내원함.\",\n  \"requested_consultation\": null,\n  \"soap_summary\": \"S: 약이 남았으나 여행으로 약을 더 받고 싶음; O: 해당 없음; A: 진단 생성하지 않음; P: 약 처방 기간 확인 필요\"\n}",
+        "error": null,
+        "usage": {
+          "input_tokens": 790,
+          "output_tokens": 149,
+          "total_tokens": 939
+        }
+      },
+      {
+        "case_id": "case_022",
+        "disease_context": "치매",
+        "split": "development",
+        "input": "어머니를 요양병원으로 모시려고 하는데 거기서 진료기록을 떼오라고 해서요. 어머니는 거동이 안 돼서 제가 왔어요. 상태는 비슷하세요.",
+        "gold": {
+          "visit_purpose": [
+            "서류 발급"
+          ],
+          "symptom_change": "비슷함",
+          "document_type": [
+            "기록/결과 사본"
+          ],
+          "document_destination": [
+            "타 의료기관/요양기관"
+          ],
+          "patient_present": false,
+          "guardian_only": true,
+          "subjective_summary": "보호자만 내원. 요양병원 전원을 위한 진료기록 사본을 요청함. 환자 상태는 비슷하다고 함.",
+          "requested_consultation": null,
+          "soap_summary": "S: 보호자 단독 내원, 요양병원 제출용 기록 사본 요청, 상태 비슷함. O: 해당 없음(환자 미내원). A: 진단/치료 방침 생성하지 않음. P: 기록 사본 발급 절차 확인."
+        },
+        "prediction": {
+          "visit_purpose": [
+            "서류 발급"
+          ],
+          "document_type": [
+            "기록/결과 사본"
+          ],
+          "document_destination": [
+            "타 의료기관/요양기관"
+          ],
+          "symptom_change": "비슷함",
+          "patient_present": false,
+          "guardian_only": true,
+          "subjective_summary": "어머니가 거동이 안 되어 보호자가 대신 내원했으며, 상태는 비슷하다고 함.",
+          "requested_consultation": null,
+          "soap_summary": "S: 보호자가 요양병원 제출용 진료기록 요청, 환자 거동 불가; O: 없음; A: 진단 없음; P: 내원자 및 보호자 확인"
+        },
+        "raw_output": "{\n  \"visit_purpose\": [\"서류 발급\"],\n  \"symptom_change\": \"비슷함\",\n  \"document_type\": [\"기록/결과 사본\"],\n  \"document_destination\": [\"타 의료기관/요양기관\"],\n  \"patient_present\": false,\n  \"guardian_only\": true,\n  \"subjective_summary\": \"어머니가 거동이 안 되어 보호자가 대신 내원했으며, 상태는 비슷하다고 함.\",\n  \"requested_consultation\": null,\n  \"soap_summary\": \"S: 보호자가 요양병원 제출용 진료기록 요청, 환자 거동 불가; O: 없음; A: 진단 없음; P: 내원자 및 보호자 확인\"\n}",
+        "error": null,
+        "usage": {
+          "input_tokens": 786,
+          "output_tokens": 157,
+          "total_tokens": 943
+        }
+      },
+      {
+        "case_id": "case_023",
+        "disease_context": "파킨슨병",
+        "split": "development",
+        "input": "다음 주에 다른 병원 예약이 있어서 검사 결과지가 필요해요. 결과는 지난번에 이미 들었고요, 종이만 받아 가면 됩니다. 혼자 왔어요.",
+        "gold": {
+          "visit_purpose": [
+            "서류 발급"
+          ],
+          "symptom_change": null,
+          "document_type": [
+            "기록/결과 사본"
+          ],
+          "document_destination": [
+            "타 의료기관/요양기관"
+          ],
+          "patient_present": true,
+          "guardian_only": false,
+          "subjective_summary": "환자 본인 내원. 타 병원 제출용 검사 결과지 사본을 요청함. 결과 설명은 이미 들어 추가 확인을 원하지 않음.",
+          "requested_consultation": null,
+          "soap_summary": "S: 환자 본인 내원, 결과지 사본만 요청(결과 상담 불필요). O: 해당 없음(문진 단계). A: 진단/치료 방침 생성하지 않음. P: 결과지 사본 발급."
+        },
+        "prediction": {
+          "visit_purpose": [
+            "서류 발급",
+            "검사결과 확인"
+          ],
+          "document_type": [
+            "기록/결과 사본"
+          ],
+          "document_destination": [
+            "타 의료기관/요양기관"
+          ],
+          "symptom_change": null,
+          "patient_present": true,
+          "guardian_only": false,
+          "subjective_summary": "환자가 다음 주 다른 병원 방문을 위해 지난번 검사 결과지 종이 사본을 요청했으며, 혼자 내원함.",
+          "requested_consultation": null,
+          "soap_summary": "S: 다른 병원 예약으로 검사 결과지 종이만 필요함, 환자 혼자 내원/O: 없음/A: 진단 없음/P: 없음"
+        },
+        "raw_output": "```json\n{\n  \"visit_purpose\": [\"서류 발급\", \"검사결과 확인\"],\n  \"symptom_change\": null,\n  \"document_type\": [\"기록/결과 사본\"],\n  \"document_destination\": [\"타 의료기관/요양기관\"],\n  \"patient_present\": true,\n  \"guardian_only\": false,\n  \"subjective_summary\": \"환자가 다음 주 다른 병원 방문을 위해 지난번 검사 결과지 종이 사본을 요청했으며, 혼자 내원함.\",\n  \"requested_consultation\": null,\n  \"soap_summary\": \"S: 다른 병원 예약으로 검사 결과지 종이만 필요함, 환자 혼자 내원/O: 없음/A: 진단 없음/P: 없음\"\n}\n```",
+        "error": null,
+        "usage": {
+          "input_tokens": 779,
+          "output_tokens": 162,
+          "total_tokens": 941
+        }
+      }
+    ]
+  },
+  "v3": {
+    "created_at": "2026-07-09T23:33:06+09:00",
+    "model": "gpt-4.1-mini",
+    "prompt_version": "v3",
+    "split": "development",
+    "metrics": {
+      "case_count": 20,
+      "json_success_rate": 1.0,
+      "exact_match": 0.6,
+      "field_accuracy": 0.9083333333333333,
+      "micro_precision": 0.94,
+      "micro_recall": 0.9591836734693877,
+      "micro_f1": 0.9494949494949495,
+      "omission_rate": 0.04081632653061224,
+      "hallucination_rate": 0.06,
+      "input_tokens": 25394,
+      "output_tokens": 3113,
+      "symptom_change_accuracy": 0.8,
+      "patient_present_accuracy": 0.95,
+      "guardian_only_accuracy": 0.9
+    },
+    "records": [
+      {
+        "case_id": "case_001",
+        "disease_context": "치매",
+        "split": "development",
+        "input": "어머니는 오늘 못 오시고 저만 왔어요. 요양원에 낼 서류가 필요한데 뭘 떼야 하는지는 잘 모르겠어요. 그리고 요즘 식사를 하시고도 밥을 안 먹었다고 하시는 일이 자꾸 있어서 그것도 여쭤보고 싶어요.",
+        "gold": {
+          "visit_purpose": [
+            "서류 발급",
+            "증상 상담"
+          ],
+          "symptom_change": "나빠짐",
+          "document_type": [
+            "기타/종류 모름"
+          ],
+          "document_destination": [
+            "타 의료기관/요양기관"
+          ],
+          "patient_present": false,
+          "guardian_only": true,
+          "subjective_summary": "보호자만 내원. 환자가 식사한 사실을 잊는 일이 잦다고 보호자가 전달함. 요양원 제출용 서류가 필요하나 서류 종류는 확인 필요.",
+          "requested_consultation": "식사한 사실을 잊어버리는 증상에 대해 상담하고 싶어함",
+          "soap_summary": "S: 보호자 단독 내원, 환자의 식사 사실 망각 반복을 보호자가 전달. O: 해당 없음(환자 미내원). A: 진단/치료 방침 생성하지 않음. P: 서류 종류 확인, 인지 변화 진행 여부 확인 필요."
+        },
+        "prediction": {
+          "visit_purpose": [
+            "서류 발급",
+            "증상 상담"
+          ],
+          "document_type": [
+            "기타/종류 모름"
+          ],
+          "document_destination": [
+            "타 의료기관/요양기관"
+          ],
+          "symptom_change": "새 증상 있음",
+          "patient_present": true,
+          "guardian_only": false,
+          "subjective_summary": "환자 본인이 내원함. 식사 후에도 밥을 먹지 않았다고 하는 일이 자주 발생하고 있으며 요양원 제출용 서류가 필요한데 종류는 모름.",
+          "requested_consultation": "식사 후 밥을 먹지 않았다고 하는 현상에 대해 상담하고 싶어함",
+          "soap_summary": "S: 환자가 식사 후 밥을 먹지 않았다고 하는 일이 자주 있음. O: 해당 없음. A: 진단/치료 방침 생성하지 않음. P: 서류 종류 확인 필요."
+        },
+        "raw_output": "{\"visit_purpose\":[\"서류 발급\",\"증상 상담\"],\"symptom_change\":\"새 증상 있음\",\"document_type\":[\"기타/종류 모름\"],\"document_destination\":[\"타 의료기관/요양기관\"],\"patient_present\":true,\"guardian_only\":false,\"subjective_summary\":\"환자 본인이 내원함. 식사 후에도 밥을 먹지 않았다고 하는 일이 자주 발생하고 있으며 요양원 제출용 서류가 필요한데 종류는 모름.\",\"requested_consultation\":\"식사 후 밥을 먹지 않았다고 하는 현상에 대해 상담하고 싶어함\",\"soap_summary\":\"S: 환자가 식사 후 밥을 먹지 않았다고 하는 일이 자주 있음. O: 해당 없음. A: 진단/치료 방침 생성하지 않음. P: 서류 종류 확인 필요.\"}",
+        "error": null,
+        "usage": {
+          "input_tokens": 1286,
+          "output_tokens": 181,
+          "total_tokens": 1467
+        }
+      },
+      {
+        "case_id": "case_002",
+        "disease_context": "파킨슨병",
+        "split": "development",
+        "input": "약은 그대로 받을게요. 그런데 요즘 손 떨림이 오전에는 괜찮다가 오후만 되면 심해져요. 저녁때는 수저 들기가 힘들 때도 있고요. 혼자 왔습니다.",
+        "gold": {
+          "visit_purpose": [
+            "약 처방",
+            "증상 상담"
+          ],
+          "symptom_change": "나빠짐",
+          "document_type": [],
+          "document_destination": [],
+          "patient_present": true,
+          "guardian_only": false,
+          "subjective_summary": "환자 본인 내원. 손 떨림이 오후에 심해지고 저녁에는 수저 사용이 힘들 때가 있다고 함. 약 처방 유지를 원함.",
+          "requested_consultation": "오후에 심해지는 손 떨림에 대해 상담 요청",
+          "soap_summary": "S: 환자 본인 내원, 손 떨림 오후 악화와 저녁 수저 사용 어려움 호소. O: 해당 없음(문진 단계). A: 진단/치료 방침 생성하지 않음. P: 약 처방 확인, 증상 시간대별 변화 진료 중 확인 필요."
+        },
+        "prediction": {
+          "visit_purpose": [
+            "약 처방",
+            "증상 상담"
+          ],
+          "document_type": [],
+          "document_destination": [],
+          "symptom_change": "나빠짐",
+          "patient_present": true,
+          "guardian_only": false,
+          "subjective_summary": "환자는 약은 그대로 처방받기를 원하며, 손 떨림이 오전에는 괜찮으나 오후에 심해지고 저녁에는 수저 들기가 힘든 증상을 호소함.",
+          "requested_consultation": "손 떨림 증상의 악화와 증상 관리에 대해 상담하고 싶어함",
+          "soap_summary": "S: 손 떨림이 오후에 심해지고 저녁에 수저 드는데 어려움 호소. O: 해당 없음. A: 진단/치료 방침 생성하지 않음. P: 증상 악화 경과 확인 필요."
+        },
+        "raw_output": "{\"visit_purpose\":[\"약 처방\",\"증상 상담\"],\"symptom_change\":\"나빠짐\",\"document_type\":[],\"document_destination\":[],\"patient_present\":true,\"guardian_only\":false,\"subjective_summary\":\"환자는 약은 그대로 처방받기를 원하며, 손 떨림이 오전에는 괜찮으나 오후에 심해지고 저녁에는 수저 들기가 힘든 증상을 호소함.\",\"requested_consultation\":\"손 떨림 증상의 악화와 증상 관리에 대해 상담하고 싶어함\",\"soap_summary\":\"S: 손 떨림이 오후에 심해지고 저녁에 수저 드는데 어려움 호소. O: 해당 없음. A: 진단/치료 방침 생성하지 않음. P: 증상 악화 경과 확인 필요.\"}",
+        "error": null,
+        "usage": {
+          "input_tokens": 1267,
+          "output_tokens": 172,
+          "total_tokens": 1439
+        }
+      },
+      {
+        "case_id": "case_003",
+        "disease_context": "뇌전증",
+        "split": "development",
+        "input": "지난달에 학교 낼 진단서는 받아 갔고요, 요즘 발작 횟수가 좀 는 것 같아서 왔어요. 엄마랑 같이 왔습니다.",
+        "gold": {
+          "visit_purpose": [
+            "증상 상담"
+          ],
+          "symptom_change": "나빠짐",
+          "document_type": [],
+          "document_destination": [],
+          "patient_present": true,
+          "guardian_only": false,
+          "subjective_summary": "환자와 보호자 함께 내원. 발작 횟수가 늘어난 것 같다고 함. 서류는 지난달 이미 발급받아 이번에는 요청하지 않음.",
+          "requested_consultation": "발작 횟수가 늘어난 것에 대해 상담하고 싶어함",
+          "soap_summary": "S: 환자·보호자 함께 내원, 발작 빈도 증가 우려 전달. O: 해당 없음(문진 단계). A: 진단/치료 방침 생성하지 않음. P: 발작 빈도·양상 변화 진료 중 확인 필요."
+        },
+        "prediction": {
+          "visit_purpose": [
+            "증상 상담"
+          ],
+          "document_type": [],
+          "document_destination": [],
+          "symptom_change": "나빠짐",
+          "patient_present": true,
+          "guardian_only": false,
+          "subjective_summary": "환자가 엄마와 함께 내원했으며 최근 발작 횟수가 증가했다고 보고함. 지난달 학교 제출용 진단서는 이미 받았음.",
+          "requested_consultation": "발작 횟수 증가에 대해 상담하고 싶어함",
+          "soap_summary": "S: 환자 내원, 발작 횟수 증가 호소. O: 해당 없음. A: 진단/치료 방침 생성하지 않음. P: 추가 증상 변화 여부 확인 필요."
+        },
+        "raw_output": "{\"visit_purpose\":[\"증상 상담\"],\"symptom_change\":\"나빠짐\",\"document_type\":[],\"document_destination\":[],\"patient_present\":true,\"guardian_only\":false,\"subjective_summary\":\"환자가 엄마와 함께 내원했으며 최근 발작 횟수가 증가했다고 보고함. 지난달 학교 제출용 진단서는 이미 받았음.\",\"requested_consultation\":\"발작 횟수 증가에 대해 상담하고 싶어함\",\"soap_summary\":\"S: 환자 내원, 발작 횟수 증가 호소. O: 해당 없음. A: 진단/치료 방침 생성하지 않음. P: 추가 증상 변화 여부 확인 필요.\"}",
+        "error": null,
+        "usage": {
+          "input_tokens": 1255,
+          "output_tokens": 143,
+          "total_tokens": 1398
+        }
+      },
+      {
+        "case_id": "case_004",
+        "disease_context": "치매",
+        "split": "development",
+        "input": "아버지 모시고 같이 왔어요. 지난번 검사 결과 들으러 왔고, 보험에 낼 소견서도 하나 부탁드립니다.",
+        "gold": {
+          "visit_purpose": [
+            "검사결과 확인",
+            "서류 발급"
+          ],
+          "symptom_change": null,
+          "document_type": [
+            "소견서"
+          ],
+          "document_destination": [
+            "보험"
+          ],
+          "patient_present": true,
+          "guardian_only": false,
+          "subjective_summary": "환자와 보호자 함께 내원. 검사 결과 확인을 원하며 보험 제출용 소견서를 요청함.",
+          "requested_consultation": null,
+          "soap_summary": "S: 환자·보호자 함께 내원, 검사 결과 확인 및 소견서 요청. O: 해당 없음(문진 단계). A: 진단/치료 방침 생성하지 않음. P: 검사 결과 안내, 소견서 발급 절차 확인 필요."
+        },
+        "prediction": {
+          "visit_purpose": [
+            "서류 발급",
+            "검사결과 확인"
+          ],
+          "document_type": [
+            "소견서"
+          ],
+          "document_destination": [
+            "보험"
+          ],
+          "symptom_change": null,
+          "patient_present": true,
+          "guardian_only": false,
+          "subjective_summary": "환자와 보호자가 내원하였으며, 지난 검사 결과를 듣기 위해 방문했고 보험 제출용 소견서 발급을 요청함.",
+          "requested_consultation": null,
+          "soap_summary": "S: 환자와 보호자 동반 내원, 검사 결과 청취와 소견서 요청. O: 해당 없음. A: 진단/치료 방침 생성하지 않음. P: 증상 변화에 대한 언급 없음."
+        },
+        "raw_output": "{\"visit_purpose\":[\"서류 발급\",\"검사결과 확인\"],\"symptom_change\":null,\"document_type\":[\"소견서\"],\"document_destination\":[\"보험\"],\"patient_present\":true,\"guardian_only\":false,\"subjective_summary\":\"환자와 보호자가 내원하였으며, 지난 검사 결과를 듣기 위해 방문했고 보험 제출용 소견서 발급을 요청함.\",\"requested_consultation\":null,\"soap_summary\":\"S: 환자와 보호자 동반 내원, 검사 결과 청취와 소견서 요청. O: 해당 없음. A: 진단/치료 방침 생성하지 않음. P: 증상 변화에 대한 언급 없음.\"}",
+        "error": null,
+        "usage": {
+          "input_tokens": 1250,
+          "output_tokens": 147,
+          "total_tokens": 1397
+        }
+      },
+      {
+        "case_id": "case_005",
+        "disease_context": "파킨슨병",
+        "split": "development",
+        "input": "아버지는 거동이 불편하셔서 저만 왔어요. 장애 등급 신청을 하려는데 어떤 서류를 떼야 하는지 모르겠어요. 그리고 요즘 걸음이 많이 느려지셨어요. 발이 잘 안 떨어진다고 하시고, 집 안에서도 몇 번 넘어질 뻔했어요.",
+        "gold": {
+          "visit_purpose": [
+            "서류 발급",
+            "증상 상담"
+          ],
+          "symptom_change": "나빠짐",
+          "document_type": [
+            "기타/종류 모름"
+          ],
+          "document_destination": [
+            "공공기관"
+          ],
+          "patient_present": false,
+          "guardian_only": true,
+          "subjective_summary": "보호자만 내원. 환자의 걸음이 느려지고 발이 잘 떨어지지 않아 넘어질 뻔한 일이 있었다고 보호자가 전달함. 장애 등급 신청용 서류가 필요하나 서류 종류는 확인 필요.",
+          "requested_consultation": "보행이 느려진 변화에 대해 상담하고 싶어함",
+          "soap_summary": "S: 보호자 단독 내원, 환자의 보행 저하와 낙상 위험을 보호자가 전달. O: 해당 없음(환자 미내원). A: 진단/치료 방침 생성하지 않음. P: 서류 종류 확인, 보행 변화와 낙상 위험 확인 필요."
+        },
+        "prediction": {
+          "visit_purpose": [
+            "서류 발급",
+            "증상 상담"
+          ],
+          "document_type": [
+            "기타/종류 모름"
+          ],
+          "document_destination": [
+            "공공기관",
+            "제출처 모름"
+          ],
+          "symptom_change": "나빠짐",
+          "patient_present": false,
+          "guardian_only": true,
+          "subjective_summary": "보호자만 내원. 환자는 거동이 불편하며 걸음이 많이 느려지고 집 안에서 몇 번 넘어질 뻔했다고 보호자가 전달함. 장애 등급 신청을 위해 필요한 서류 종류를 모르겠음.",
+          "requested_consultation": "걸음이 느려지고 넘어질 뻔한 증상에 대해 상담하고 싶어함.",
+          "soap_summary": "S: 보호자 단독 내원, 환자의 보행 장애 및 낙상 위험을 보호자가 전달. O: 해당 없음(환자 미내원). A: 진단/치료 방침 생성하지 않음. P: 서류 종류 및 제출처 확인 필요."
+        },
+        "raw_output": "{\"visit_purpose\":[\"서류 발급\",\"증상 상담\"],\"symptom_change\":\"나빠짐\",\"document_type\":[\"기타/종류 모름\"],\"document_destination\":[\"공공기관\",\"제출처 모름\"],\"patient_present\":false,\"guardian_only\":true,\"subjective_summary\":\"보호자만 내원. 환자는 거동이 불편하며 걸음이 많이 느려지고 집 안에서 몇 번 넘어질 뻔했다고 보호자가 전달함. 장애 등급 신청을 위해 필요한 서류 종류를 모르겠음.\",\"requested_consultation\":\"걸음이 느려지고 넘어질 뻔한 증상에 대해 상담하고 싶어함.\",\"soap_summary\":\"S: 보호자 단독 내원, 환자의 보행 장애 및 낙상 위험을 보호자가 전달. O: 해당 없음(환자 미내원). A: 진단/치료 방침 생성하지 않음. P: 서류 종류 및 제출처 확인 필요.\"}",
+        "error": null,
+        "usage": {
+          "input_tokens": 1292,
+          "output_tokens": 208,
+          "total_tokens": 1500
+        }
+      },
+      {
+        "case_id": "case_006",
+        "disease_context": "뇌전증",
+        "split": "development",
+        "input": "약만 타러 왔어요. 별다른 건 없었고요. 혼자 왔습니다.",
+        "gold": {
+          "visit_purpose": [
+            "약 처방"
+          ],
+          "symptom_change": "비슷함",
+          "document_type": [],
+          "document_destination": [],
+          "patient_present": true,
+          "guardian_only": false,
+          "subjective_summary": "환자 본인 내원. 증상 변화 없이 약 처방만 요청함.",
+          "requested_consultation": null,
+          "soap_summary": "S: 환자 본인 내원, 증상 변화 없음, 약 처방 요청. O: 해당 없음(문진 단계). A: 진단/치료 방침 생성하지 않음. P: 정기 처방 확인."
+        },
+        "prediction": {
+          "visit_purpose": [
+            "약 처방"
+          ],
+          "document_type": [],
+          "document_destination": [],
+          "symptom_change": "비슷함",
+          "patient_present": true,
+          "guardian_only": false,
+          "subjective_summary": "환자가 혼자 내원하였으며 별다른 증상 변화 없이 약 처방을 위해 방문함.",
+          "requested_consultation": null,
+          "soap_summary": "S: 환자 단독 내원, 별다른 증상 변화 없음. O: 해당 없음. A: 진단/치료 방침 생성하지 않음. P: 없음."
+        },
+        "raw_output": "{\"visit_purpose\":[\"약 처방\"],\"symptom_change\":\"비슷함\",\"document_type\":[],\"document_destination\":[],\"patient_present\":true,\"guardian_only\":false,\"subjective_summary\":\"환자가 혼자 내원하였으며 별다른 증상 변화 없이 약 처방을 위해 방문함.\",\"requested_consultation\":null,\"soap_summary\":\"S: 환자 단독 내원, 별다른 증상 변화 없음. O: 해당 없음. A: 진단/치료 방침 생성하지 않음. P: 없음.\"}",
+        "error": null,
+        "usage": {
+          "input_tokens": 1239,
+          "output_tokens": 116,
+          "total_tokens": 1355
+        }
+      },
+      {
+        "case_id": "case_007",
+        "disease_context": "치매",
+        "split": "development",
+        "input": "어머니 모시고 같이 왔어요. 요즘 밤에 자꾸 깨서 집 안을 돌아다니세요. 새벽에 현관문을 열려고 하신 적도 있고요. 이게 약 때문인지 다른 이유인지 상담받고 싶어요.",
+        "gold": {
+          "visit_purpose": [
+            "증상 상담"
+          ],
+          "symptom_change": "새 증상 있음",
+          "document_type": [],
+          "document_destination": [],
+          "patient_present": true,
+          "guardian_only": false,
+          "subjective_summary": "환자와 보호자 함께 내원. 야간에 깨서 배회하고 새벽에 현관문을 열려 한 일이 있었다고 전달하며 원인 상담을 원함.",
+          "requested_consultation": "야간 각성·배회가 약 때문인지 다른 원인인지 상담 요청",
+          "soap_summary": "S: 환자·보호자 함께 내원, 야간 각성·배회 새로 발생, 새벽 외출 시도 있었음. O: 해당 없음(문진 단계). A: 진단/치료 방침 생성하지 않음. P: 야간 증상과 복약 관련성 진료 중 확인 필요."
+        },
+        "prediction": {
+          "visit_purpose": [
+            "증상 상담"
+          ],
+          "document_type": [],
+          "document_destination": [],
+          "symptom_change": "새 증상 있음",
+          "patient_present": true,
+          "guardian_only": false,
+          "subjective_summary": "환자가 최근 밤에 자주 깨서 집 안을 돌아다니고 새벽에 현관문을 열려고 하는 행동이 나타남.",
+          "requested_consultation": "약 때문인지 다른 이유인지에 대한 상담을 원함",
+          "soap_summary": "S: 야간에 자주 깨서 돌아다니고 현관문을 열려고 하는 행동이 새로 발생함. O: 해당 없음. A: 진단/치료 방침 생성하지 않음. P: 증상 원인 확인 필요."
+        },
+        "raw_output": "{\"visit_purpose\":[\"증상 상담\"],\"symptom_change\":\"새 증상 있음\",\"document_type\":[],\"document_destination\":[],\"patient_present\":true,\"guardian_only\":false,\"subjective_summary\":\"환자가 최근 밤에 자주 깨서 집 안을 돌아다니고 새벽에 현관문을 열려고 하는 행동이 나타남.\",\"requested_consultation\":\"약 때문인지 다른 이유인지에 대한 상담을 원함\",\"soap_summary\":\"S: 야간에 자주 깨서 돌아다니고 현관문을 열려고 하는 행동이 새로 발생함. O: 해당 없음. A: 진단/치료 방침 생성하지 않음. P: 증상 원인 확인 필요.\"}",
+        "error": null,
+        "usage": {
+          "input_tokens": 1272,
+          "output_tokens": 150,
+          "total_tokens": 1422
+        }
+      },
+      {
+        "case_id": "case_011",
+        "disease_context": "파킨슨병",
+        "split": "development",
+        "input": "아이고 오늘 주차장이 왜 이렇게 복잡해요. 아버지 약 타러 왔는데요, 참 그리고 저번에 새로 바꾼 약 있잖아요, 그거 먹고부터 자꾸 어지럽다고 하셔가지고. 아 아버지도 같이 왔어요, 지금 화장실 가셨고요. 어지러운 게 약 때문인가 그것 좀 여쭤볼게요.",
+        "gold": {
+          "visit_purpose": [
+            "약 처방",
+            "증상 상담"
+          ],
+          "symptom_change": "새 증상 있음",
+          "document_type": [],
+          "document_destination": [],
+          "patient_present": true,
+          "guardian_only": false,
+          "subjective_summary": "환자와 보호자 함께 내원. 약 변경 후 어지럼이 새로 생겼다고 보호자가 전달함. 약 처방을 원함.",
+          "requested_consultation": "약 변경 후 생긴 어지럼이 약 때문인지 상담 요청",
+          "soap_summary": "S: 환자·보호자 함께 내원, 약 변경 후 어지럼 발생 전달. O: 해당 없음(문진 단계). A: 진단/치료 방침 생성하지 않음. P: 어지럼과 약 변경의 관련성 진료 중 확인 필요, 처방 확인."
+        },
+        "prediction": {
+          "visit_purpose": [
+            "약 처방",
+            "증상 상담"
+          ],
+          "document_type": [],
+          "document_destination": [],
+          "symptom_change": "새 증상 있음",
+          "patient_present": true,
+          "guardian_only": false,
+          "subjective_summary": "환자와 보호자 내원. 보호자 언급에 따르면 새로 바꾼 약 복용 후 어지럼증이 발생함.",
+          "requested_consultation": "어지럼증이 약 때문인지 상담하고 싶어함",
+          "soap_summary": "S: 보호자가 어지럼증 발생을 설명함. O: 환자는 현재 화장실에 있음. A: 진단/치료 방침 생성하지 않음. P: 증상 원인 및 약물 관련성 확인 필요."
+        },
+        "raw_output": "{\"visit_purpose\":[\"약 처방\",\"증상 상담\"],\"symptom_change\":\"새 증상 있음\",\"document_type\":[],\"document_destination\":[],\"patient_present\":true,\"guardian_only\":false,\"subjective_summary\":\"환자와 보호자 내원. 보호자 언급에 따르면 새로 바꾼 약 복용 후 어지럼증이 발생함.\",\"requested_consultation\":\"어지럼증이 약 때문인지 상담하고 싶어함\",\"soap_summary\":\"S: 보호자가 어지럼증 발생을 설명함. O: 환자는 현재 화장실에 있음. A: 진단/치료 방침 생성하지 않음. P: 증상 원인 및 약물 관련성 확인 필요.\"}",
+        "error": null,
+        "usage": {
+          "input_tokens": 1308,
+          "output_tokens": 153,
+          "total_tokens": 1461
+        }
+      },
+      {
+        "case_id": "case_012",
+        "disease_context": "뇌전증",
+        "split": "development",
+        "input": "약이요. 그대로예요.",
+        "gold": {
+          "visit_purpose": [
+            "약 처방"
+          ],
+          "symptom_change": "비슷함",
+          "document_type": [],
+          "document_destination": [],
+          "patient_present": null,
+          "guardian_only": null,
+          "subjective_summary": "약 처방만 요청함. 증상 변화 없다고 함. 방문 형태 언급 없음(미상).",
+          "requested_consultation": null,
+          "soap_summary": "S: 약 처방 요청, 증상 변화 없음, 방문 형태 미상. O: 해당 없음(문진 단계). A: 진단/치료 방침 생성하지 않음. P: 방문 형태 확인, 정기 처방 확인."
+        },
+        "prediction": {
+          "visit_purpose": [
+            "약 처방"
+          ],
+          "document_type": [],
+          "document_destination": [],
+          "symptom_change": "비슷함",
+          "patient_present": null,
+          "guardian_only": false,
+          "subjective_summary": "환자가 약을 원하며 증상은 변함없다고 함.",
+          "requested_consultation": null,
+          "soap_summary": "S: 환자가 약 처방 원함, 증상 변화 없다고 보고함. O: 미상. A: 진단/치료 방침 생성하지 않음. P: 내원 여부 확인 필요."
+        },
+        "raw_output": "{\"visit_purpose\":[\"약 처방\"],\"symptom_change\":\"비슷함\",\"document_type\":[],\"document_destination\":[],\"patient_present\":null,\"guardian_only\":false,\"subjective_summary\":\"환자가 약을 원하며 증상은 변함없다고 함.\",\"requested_consultation\":null,\"soap_summary\":\"S: 환자가 약 처방 원함, 증상 변화 없다고 보고함. O: 미상. A: 진단/치료 방침 생성하지 않음. P: 내원 여부 확인 필요.\"}",
+        "error": null,
+        "usage": {
+          "input_tokens": 1224,
+          "output_tokens": 112,
+          "total_tokens": 1336
+        }
+      },
+      {
+        "case_id": "case_013",
+        "disease_context": "치매",
+        "split": "development",
+        "input": "어무이 모시고 왔심더. 요새 자꾸 화를 내시고 예전엔 안 그랬거든예. 밤에 잠도 잘 몬 주무시고. 그거 때문에 상담 좀 받아볼라꼬예.",
+        "gold": {
+          "visit_purpose": [
+            "증상 상담"
+          ],
+          "symptom_change": "새 증상 있음",
+          "document_type": [],
+          "document_destination": [],
+          "patient_present": true,
+          "guardian_only": false,
+          "subjective_summary": "환자와 보호자 함께 내원. 이전에 없던 화냄과 수면 문제가 생겼다고 보호자가 전달함.",
+          "requested_consultation": "화를 자주 내는 것과 잠을 잘 못 자는 문제에 대해 상담하고 싶어함",
+          "soap_summary": "S: 환자·보호자 함께 내원, 화냄과 수면 문제 새로 발생 전달. O: 해당 없음(문진 단계). A: 진단/치료 방침 생성하지 않음. P: 행동 변화·수면 문제 진료 중 확인 필요."
+        },
+        "prediction": {
+          "visit_purpose": [
+            "증상 상담"
+          ],
+          "document_type": [],
+          "document_destination": [],
+          "symptom_change": "새 증상 있음",
+          "patient_present": true,
+          "guardian_only": false,
+          "subjective_summary": "환자가 최근 자주 화를 내고 밤에 잠을 잘 못 주무신다고 보호자가 전달함.",
+          "requested_consultation": "화내는 증상과 수면 문제에 대해 상담 받고 싶어함",
+          "soap_summary": "S: 보호자가 환자의 기분 변화와 수면 문제를 전달함. O: 해당 없음. A: 진단/치료 방침 생성하지 않음. P: 증상 변화 상세 확인 필요."
+        },
+        "raw_output": "{\"visit_purpose\":[\"증상 상담\"],\"symptom_change\":\"새 증상 있음\",\"document_type\":[],\"document_destination\":[],\"patient_present\":true,\"guardian_only\":false,\"subjective_summary\":\"환자가 최근 자주 화를 내고 밤에 잠을 잘 못 주무신다고 보호자가 전달함.\",\"requested_consultation\":\"화내는 증상과 수면 문제에 대해 상담 받고 싶어함\",\"soap_summary\":\"S: 보호자가 환자의 기분 변화와 수면 문제를 전달함. O: 해당 없음. A: 진단/치료 방침 생성하지 않음. P: 증상 변화 상세 확인 필요.\"}",
+        "error": null,
+        "usage": {
+          "input_tokens": 1271,
+          "output_tokens": 137,
+          "total_tokens": 1408
+        }
+      },
+      {
+        "case_id": "case_014",
+        "disease_context": "파킨슨병",
+        "split": "development",
+        "input": "소견서 하나 떼려고요. 아 잠깐, 소견서가 아니고 진단서라 했나... 보험회사에서 달라는 거요. 몸은 뭐 비슷해요. 혼자 왔어요.",
+        "gold": {
+          "visit_purpose": [
+            "서류 발급"
+          ],
+          "symptom_change": "비슷함",
+          "document_type": [
+            "기타/종류 모름"
+          ],
+          "document_destination": [
+            "보험"
+          ],
+          "patient_present": true,
+          "guardian_only": false,
+          "subjective_summary": "환자 본인 내원. 보험회사 제출용 서류가 필요하나 진단서인지 소견서인지 확실하지 않음. 증상은 이전과 비슷하다고 함.",
+          "requested_consultation": null,
+          "soap_summary": "S: 환자 본인 내원, 보험 제출용 서류 요청(종류 불확실), 증상 변화 없음. O: 해당 없음(문진 단계). A: 진단/치료 방침 생성하지 않음. P: 보험사 요구 서류 종류 확인 필요."
+        },
+        "prediction": {
+          "visit_purpose": [
+            "서류 발급"
+          ],
+          "document_type": [
+            "진단서"
+          ],
+          "document_destination": [
+            "보험"
+          ],
+          "symptom_change": "비슷함",
+          "patient_present": true,
+          "guardian_only": false,
+          "subjective_summary": "환자가 혼자 내원하였으며, 몸 상태는 이전과 비슷하다고 보고함. 보험회사 제출용 진단서를 요청함.",
+          "requested_consultation": null,
+          "soap_summary": "S: 환자 혼자 내원, 증상 상태 비슷함. O: 해당 없음. A: 진단/치료 방침 생성하지 않음. P: 없음."
+        },
+        "raw_output": "{\"visit_purpose\":[\"서류 발급\"],\"symptom_change\":\"비슷함\",\"document_type\":[\"진단서\"],\"document_destination\":[\"보험\"],\"patient_present\":true,\"guardian_only\":false,\"subjective_summary\":\"환자가 혼자 내원하였으며, 몸 상태는 이전과 비슷하다고 보고함. 보험회사 제출용 진단서를 요청함.\",\"requested_consultation\":null,\"soap_summary\":\"S: 환자 혼자 내원, 증상 상태 비슷함. O: 해당 없음. A: 진단/치료 방침 생성하지 않음. P: 없음.\"}",
+        "error": null,
+        "usage": {
+          "input_tokens": 1265,
+          "output_tokens": 130,
+          "total_tokens": 1395
+        }
+      },
+      {
+        "case_id": "case_015",
+        "disease_context": "뇌전증",
+        "split": "development",
+        "input": "약 바꾸고 나서 발작이 확 줄었어요. 두 달 동안 한 번도 없었고요. 약은 그대로 받아 가면 되고, 혼자 왔습니다.",
+        "gold": {
+          "visit_purpose": [
+            "약 처방"
+          ],
+          "symptom_change": "좋아짐",
+          "document_type": [],
+          "document_destination": [],
+          "patient_present": true,
+          "guardian_only": false,
+          "subjective_summary": "환자 본인 내원. 약 변경 후 두 달간 발작이 없었다고 함. 동일 약 처방을 원함.",
+          "requested_consultation": null,
+          "soap_summary": "S: 환자 본인 내원, 약 변경 후 발작 없음(두 달), 동일 처방 요청. O: 해당 없음(문진 단계). A: 진단/치료 방침 생성하지 않음. P: 정기 처방 확인."
+        },
+        "prediction": {
+          "visit_purpose": [
+            "약 처방"
+          ],
+          "document_type": [],
+          "document_destination": [],
+          "symptom_change": "좋아짐",
+          "patient_present": true,
+          "guardian_only": false,
+          "subjective_summary": "환자가 약 변경 후 발작이 크게 줄어 두 달 동안 한 번도 발작이 없었다고 보고함. 약은 그대로 처방받길 원하며 혼자 내원함.",
+          "requested_consultation": null,
+          "soap_summary": "S: 약 변경 후 발작 감소, 2개월간 발작 없음. O: 해당 없음. A: 진단/치료 방침 생성하지 않음. P: 없음."
+        },
+        "raw_output": "{\n  \"visit_purpose\": [\"약 처방\"],\n  \"symptom_change\": \"좋아짐\",\n  \"document_type\": [],\n  \"document_destination\": [],\n  \"patient_present\": true,\n  \"guardian_only\": false,\n  \"subjective_summary\": \"환자가 약 변경 후 발작이 크게 줄어 두 달 동안 한 번도 발작이 없었다고 보고함. 약은 그대로 처방받길 원하며 혼자 내원함.\",\n  \"requested_consultation\": null,\n  \"soap_summary\": \"S: 약 변경 후 발작 감소, 2개월간 발작 없음. O: 해당 없음. A: 진단/치료 방침 생성하지 않음. P: 없음.\"\n}",
+        "error": null,
+        "usage": {
+          "input_tokens": 1255,
+          "output_tokens": 154,
+          "total_tokens": 1409
+        }
+      },
+      {
+        "case_id": "case_016",
+        "disease_context": "치매",
+        "split": "development",
+        "input": "남편이 요즘 통 기억을 못 해요. 어제는 손주 이름도 헷갈리고. 우리 딸은 미국 사는데 걔가 자꾸 전화로 아빠 어떠냐고 물어봐서요. 오늘은 남편이랑 같이 왔고요, 진료확인서도 한 장 떼주세요. 제가 보관해두게요.",
+        "gold": {
+          "visit_purpose": [
+            "증상 상담",
+            "서류 발급"
+          ],
+          "symptom_change": "나빠짐",
+          "document_type": [
+            "통원사실증명서(진료확인서)"
+          ],
+          "document_destination": [
+            "개인 보관"
+          ],
+          "patient_present": true,
+          "guardian_only": false,
+          "subjective_summary": "환자와 보호자 함께 내원. 기억력 저하가 심해졌다고 보호자가 전달함. 개인 보관용 진료확인서를 요청함.",
+          "requested_consultation": "기억력이 더 나빠진 것에 대해 상담하고 싶어함",
+          "soap_summary": "S: 환자·보호자 함께 내원, 기억력 저하 심화 전달, 진료확인서 요청. O: 해당 없음(문진 단계). A: 진단/치료 방침 생성하지 않음. P: 인지 변화 진행 여부 확인, 진료확인서 발급."
+        },
+        "prediction": {
+          "visit_purpose": [
+            "증상 상담",
+            "서류 발급"
+          ],
+          "document_type": [
+            "통원사실증명서(진료확인서)"
+          ],
+          "document_destination": [
+            "개인 보관"
+          ],
+          "symptom_change": "새 증상 있음",
+          "patient_present": true,
+          "guardian_only": false,
+          "subjective_summary": "환자와 보호자 동반 내원. 보호자에 따르면 환자가 최근 기억 장애(손주 이름 헷갈림) 발생하여 가족들이 걱정함. 진료확인서 1부를 개인 보관용으로 요청함.",
+          "requested_consultation": null,
+          "soap_summary": "S: 기억 장애 증상 호소 및 보호자 동반 내원. O: 해당 없음. A: 진단/치료 방침 생성하지 않음. P: 증상 변화 및 추가 상담 필요 여부 확인."
+        },
+        "raw_output": "{\"visit_purpose\":[\"증상 상담\",\"서류 발급\"],\"symptom_change\":\"새 증상 있음\",\"document_type\":[\"통원사실증명서(진료확인서)\"],\"document_destination\":[\"개인 보관\"],\"patient_present\":true,\"guardian_only\":false,\"subjective_summary\":\"환자와 보호자 동반 내원. 보호자에 따르면 환자가 최근 기억 장애(손주 이름 헷갈림) 발생하여 가족들이 걱정함. 진료확인서 1부를 개인 보관용으로 요청함.\",\"requested_consultation\":null,\"soap_summary\":\"S: 기억 장애 증상 호소 및 보호자 동반 내원. O: 해당 없음. A: 진단/치료 방침 생성하지 않음. P: 증상 변화 및 추가 상담 필요 여부 확인.\"}",
+        "error": null,
+        "usage": {
+          "input_tokens": 1298,
+          "output_tokens": 179,
+          "total_tokens": 1477
+        }
+      },
+      {
+        "case_id": "case_017",
+        "disease_context": "파킨슨병",
+        "split": "development",
+        "input": "아버지가 못 오셔서 제가 왔는데요, 전화로 여쭤보니까 별다른 건 없다고는 하시는데 제가 직접 본 게 아니라 잘 모르겠어요. 약이나 타다 드리려고요.",
+        "gold": {
+          "visit_purpose": [
+            "약 처방"
+          ],
+          "symptom_change": "비슷함",
+          "document_type": [],
+          "document_destination": [],
+          "patient_present": false,
+          "guardian_only": true,
+          "subjective_summary": "보호자만 내원. 환자는 전화로 별다른 변화가 없다고 함(전언). 보호자가 직접 확인하지는 못함. 약 처방을 원함.",
+          "requested_consultation": null,
+          "soap_summary": "S: 보호자 단독 내원, 증상 변화 없음(환자 전언, 보호자 직접 확인 못함). O: 해당 없음(환자 미내원). A: 진단/치료 방침 생성하지 않음. P: 증상 변화 진료 중 재확인, 처방 확인."
+        },
+        "prediction": {
+          "visit_purpose": [
+            "약 처방"
+          ],
+          "document_type": [],
+          "document_destination": [],
+          "symptom_change": "잘 모르겠음",
+          "patient_present": false,
+          "guardian_only": true,
+          "subjective_summary": "보호자만 내원. 환자는 동행하지 않았으며 환자의 상태에 대해 보호자가 직접 확인하지 못해 잘 모르겠다고 설명함. 약 처방을 위해 방문함.",
+          "requested_consultation": null,
+          "soap_summary": "S: 보호자 단독 내원, 환자 상태 정확히 모름. O: 해당 없음(환자 미내원). A: 진단/치료 방침 생성하지 않음. P: 환자 상태 정확한 정보 확인 필요."
+        },
+        "raw_output": "{\"visit_purpose\":[\"약 처방\"],\"symptom_change\":\"잘 모르겠음\",\"document_type\":[],\"document_destination\":[],\"patient_present\":false,\"guardian_only\":true,\"subjective_summary\":\"보호자만 내원. 환자는 동행하지 않았으며 환자의 상태에 대해 보호자가 직접 확인하지 못해 잘 모르겠다고 설명함. 약 처방을 위해 방문함.\",\"requested_consultation\":null,\"soap_summary\":\"S: 보호자 단독 내원, 환자 상태 정확히 모름. O: 해당 없음(환자 미내원). A: 진단/치료 방침 생성하지 않음. P: 환자 상태 정확한 정보 확인 필요.\"}",
+        "error": null,
+        "usage": {
+          "input_tokens": 1266,
+          "output_tokens": 147,
+          "total_tokens": 1413
+        }
+      },
+      {
+        "case_id": "case_018",
+        "disease_context": "뇌전증",
+        "split": "development",
+        "input": "저기 애가 이번에 수학여행을 가는데 학교에서 약 먹는 거 때문에 서류를 하나 해오라 하더라고요. 뭐라더라, 진단서인지 소견서인지... 아무튼 학교 제출용이요. 애는 학교 갔고 저만 왔어요. 발작은 요즘 없었어요.",
+        "gold": {
+          "visit_purpose": [
+            "서류 발급"
+          ],
+          "symptom_change": "비슷함",
+          "document_type": [
+            "기타/종류 모름"
+          ],
+          "document_destination": [
+            "직장/학교"
+          ],
+          "patient_present": false,
+          "guardian_only": true,
+          "subjective_summary": "보호자만 내원. 수학여행 관련 학교 제출용 서류가 필요하나 서류 종류는 확실하지 않음. 최근 발작은 없었다고 함.",
+          "requested_consultation": null,
+          "soap_summary": "S: 보호자 단독 내원, 학교 제출용 서류 요청(종류 불확실), 발작 없음. O: 해당 없음(환자 미내원). A: 진단/치료 방침 생성하지 않음. P: 학교 요구 서류 종류 확인 필요."
+        },
+        "prediction": {
+          "visit_purpose": [
+            "서류 발급"
+          ],
+          "document_type": [
+            "기타/종류 모름"
+          ],
+          "document_destination": [
+            "직장/학교"
+          ],
+          "symptom_change": "비슷함",
+          "patient_present": false,
+          "guardian_only": true,
+          "subjective_summary": "보호자만 내원. 환자는 학교에 가있음. 최근 발작은 없었음. 학교 제출용 약 복용 관련 서류가 필요한데 서류 종류는 진단서인지 소견서인지 불분명함.",
+          "requested_consultation": null,
+          "soap_summary": "S: 보호자 단독 내원, 환자 학교에 있음. 발작 최근 없음. O: 해당 없음(환자 미내원). A: 진단/치료 방침 생성하지 않음. P: 서류 종류 확인 필요."
+        },
+        "raw_output": "{\n  \"visit_purpose\": [\"서류 발급\"],\n  \"symptom_change\": \"비슷함\",\n  \"document_type\": [\"기타/종류 모름\"],\n  \"document_destination\": [\"직장/학교\"],\n  \"patient_present\": false,\n  \"guardian_only\": true,\n  \"subjective_summary\": \"보호자만 내원. 환자는 학교에 가있음. 최근 발작은 없었음. 학교 제출용 약 복용 관련 서류가 필요한데 서류 종류는 진단서인지 소견서인지 불분명함.\",\n  \"requested_consultation\": null,\n  \"soap_summary\": \"S: 보호자 단독 내원, 환자 학교에 있음. 발작 최근 없음. O: 해당 없음(환자 미내원). A: 진단/치료 방침 생성하지 않음. P: 서류 종류 확인 필요.\"\n}",
+        "error": null,
+        "usage": {
+          "input_tokens": 1291,
+          "output_tokens": 192,
+          "total_tokens": 1483
+        }
+      },
+      {
+        "case_id": "case_019",
+        "disease_context": "치매",
+        "split": "development",
+        "input": "오늘 좀 할 게 많아요. 지난주에 한 MRI 결과도 들어야 하고, 어머니 약도 타야 하고, 주간보호센터에 낼 소견서도 있고요. 어머니는 요즘 좀 가라앉으셨는지 말수가 줄었어요. 같이 왔습니다.",
+        "gold": {
+          "visit_purpose": [
+            "검사결과 확인",
+            "약 처방",
+            "서류 발급",
+            "증상 상담"
+          ],
+          "symptom_change": "새 증상 있음",
+          "document_type": [
+            "소견서"
+          ],
+          "document_destination": [
+            "타 의료기관/요양기관"
+          ],
+          "patient_present": true,
+          "guardian_only": false,
+          "subjective_summary": "환자와 보호자 함께 내원. 검사 결과 확인, 약 처방, 주간보호센터 제출용 소견서를 요청함. 말수가 줄어드는 변화가 새로 나타났다고 보호자가 전달함.",
+          "requested_consultation": "말수가 줄어든 변화에 대해 상담하고 싶어함",
+          "soap_summary": "S: 환자·보호자 함께 내원, 말수 감소 새로 관찰, 결과 확인·처방·소견서 요청. O: 해당 없음(문진 단계). A: 진단/치료 방침 생성하지 않음. P: 검사 결과 안내, 소견서 발급, 기분·의욕 변화 진료 중 확인 필요(약 부작용 가능성 포함)."
+        },
+        "prediction": {
+          "visit_purpose": [
+            "약 처방",
+            "서류 발급",
+            "검사결과 확인"
+          ],
+          "document_type": [
+            "소견서"
+          ],
+          "document_destination": [
+            "타 의료기관/요양기관"
+          ],
+          "symptom_change": "나빠짐",
+          "patient_present": true,
+          "guardian_only": false,
+          "subjective_summary": "환자와 보호자가 동행. MRI 검사 결과 확인 예정이며, 약 처방과 주간보호센터에 제출할 소견서 발급을 위해 내원함. 환자의 말수가 줄어든 상태임.",
+          "requested_consultation": null,
+          "soap_summary": "S: 환자와 보호자 동석, 말수 감소 관찰됨. O: 해당 없음. A: 진단/치료 방침 생성하지 않음. P: 없음."
+        },
+        "raw_output": "{\"visit_purpose\":[\"약 처방\",\"서류 발급\",\"검사결과 확인\"],\"symptom_change\":\"나빠짐\",\"document_type\":[\"소견서\"],\"document_destination\":[\"타 의료기관/요양기관\"],\"patient_present\":true,\"guardian_only\":false,\"subjective_summary\":\"환자와 보호자가 동행. MRI 검사 결과 확인 예정이며, 약 처방과 주간보호센터에 제출할 소견서 발급을 위해 내원함. 환자의 말수가 줄어든 상태임.\",\"requested_consultation\":null,\"soap_summary\":\"S: 환자와 보호자 동석, 말수 감소 관찰됨. O: 해당 없음. A: 진단/치료 방침 생성하지 않음. P: 없음.\"}",
+        "error": null,
+        "usage": {
+          "input_tokens": 1282,
+          "output_tokens": 163,
+          "total_tokens": 1445
+        }
+      },
+      {
+        "case_id": "case_020",
+        "disease_context": "뇌전증",
+        "split": "development",
+        "input": "지난번에 떼 간 진단서가 회사에서 양식이 안 맞는다고 다시 해오래요. 아니 무슨 서류를 두 번씩 떼게 하는지 모르겠네. 회사 제출용으로 다시 부탁드립니다. 발작은 없었고요, 혼자 왔어요.",
+        "gold": {
+          "visit_purpose": [
+            "서류 발급"
+          ],
+          "symptom_change": "비슷함",
+          "document_type": [
+            "진단서"
+          ],
+          "document_destination": [
+            "직장/학교"
+          ],
+          "patient_present": true,
+          "guardian_only": false,
+          "subjective_summary": "환자 본인 내원. 회사 제출용 진단서 재발급을 요청함(양식 문제로 재요청). 발작은 없었다고 함.",
+          "requested_consultation": null,
+          "soap_summary": "S: 환자 본인 내원, 진단서 재발급 요청(회사 양식 문제), 발작 없음. O: 해당 없음(문진 단계). A: 진단/치료 방침 생성하지 않음. P: 회사 요구 양식 확인 후 진단서 재발급."
+        },
+        "prediction": {
+          "visit_purpose": [
+            "서류 발급"
+          ],
+          "document_type": [
+            "진단서"
+          ],
+          "document_destination": [
+            "직장/학교"
+          ],
+          "symptom_change": "비슷함",
+          "patient_present": true,
+          "guardian_only": false,
+          "subjective_summary": "환자가 혼자 내원하였으며, 이전에 발급한 진단서가 회사 양식에 맞지 않아 동일한 진단서를 회사 제출용으로 다시 발급받고자 함. 발작은 없었다고 함.",
+          "requested_consultation": null,
+          "soap_summary": "S: 환자 혼자 내원, 발작 없음, 진단서 재발급 요청. O: 해당 없음. A: 진단/치료 방침 생성하지 않음. P: 없음."
+        },
+        "raw_output": "{\n  \"visit_purpose\": [\"서류 발급\"],\n  \"symptom_change\": \"비슷함\",\n  \"document_type\": [\"진단서\"],\n  \"document_destination\": [\"직장/학교\"],\n  \"patient_present\": true,\n  \"guardian_only\": false,\n  \"subjective_summary\": \"환자가 혼자 내원하였으며, 이전에 발급한 진단서가 회사 양식에 맞지 않아 동일한 진단서를 회사 제출용으로 다시 발급받고자 함. 발작은 없었다고 함.\",\n  \"requested_consultation\": null,\n  \"soap_summary\": \"S: 환자 혼자 내원, 발작 없음, 진단서 재발급 요청. O: 해당 없음. A: 진단/치료 방침 생성하지 않음. P: 없음.\"\n}",
+        "error": null,
+        "usage": {
+          "input_tokens": 1281,
+          "output_tokens": 178,
+          "total_tokens": 1459
+        }
+      },
+      {
+        "case_id": "case_021",
+        "disease_context": "뇌전증",
+        "split": "development",
+        "input": "그... 약이 좀 남았는데요, 이번에 여행을 가게 돼서 약을 좀 길게, 그러니까 두 달 치? 길게 받을 수 있나 해서요. 발작은 없었어요. 혼자 왔어요.",
+        "gold": {
+          "visit_purpose": [
+            "약 처방"
+          ],
+          "symptom_change": "비슷함",
+          "document_type": [],
+          "document_destination": [],
+          "patient_present": true,
+          "guardian_only": false,
+          "subjective_summary": "환자 본인 내원. 여행으로 두 달 치 장기 처방이 가능한지 문의함. 발작은 없었다고 함.",
+          "requested_consultation": "여행 기간에 맞춘 장기 처방이 가능한지 문의함",
+          "soap_summary": "S: 환자 본인 내원, 여행으로 장기 처방 요청, 발작 없음. O: 해당 없음(문진 단계). A: 진단/치료 방침 생성하지 않음. P: 처방 일수 조정 가능 여부 진료 중 확인."
+        },
+        "prediction": {
+          "visit_purpose": [
+            "약 처방"
+          ],
+          "document_type": [],
+          "document_destination": [],
+          "symptom_change": "비슷함",
+          "patient_present": true,
+          "guardian_only": false,
+          "subjective_summary": "환자가 혼자 내원하였으며, 최근 발작은 없었고 여행을 가서 두 달 치 약을 길게 받고 싶어함.",
+          "requested_consultation": "두 달 치 약을 길게 받을 수 있는지 상담하고 싶어함",
+          "soap_summary": "S: 환자 혼자 내원, 발작 없음. O: 해당 없음. A: 진단/치료 방침 생성하지 않음. P: 약 처방 기간 연장 가능 여부 확인 필요."
+        },
+        "raw_output": "{\"visit_purpose\":[\"약 처방\"],\"symptom_change\":\"비슷함\",\"document_type\":[],\"document_destination\":[],\"patient_present\":true,\"guardian_only\":false,\"subjective_summary\":\"환자가 혼자 내원하였으며, 최근 발작은 없었고 여행을 가서 두 달 치 약을 길게 받고 싶어함.\",\"requested_consultation\":\"두 달 치 약을 길게 받을 수 있는지 상담하고 싶어함\",\"soap_summary\":\"S: 환자 혼자 내원, 발작 없음. O: 해당 없음. A: 진단/치료 방침 생성하지 않음. P: 약 처방 기간 연장 가능 여부 확인 필요.\"}",
+        "error": null,
+        "usage": {
+          "input_tokens": 1269,
+          "output_tokens": 145,
+          "total_tokens": 1414
+        }
+      },
+      {
+        "case_id": "case_022",
+        "disease_context": "치매",
+        "split": "development",
+        "input": "어머니를 요양병원으로 모시려고 하는데 거기서 진료기록을 떼오라고 해서요. 어머니는 거동이 안 돼서 제가 왔어요. 상태는 비슷하세요.",
+        "gold": {
+          "visit_purpose": [
+            "서류 발급"
+          ],
+          "symptom_change": "비슷함",
+          "document_type": [
+            "기록/결과 사본"
+          ],
+          "document_destination": [
+            "타 의료기관/요양기관"
+          ],
+          "patient_present": false,
+          "guardian_only": true,
+          "subjective_summary": "보호자만 내원. 요양병원 전원을 위한 진료기록 사본을 요청함. 환자 상태는 비슷하다고 함.",
+          "requested_consultation": null,
+          "soap_summary": "S: 보호자 단독 내원, 요양병원 제출용 기록 사본 요청, 상태 비슷함. O: 해당 없음(환자 미내원). A: 진단/치료 방침 생성하지 않음. P: 기록 사본 발급 절차 확인."
+        },
+        "prediction": {
+          "visit_purpose": [
+            "서류 발급"
+          ],
+          "document_type": [
+            "기록/결과 사본"
+          ],
+          "document_destination": [
+            "타 의료기관/요양기관"
+          ],
+          "symptom_change": "비슷함",
+          "patient_present": false,
+          "guardian_only": true,
+          "subjective_summary": "보호자가 거동이 불편한 어머니 대신 내원했으며, 어머니 상태는 비슷하다고 함. 요양병원 제출용 진료기록 사본이 필요함.",
+          "requested_consultation": null,
+          "soap_summary": "S: 보호자 단독 내원, 환자 상태 비슷함을 보호자가 전달. O: 해당 없음(환자 미내원). A: 진단/치료 방침 생성하지 않음. P: 없음."
+        },
+        "raw_output": "{\"visit_purpose\":[\"서류 발급\"],\"symptom_change\":\"비슷함\",\"document_type\":[\"기록/결과 사본\"],\"document_destination\":[\"타 의료기관/요양기관\"],\"patient_present\":false,\"guardian_only\":true,\"subjective_summary\":\"보호자가 거동이 불편한 어머니 대신 내원했으며, 어머니 상태는 비슷하다고 함. 요양병원 제출용 진료기록 사본이 필요함.\",\"requested_consultation\":null,\"soap_summary\":\"S: 보호자 단독 내원, 환자 상태 비슷함을 보호자가 전달. O: 해당 없음(환자 미내원). A: 진단/치료 방침 생성하지 않음. P: 없음.\"}",
+        "error": null,
+        "usage": {
+          "input_tokens": 1265,
+          "output_tokens": 161,
+          "total_tokens": 1426
+        }
+      },
+      {
+        "case_id": "case_023",
+        "disease_context": "파킨슨병",
+        "split": "development",
+        "input": "다음 주에 다른 병원 예약이 있어서 검사 결과지가 필요해요. 결과는 지난번에 이미 들었고요, 종이만 받아 가면 됩니다. 혼자 왔어요.",
+        "gold": {
+          "visit_purpose": [
+            "서류 발급"
+          ],
+          "symptom_change": null,
+          "document_type": [
+            "기록/결과 사본"
+          ],
+          "document_destination": [
+            "타 의료기관/요양기관"
+          ],
+          "patient_present": true,
+          "guardian_only": false,
+          "subjective_summary": "환자 본인 내원. 타 병원 제출용 검사 결과지 사본을 요청함. 결과 설명은 이미 들어 추가 확인을 원하지 않음.",
+          "requested_consultation": null,
+          "soap_summary": "S: 환자 본인 내원, 결과지 사본만 요청(결과 상담 불필요). O: 해당 없음(문진 단계). A: 진단/치료 방침 생성하지 않음. P: 결과지 사본 발급."
+        },
+        "prediction": {
+          "visit_purpose": [
+            "서류 발급",
+            "검사결과 확인"
+          ],
+          "document_type": [
+            "기록/결과 사본"
+          ],
+          "document_destination": [
+            "타 의료기관/요양기관"
+          ],
+          "symptom_change": null,
+          "patient_present": true,
+          "guardian_only": false,
+          "subjective_summary": "환자가 다음 주 다른 병원 예약으로 검사 결과지의 종이 사본이 필요하다고 함. 결과는 이미 들었다고 함.",
+          "requested_consultation": null,
+          "soap_summary": "S: 환자가 혼자 내원하여 검사 결과지 사본을 요청함. O: 해당 없음. A: 진단/치료 방침 생성하지 않음. P: 없음."
+        },
+        "raw_output": "{\"visit_purpose\":[\"서류 발급\",\"검사결과 확인\"],\"symptom_change\":null,\"document_type\":[\"기록/결과 사본\"],\"document_destination\":[\"타 의료기관/요양기관\"],\"patient_present\":true,\"guardian_only\":false,\"subjective_summary\":\"환자가 다음 주 다른 병원 예약으로 검사 결과지의 종이 사본이 필요하다고 함. 결과는 이미 들었다고 함.\",\"requested_consultation\":null,\"soap_summary\":\"S: 환자가 혼자 내원하여 검사 결과지 사본을 요청함. O: 해당 없음. A: 진단/치료 방침 생성하지 않음. P: 없음.\"}",
+        "error": null,
+        "usage": {
+          "input_tokens": 1258,
+          "output_tokens": 145,
+          "total_tokens": 1403
+        }
+      }
+    ]
+  }
+}

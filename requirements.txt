@@ -3,6 +3,7 @@ openai>=2.0
 python-dotenv>=1.0
 pandas>=2.0
 matplotlib>=3.8
+langsmith>=0.4
 jupyterlab>=4.0
 
 # 선택: frontend/는 순수 HTML/CSS/JS라 Python 의존성이 없음 (python3 -m http.server만 있으면 됨)
