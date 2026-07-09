@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>신경과 재진 AI 문진 Lab</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
+  </head>
+  <body>
+    <main class="app-shell">
+      <header class="topbar">
+        <div>
+          <p class="eyebrow">Flask Lab · 신경과 재진 입력 구조 검증</p>
+          <h1>신경과 재진 AI 문진 Lab</h1>
+        </div>
+      </header>
+
+      <form class="card" method="post" action="{{ url_for('result') }}">
+        <section>
+          <p class="progress">1 / 6</p>
+          <h2>검증 케이스</h2>
+          <div class="grid">
+            {% for case in cases %}
+              <label class="option-card">
+                <input type="radio" name="case_id" value="{{ case.id }}" {% if loop.first %}checked{% endif %} />
+                <span>
+                  <strong>{{ case.label }} ({{ case.age }}세)</strong><br />
+                  {{ case.department }} · {{ case.doctor }} · {{ case.time }}<br />
+                  <em>{{ case.tests_ready }}</em>
+                </span>
+              </label>
+            {% endfor %}
+          </div>
+        </section>
+
+        <section>
+          <p class="progress">2 / 6</p>
+          <h2>검증용 입력</h2>
+          <label class="field-label">
+            질환군 또는 진료 맥락
+            <textarea name="disease_context" class="textarea small" placeholder="예: 신경과 재진, 인지저하 추적, 이상운동 상담 등"></textarea>
+          </label>
+          <label class="field-label">
+            케이스 메모
+            <textarea name="case_memo" class="textarea" placeholder="비식별·합성 문장으로 입력하세요. 보호자 설명, 증상 변화, 약 관련 내용, 서류 요청 등을 자유롭게 적습니다."></textarea>
+          </label>
+        </section>
+
+        <section>
+          <p class="progress">3 / 6</p>
+          <h2>오늘 진료 목적</h2>
+          <div class="grid two">
+            {% for option in purpose_options %}
+              <label class="check-card">
+                <input type="checkbox" name="purposes" value="{{ option }}" />
+                <span>{{ option }}</span>
+              </label>
+            {% endfor %}
+          </div>
+        </section>
+
+        <section>
+          <p class="progress">4 / 6</p>
+          <h2>증상 변화</h2>
+          <div class="grid two">
+            {% for option in symptom_change_options %}
+              <label class="check-card">
+                <input type="radio" name="symptom_change" value="{{ option }}" {% if option == "비슷함" %}checked{% endif %} />
+                <span>{{ option }}</span>
+              </label>
+            {% endfor %}
+          </div>
+          <label class="field-label">
+            진료 때 전달할 내용
+            <textarea name="symptom_text" class="textarea" placeholder="증상 변화, 약 관련 내용, 보호자 설명, 진료 때 확인하고 싶은 내용을 자유롭게 입력하세요."></textarea>
+          </label>
+        </section>
+
+        <section>
+          <p class="progress">5 / 6</p>
+          <h2>서류와 제출처</h2>
+          <h3>서류 유형</h3>
+          <div class="grid two">
+            {% for option in document_options %}
+              <label class="check-card">
+                <input type="checkbox" name="documents" value="{{ option }}" />
+                <span>{{ option }}</span>
+              </label>
+            {% endfor %}
+          </div>
+
+          <h3>제출처</h3>
+          <div class="grid two">
+            {% for option in destination_options %}
+              <label class="check-card">
+                <input type="checkbox" name="destinations" value="{{ option }}" />
+                <span>{{ option }}</span>
+              </label>
+            {% endfor %}
+          </div>
+        </section>
+
+        <section>
+          <p class="progress">6 / 6</p>
+          <h2>방문 형태</h2>
+          <div class="grid">
+            {% for option in visit_type_options %}
+              <label class="check-card">
+                <input type="radio" name="visit_type" value="{{ option }}" {% if loop.first %}checked{% endif %} />
+                <span>{{ option }}</span>
+              </label>
+            {% endfor %}
+          </div>
+        </section>
+
+        <div class="actions">
+          <button class="primary-button" type="submit">구조화 요약 생성</button>
+        </div>
+      </form>
+    </main>
+  </body>
+</html>

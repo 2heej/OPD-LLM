@@ -1,0 +1,11 @@
+# 핵심: 노트북 실험(LLM 호출, 평가, 시각화)에 필요한 패키지
+openai>=2.0
+python-dotenv>=1.0
+pandas>=2.0
+matplotlib>=3.8
+jupyterlab>=4.0
+
+# 선택: frontend/는 순수 HTML/CSS/JS라 Python 의존성이 없음 (python3 -m http.server만 있으면 됨)
+
+# 선택, 현재 범위 밖: legacy_flask/ 참고용 백엔드 후보를 실행해볼 때만 필요
+Flask>=3.0

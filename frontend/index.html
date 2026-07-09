@@ -1,0 +1,206 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>신경과 재진 AI 문진 — UI 프로토타입</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <main class="app-shell">
+      <header class="topbar">
+        <div>
+          <p class="eyebrow">포트폴리오 데모 · HTML/CSS/JS 프로토타입</p>
+          <h1>신경과 재진 외래 AI 문진</h1>
+          <p class="subtitle">
+            치매·파킨슨병·뇌전증 재진 예약 환자를 대상으로 진료 전 문진을 입력하는 화면입니다.
+            여기서 만든 입력은 실제 서버로 전송되지 않으며, LLM 프롬프트 평가(<code>NLP_LLM_Prompt_Evaluation.ipynb</code>)에서
+            사용하는 것과 동일한 형식의 JSON 미리보기만 생성합니다.
+          </p>
+        </div>
+      </header>
+
+      <form id="intake-form" class="card">
+        <section>
+          <p class="progress">1 / 5</p>
+          <h2>질환군 / 진료 맥락</h2>
+          <div class="grid two" id="disease-context-group">
+            <label class="option-card">
+              <input type="radio" name="disease_context" value="치매" checked />
+              <span>치매</span>
+            </label>
+            <label class="option-card">
+              <input type="radio" name="disease_context" value="파킨슨병" />
+              <span>파킨슨병</span>
+            </label>
+            <label class="option-card">
+              <input type="radio" name="disease_context" value="뇌전증" />
+              <span>뇌전증</span>
+            </label>
+          </div>
+        </section>
+
+        <section>
+          <p class="progress">2 / 5</p>
+          <h2>오늘 진료 목적 (복수 선택)</h2>
+          <div class="grid two" id="purpose-group">
+            <label class="check-card">
+              <input type="checkbox" name="visit_purpose" value="약 처방" />
+              <span>약 처방</span>
+            </label>
+            <label class="check-card">
+              <input type="checkbox" name="visit_purpose" value="증상 상담" />
+              <span>증상 상담</span>
+            </label>
+            <label class="check-card">
+              <input type="checkbox" name="visit_purpose" value="서류 발급" />
+              <span>서류 발급</span>
+            </label>
+            <label class="check-card">
+              <input type="checkbox" name="visit_purpose" value="검사결과 확인" />
+              <span>검사결과 확인</span>
+            </label>
+          </div>
+        </section>
+
+        <!-- 조건부 섹션: '증상 상담' 또는 '약 처방' 선택 시에만 표시 -->
+        <section id="symptom-section" class="conditional" hidden>
+          <p class="progress">추가 질문</p>
+          <h2>증상 변화</h2>
+          <div class="grid two">
+            <label class="check-card">
+              <input type="radio" name="symptom_change" value="좋아짐" />
+              <span>좋아짐</span>
+            </label>
+            <label class="check-card">
+              <input type="radio" name="symptom_change" value="비슷함" checked />
+              <span>비슷함</span>
+            </label>
+            <label class="check-card">
+              <input type="radio" name="symptom_change" value="나빠짐" />
+              <span>나빠짐</span>
+            </label>
+            <label class="check-card">
+              <input type="radio" name="symptom_change" value="새 증상 있음" />
+              <span>새 증상 있음</span>
+            </label>
+            <label class="check-card">
+              <input type="radio" name="symptom_change" value="잘 모르겠음" />
+              <span>잘 모르겠음</span>
+            </label>
+          </div>
+          <label class="field-label">
+            오늘 상담받고 싶은 내용
+            <textarea
+              name="requested_consultation"
+              class="textarea"
+              placeholder="예: 최근 손 떨림이 오후에 심해지는 것 같아서 여쭤보고 싶어요."
+            ></textarea>
+          </label>
+          <label class="field-label">
+            환자 또는 보호자가 전달하는 내용 (원문 그대로)
+            <textarea
+              name="subjective_summary_raw"
+              class="textarea"
+              placeholder="비식별·합성 문장으로 자유롭게 입력하세요. 이 원문이 LLM 구조화 요약의 입력이 됩니다."
+            ></textarea>
+          </label>
+        </section>
+
+        <!-- 조건부 섹션: '서류 발급' 선택 시에만 표시 -->
+        <section id="document-section" class="conditional" hidden>
+          <p class="progress">추가 질문</p>
+          <h2>서류와 제출처</h2>
+          <h3>서류 유형</h3>
+          <div class="grid two">
+            <label class="check-card">
+              <input type="checkbox" name="document_type" value="진단서" />
+              <span>진단서</span>
+            </label>
+            <label class="check-card">
+              <input type="checkbox" name="document_type" value="소견서" />
+              <span>소견서</span>
+            </label>
+            <label class="check-card">
+              <input type="checkbox" name="document_type" value="통원사실증명서(진료확인서)" />
+              <span>통원사실증명서(진료확인서)</span>
+            </label>
+            <label class="check-card">
+              <input type="checkbox" name="document_type" value="기록/결과 사본" />
+              <span>기록/결과 사본</span>
+            </label>
+            <label class="check-card">
+              <input type="checkbox" name="document_type" value="개인 양식" />
+              <span>개인 양식</span>
+            </label>
+            <label class="check-card">
+              <input type="checkbox" name="document_type" value="기타/종류 모름" />
+              <span>기타/종류 모름</span>
+            </label>
+          </div>
+          <h3>제출처</h3>
+          <div class="grid two">
+            <label class="check-card">
+              <input type="checkbox" name="document_destination" value="보험" />
+              <span>보험</span>
+            </label>
+            <label class="check-card">
+              <input type="checkbox" name="document_destination" value="직장/학교" />
+              <span>직장/학교</span>
+            </label>
+            <label class="check-card">
+              <input type="checkbox" name="document_destination" value="공공기관" />
+              <span>공공기관</span>
+            </label>
+            <label class="check-card">
+              <input type="checkbox" name="document_destination" value="타 의료기관" />
+              <span>타 의료기관</span>
+            </label>
+            <label class="check-card">
+              <input type="checkbox" name="document_destination" value="개인 보관" />
+              <span>개인 보관</span>
+            </label>
+            <label class="check-card">
+              <input type="checkbox" name="document_destination" value="제출처 모름" />
+              <span>제출처 모름</span>
+            </label>
+          </div>
+        </section>
+
+        <section>
+          <p class="progress">3 / 5</p>
+          <h2>오늘 방문 형태</h2>
+          <div class="grid" id="visit-type-group">
+            <label class="option-card">
+              <input type="radio" name="visit_type" value="patient" checked />
+              <span>환자 본인이 방문</span>
+            </label>
+            <label class="option-card">
+              <input type="radio" name="visit_type" value="both" />
+              <span>환자와 보호자가 함께 방문</span>
+            </label>
+            <label class="option-card">
+              <input type="radio" name="visit_type" value="guardian_only" />
+              <span>보호자만 방문</span>
+            </label>
+          </div>
+        </section>
+
+        <div class="actions">
+          <button class="primary-button" type="submit">문진 입력 JSON 미리보기</button>
+        </div>
+      </form>
+
+      <section class="card" id="preview-card" hidden>
+        <h2>LLM 입력용 JSON 미리보기</h2>
+        <p class="progress">
+          이 화면은 실제로 서버나 LLM을 호출하지 않습니다. 노트북(<code>NLP_LLM_Prompt_Evaluation.ipynb</code>)에서
+          동일한 필드로 프롬프트 v0~v3를 평가합니다.
+        </p>
+        <pre id="preview-output"></pre>
+      </section>
+    </main>
+
+    <script src="script.js"></script>
+  </body>
+</html>

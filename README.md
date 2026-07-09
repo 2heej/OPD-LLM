@@ -1,128 +1,167 @@
-# OPD-LLM
-# 신경과 재진 외래 AI 문진 — Jupyter 실험 + Flask 데모
+# 신경과 재진 외래 AI 문진 — LLM 프롬프트 평가 기반 SOAP 요약
 
-## 목적
+## 1. 문제 정의
 
-현재 주 작업물은 [NLP_LLM_Prompt_Evaluation.ipynb](/Users/mac/Documents/Codex/2026-06-22/new-chat/outputs/outpatient-ai-lab/NLP_LLM_Prompt_Evaluation.ipynb)입니다. 코랩·캐글과 같은 셀 실행 방식으로 합성 사례, 프롬프트 v0~v3, 평가 지표와 오류 분석을 확인합니다.
+대학병원 신경과 외래에서 근무하며 반복적으로 관찰한 문제는 다음과 같다.
 
-Flask는 LLM 구조화 결과가 외래 문진 화면과 SOAP 초안에 어떻게 적용되는지 보여주는 데모로 유지합니다.
+- **정보 누락**: 환자·보호자가 진료 전에 전달한 내용(약 관련 변화, 증상 변화, 상담 요청)이 진료 중 다시 처음부터 확인되며 시간이 소요된다.
+- **서류 요청 지연**: 서류 종류(진단서/소견서/통원확인서 등)와 제출처가 명확하지 않은 채로 접수되어 발급이 지연된다.
+- **보호자 단독 내원**: 환자 본인이 오지 못하고 보호자만 내원하는 경우, 이 사실이 진료 전 단계에서 명확히 전달되지 않아 진료·서류 발급 조건 확인이 늦어진다.
+- **상담 내용 누락**: 환자·보호자가 오늘 상담받고 싶다고 미리 밝힌 내용이 접수 단계에서 기록되지 않아 진료 중 재차 질문해야 한다.
 
-기본 실행 방향은 LLM 기반 요약입니다. OpenAI API 키가 있으면 LLM 요약을 우선 사용하고, API 키가 없거나 호출에 실패하면 앱이 멈추지 않도록 규칙 기반 요약으로 대체됩니다.
+이 프로젝트는 위 네 가지 문제를 LLM 기반 구조화 요약으로 완화할 수 있는지를, **실제 서비스 구축이 아니라 프롬프트 설계·평가 관점**에서 검증하는 NLP/LLM 포트폴리오 프로젝트다. 합성 문진 케이스 10개에 대해 프롬프트 v0~v3의 정보 추출 성능을 정량 지표와 오류 분석으로 비교한다.
 
-## 파일 구성
+## 2. 대상 범위
 
-| 파일·폴더 | 역할 |
-|---|---|
-| `NLP_LLM_Prompt_Evaluation.ipynb` | 주 실험 노트북 |
-| `eval_cases.json` | 비식별 합성 사례와 정답 |
-| `prompts.py` | 프롬프트 v0~v3 |
-| `app.py` | Flask 데모 서버 |
-| `templates/` | 입력·결과 화면 |
-| `static/` | 화면 디자인 |
-| `requirements.txt` | 필요한 Python 패키지 |
-| `.env.example` | API 키 설정 예시 |
+- 신경과 **재진 예약** 환자
+- 질환군: **치매, 파킨슨병, 뇌전증**
+- 문진 시점: 진료 전 접수 단계 (진료 중 대화 아님)
 
-## 실행 방법
+## 3. 제외 범위
 
-### 1. Jupyter Notebook 실행
+- 말초신경질환 등 위 세 질환군 외 신경과 질환
+- 실제 환자 개인정보, 실제 EMR 연동
+- 실제 진단, 처방, 치료 방침 생성
+- 실제 응급도·위험도 판단
+- 프로덕션 수준의 서비스 배포(Flask는 후보 예시로만 보관, 아래 6번 참고)
+
+## 4. 기술 스택
+
+| 영역 | 스택 | 역할 |
+|---|---|---|
+| LLM 실험/평가 (핵심) | Python, Jupyter, OpenAI API, pandas, matplotlib | 프롬프트 v0~v3 비교, 지표 계산, 오류 분석 |
+| 문진 UI 프로토타입 | HTML, CSS, Vanilla JS | 환자용 문진 입력 화면 데모 (서버 연동 없음) |
+| (참고용, 범위 밖) | Flask | 향후 UI–LLM 연결 시 백엔드 후보 예시 |
+
+## 5. 파일 구조
+
+```
+outpatient-ai-lab/
+├── NLP_LLM_Prompt_Evaluation.ipynb   # 핵심 산출물: LLM 호출·프롬프트 비교·지표·오류분석
+├── eval_cases.json                    # 비식별 합성 문진 케이스 10개 + 정답(gold)
+├── prompts.py                         # 프롬프트 v0~v3, 허용값, 필드 정의
+├── frontend/                           # 문진 입력 UI 프로토타입 (HTML/CSS/JS, 서버 없음)
+│   ├── index.html
+│   ├── style.css
+│   └── script.js
+├── results/                            # 노트북 실행 결과 저장 위치
+│   ├── metrics_summary.csv            # 버전별 지표 요약 (매 실행 시 최신 결과로 갱신)
+│   ├── error_analysis.csv             # 최종 버전의 사례별 오류 분석
+│   └── raw/                            # 실행마다 타임스탬프로 남는 원본 응답(JSON)
+├── legacy_flask/                       # 참고용, 현재 범위 밖 (아래 6번 참고)
+│   ├── app.py
+│   ├── templates/
+│   └── static/
+├── requirements.txt
+├── .env.example
+└── .gitignore
+```
+
+## 6. Flask(legacy_flask/)에 대하여
+
+`legacy_flask/`는 문진 UI와 LLM 구조화 결과를 실제 서비스로 연결할 때 백엔드 후보가 될 수 있음을 보여주는 예시 코드다. **현재 개발·평가 대상이 아니며 유지보수하지 않는다.** 이 프로젝트의 핵심 산출물은 어디까지나 노트북의 프롬프트 평가와 `frontend/`의 UI 프로토타입이다.
+
+## 7. 실행 방법
+
+### 7.1 Jupyter Notebook 실행 (핵심)
 
 ```bash
-cd /Users/mac/Documents/Codex/2026-06-22/new-chat/outputs/outpatient-ai-lab
-source .venv/bin/activate
+cd outpatient-ai-lab
+python3 -m venv .venv && source .venv/bin/activate
 pip install -r requirements.txt
 jupyter lab
 ```
 
-브라우저의 Jupyter 화면에서 `NLP_LLM_Prompt_Evaluation.ipynb`를 선택합니다. 위에서부터 셀을 한 개씩 실행합니다.
+`NLP_LLM_Prompt_Evaluation.ipynb`를 열고 위에서부터 셀을 순서대로 실행한다.
 
-노트북 결과 확인 위치:
+1. `.env.example`을 복사해 `.env`를 만들고 `OPENAI_API_KEY`를 입력한다(로컬 Jupyter 기준).
+2. 코랩에서 실행할 때는 `NLP_LLM_Prompt_Evaluation.ipynb`, `eval_cases.json`, `prompts.py` 세 파일을 업로드하고, API 키 입력 셀에서 직접 붙여넣는다.
+3. 실행 순서: 환경설정 → API 키 → 사례/프롬프트 확인 → smoke test(1건) → 개발 세트 v0~v3 비교 → 오류 분석 → 최종 버전 선정 → 시험 세트 평가.
 
-- 실행 직후: 각 코드 셀 아래
-- 버전별 지표: `metrics_table` 셀
-- 사례별 오류: `error_table` 셀
-- 저장 결과: `notebook_results` 폴더
+결과 저장 위치:
 
-코랩에서 실행할 때는 다음 세 파일을 코랩에 올립니다.
+- 버전별 지표 요약: `results/metrics_summary.csv`
+- 최종 버전 오류 분석: `results/error_analysis.csv`
+- 매 실행의 원본 응답: `results/raw/`
 
-- `NLP_LLM_Prompt_Evaluation.ipynb`
-- `eval_cases.json`
-- `prompts.py`
-
-노트북의 `코랩에서만 실행합니다` 셀에서 `eval_cases.json`과 `prompts.py`를 선택하면 됩니다.
-
-### 2. Flask 데모 실행
+### 7.2 문진 UI 프로토타입 확인 (데모)
 
 ```bash
-cd /Users/mac/Documents/Codex/2026-06-22/new-chat/outputs/outpatient-ai-lab
-source .venv/bin/activate
-python app.py
+cd outpatient-ai-lab/frontend
+python3 -m http.server 8600
 ```
 
-브라우저에서 아래 주소를 엽니다.
+브라우저에서 `http://127.0.0.1:8600`을 연다. 이 화면은 서버나 LLM을 호출하지 않고, 입력한 값을 노트북 프롬프트 입력과 같은 형식의 JSON으로 미리 보여주기만 한다.
 
-```text
-http://127.0.0.1:5000
-```
+## 8. 프롬프트 평가 방식
 
-## LLM 요약 사용 방법
+동일한 모델·동일한 합성 케이스에서 프롬프트만 바꿔가며 비교한다. 한 번에 한 요소만 바꾸는 것을 원칙으로 한다.
 
-1. `.env.example`을 복사해서 `.env` 파일을 만듭니다.
-2. `.env` 파일의 `OPENAI_API_KEY`에 본인 API 키를 입력합니다.
-3. 서버를 다시 실행합니다.
-
-```bash
-cp .env.example .env
-```
-
-`.env` 예시:
-
-```text
-OPENAI_API_KEY=여기에_API_키를_넣으세요
-OPENAI_MODEL=gpt-4.1-mini
-USE_LLM_SUMMARY=true
-```
-
-LLM을 잠시 끄고 규칙 기반 결과만 보고 싶으면 아래처럼 바꿉니다.
-
-```text
-USE_LLM_SUMMARY=false
-```
-
-## 먼저 만질 파일
-
-처음에는 `NLP_LLM_Prompt_Evaluation.ipynb`만 위에서부터 실행합니다. 평가 사례는 [eval_cases.json](/Users/mac/Documents/Codex/2026-06-22/new-chat/outputs/outpatient-ai-lab/eval_cases.json), 프롬프트 버전은 [prompts.py](/Users/mac/Documents/Codex/2026-06-22/new-chat/outputs/outpatient-ai-lab/prompts.py)에서 수정합니다. 파일을 수정한 뒤 노트북의 `사례와 프롬프트 불러오기` 셀부터 다시 실행합니다.
-
-우선순위:
-
-1. 노트북 환경 설정과 API 키 셀 실행
-2. `eval_cases.json`에서 개발 사례와 정답 검토
-3. v0 사례 1개 smoke test
-4. 개발 세트 v0~v3 평가
-5. 오류 분석과 프롬프트 수정
-6. 선정된 프롬프트의 시험 세트 평가
-7. Flask 데모 화면 확인
-
-## 코랩/캐글 감각으로 이해하기
-
-| 코랩/캐글 작업 | 현재 프로젝트에서 대응되는 부분 |
+| 버전 | 변경 내용 |
 |---|---|
-| 평가 사례와 정답 만들기 | `eval_cases.json` |
-| 프롬프트 버전 수정 | `prompts.py` |
-| 셀 단위 실행 | `NLP_LLM_Prompt_Evaluation.ipynb` |
-| 버전별 점수 비교 | 노트북의 `metrics_table` |
-| 오류 사례 확인 | 노트북의 `error_table` |
-| 결과 저장 | `notebook_results/` |
-| 적용 화면 확인 | Flask 데모 |
+| v0 | 기본 원칙 문구만 사용한 단순 요약형 |
+| v1 | 출력 필드와 허용값을 명시해 JSON 구조를 강제 |
+| v2 | 불확실성 처리 규칙 추가 (추정 금지, 미상/null 처리) |
+| v3 | 신경과 재진 외래 맥락 명시 + 서류/보호자/상담내용 누락 방지 규칙과 예시 추가 |
 
-## 현재 제외한 것
+기본 원칙(모든 버전 공통):
 
-- 실제 환자 개인정보
-- 실제 EMR 연동
-- 실제 대기시간 예측
-- 실제 진단/처방
-- 실제 응급도 판단
-- JavaScript 기반 동적 화면
+> 너는 신경과 재진 외래 진료 전 문진 내용을 정리하는 의료 코디네이터다.
+> 진단하거나 치료 방침을 제안하지 않는다.
+> 환자 또는 보호자가 말한 내용을 바탕으로 진료 전 확인에 필요한 정보를 구조화한다.
+> 확실하지 않은 내용은 추측하지 말고 '미상' 또는 원문 표현을 유지한다.
+> 반드시 지정된 JSON 형식으로만 출력한다.
 
-## 다음 단계
+### LLM이 추출하는 필드
 
-노트북에서 개발 세트 결과와 오류를 확인한 뒤 프롬프트를 수정합니다. 최종 프롬프트 하나를 시험 세트에서 평가하고, 측정값과 대표 오류를 포트폴리오에 기록합니다.
+| 필드 | 설명 |
+|---|---|
+| `visit_purpose` | 오늘 진료 목적 (복수 선택) |
+| `symptom_change` | 증상 변화 |
+| `document_type` | 요청 서류 종류 (복수 선택) |
+| `document_destination` | 서류 제출처 (복수 선택) |
+| `patient_present` | 환자 본인 내원 여부 |
+| `guardian_only` | 보호자만 내원했는지 여부 |
+| `subjective_summary` | 환자/보호자 발화의 구조화 요약 (진단 없음) |
+| `requested_consultation` | 오늘 상담받고 싶다고 밝힌 내용 |
+| `soap_summary` | 진단·치료 방침을 제외한 S/O/A/P 형식 요약 |
+
+## 9. 평가 지표 설명
+
+| 지표 | 설명 |
+|---|---|
+| Exact Match | 분류 필드(visit_purpose, symptom_change, document_type, document_destination, patient_present, guardian_only) 전체가 정답과 완전히 일치한 사례 비율 |
+| Field Accuracy | 위 분류 필드를 필드 단위로 쪼갰을 때의 평균 정확도 |
+| Micro Precision / Recall / F1 | 복수 선택 필드(visit_purpose, document_type, document_destination)를 토큰 단위로 합산한 정밀도/재현율/F1 |
+| JSON 성공률 | LLM 출력이 JSON으로 정상 파싱된 비율 |
+| 오류 유형 분석 | 정답과 다른 사례를 5개 유형으로 분류 |
+
+### 오류 유형 5종
+
+- **누락 오류**: 정답에 있는 값을 예측이 빠뜨림
+- **과잉 추론**: 입력에 없는 내용을 예측이 지어냄
+- **분류 오류**: 단일 값 필드를 다른 값으로 잘못 분류
+- **표현 오류**: 자유 서술 필드(subjective_summary, requested_consultation, soap_summary)의 내용·어투 문제 — 자동 채점이 어려워 수동 확인 필요
+- **형식 오류**: LLM 출력이 JSON으로 파싱되지 않음
+
+## 10. 결과 해석 방법
+
+1. `results/metrics_summary.csv`에서 v0→v3로 갈수록 Exact Match·Field Accuracy·Micro F1이 개선되는지 확인한다.
+2. `results/error_analysis.csv`에서 남아 있는 오류가 어떤 유형에 몰려 있는지 확인한다(예: v0은 형식 오류가 많고, v1~v2는 서류/보호자 관련 누락 오류가 남는 식).
+3. 표현 오류는 수치로 드러나지 않으므로 노트북의 "수동 평가 기준" 셀 기준으로 사람이 직접 대표 사례를 검토한다.
+4. 최종 버전은 개발 세트에서 고른 뒤, 시험 세트(`split: "test"`)에서 한 번만 재확인한다.
+
+## 11. 한계와 확장 계획
+
+**한계**
+
+- 합성 케이스 10개(개발 7 / 시험 3)로 구성된 소규모 파일럿 평가이며, 실제 외래 표현 분포를 대표하지 않는다.
+- 임상 성능 평가가 아니라 정보 추출 프로토타입 평가다.
+- `subjective_summary`, `soap_summary` 등 자유 서술 필드는 자동 채점이 불가능해 수동 검토에 의존한다.
+
+**확장 계획**
+
+- 합성 케이스 수를 늘리고 표현 다양성(사투리, 축약어, 다중 화자 등)을 추가.
+- 표현 오류를 정량화할 수 있는 LLM-as-judge 방식 도입 검토.
+- 문진 UI(`frontend/`)와 LLM 평가 파이프라인을 실제로 연결할 백엔드가 필요해지면 `legacy_flask/`를 참고해 재설계.
+- 질환군 범위를 말초신경질환 등으로 확장.
