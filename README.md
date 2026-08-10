@@ -41,10 +41,13 @@ outpatient-ai-lab/
 ├── NLP_LLM_Prompt_Evaluation.ipynb   # 핵심 산출물: LLM 호출·프롬프트 비교·지표·오류분석
 ├── eval_cases.json                    # 비식별 합성 문진 케이스 30개 + 정답(gold)
 ├── prompts.py                         # 프롬프트 v0~v3, 허용값, 필드 정의
-├── frontend/                           # 문진 입력 UI 프로토타입 (HTML/CSS/JS, 서버 없음)
+├── frontend/                           # 문진 입력 UI 프로토타입 (개발자용, 필드 구조 검증 목적)
 │   ├── index.html
 │   ├── style.css
 │   └── script.js
+├── frontend-demo/                      # 실사용 화면 데모 (환자·보호자가 보는 화면 그대로)
+│   ├── tablet/                         # 접수처 태블릿/키오스크용 (큰 카드, 최소 입력)
+│   └── mobile/                         # 진료 전 문자 링크로 받는 휴대폰용
 ├── results/                            # 노트북 실행 결과 저장 위치
 │   ├── metrics_summary.csv            # 버전별 지표 요약 (매 실행 시 최신 결과로 갱신)
 │   ├── error_analysis.csv             # 최종 버전의 사례별 오류 분석
