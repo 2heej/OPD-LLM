@@ -1,5 +1,8 @@
 # 신경과 재진 외래 AI 문진 — LLM 프롬프트 평가 기반 SOAP 요약
 
+> 이 프로젝트(1차, NLP·프롬프트 평가)를 실제 동작하는 풀스택 서비스로 확장한 2차 프로젝트가 있습니다:
+> [outpatient-ai-service](https://github.com/2heej/outpatient-ai-service) (FastAPI + PostgreSQL, 라이브 데모: [outpatient-ai-service.vercel.app](https://outpatient-ai-service.vercel.app))
+
 ## 1. 문제 정의
 
 대학병원 신경과 외래에서 근무하며 반복적으로 관찰한 문제는 다음과 같다.
@@ -186,5 +189,6 @@ python3 -m http.server 8600
 
 - 합성 케이스 수를 늘리고 표현 다양성(사투리, 축약어, 다중 화자 등)을 추가.
 - 표현 오류를 정량화할 수 있는 LLM-as-judge 방식 도입 검토.
-- 문진 UI(`frontend/`)와 LLM 평가 파이프라인을 실제로 연결할 백엔드가 필요해지면 `legacy_flask/`를 참고해 재설계.
+- ~~문진 UI(`frontend/`)와 LLM 평가 파이프라인을 실제로 연결할 백엔드가 필요해지면 `legacy_flask/`를 참고해 재설계.~~ →
+  2차 [outpatient-ai-service](https://github.com/2heej/outpatient-ai-service)에서 FastAPI + PostgreSQL로 실제 구현하고 배포함.
 - 질환군 범위를 말초신경질환 등으로 확장.
